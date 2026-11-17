@@ -209,6 +209,7 @@ details .body{padding:0 0 14px;font-size:13.5px;color:var(--txt2);line-height:1.
 .mini tr[data-fmt]:hover td,.mini tr[data-fmt]:focus td{background:#f1f5f9}
 .mini tr[data-fmt]:focus{outline:2px solid #f59e0b;outline-offset:-2px}
 .mini .pick{display:inline-block;margin-left:5px;font-size:11px;font-weight:700;color:#b45309;background:#fffbeb;border:1px solid #fcd34d;border-radius:5px;padding:0 5px;white-space:nowrap}
+@media(max-width:480px){.mini .pick{font-size:0;padding:0 4px;margin-left:3px}.mini .pick::after{content:"›";font-size:13px;line-height:1}}
 #sec1.flash{animation:flash .9s ease}
 @keyframes flash{0%{box-shadow:0 0 0 3px rgba(217,119,6,.45)}100%{box-shadow:var(--shadow)}}
 /* toast */
