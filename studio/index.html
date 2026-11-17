@@ -1301,6 +1301,7 @@ function ocSave(){
   ocState.len = el('ocLen').value;
   ocState.start = (el('ocStart').value || '0').trim() || '0';
   ocState.line2 = el('ocTitle2').value || '#FFB800';
+  ocState.url = ((el('ocUrl') && el('ocUrl').value) || '').trim();
   try{ localStorage.setItem(LS_OC, JSON.stringify(ocState)); }catch(e){}
 }
 function ocSyncLangs(){
@@ -1335,11 +1336,12 @@ function ocBuildUi(){
     var raw = localStorage.getItem(LS_OC);
     if(raw){ var s = JSON.parse(raw); if(s && typeof s === 'object') ocState = Object.assign(ocState, s); }
   }catch(e){}
-  if(!ocState.langs || !ocState.langs.length) ocState.langs = (state.langs || ['kr']).slice();
+  if(!ocState.langs || !ocState.langs.length) ocState.langs = (state.langs && state.langs.length ? state.langs.slice() : ['kr']);
   ts.value = ocState.topic || 'living';
   el('ocLen').value = ocState.len || '30';
   el('ocStart').value = ocState.start || '0';
   el('ocTitle2').value = ocState.line2 || '#FFB800';
+  if(ocState.url && !el('ocUrl').value) el('ocUrl').value = ocState.url;
   ocSyncLangs();
   ['ocTopic','ocLen','ocTitle2'].forEach(function(id){ el(id).addEventListener('change', function(){ ocSave(); ocDirty(); }); });
   el('ocStart').addEventListener('input', function(){ ocSave(); ocDirty(); });
@@ -1530,7 +1532,7 @@ if(el('ocBuild')){
   el('ocUrl').addEventListener('input', function(){
     var v = this.value;
     if(el('srcUrl')) el('srcUrl').value = v;
-    state.srcUrl = v; saveDraft(); ocDirty();
+    state.srcUrl = v; saveDraft(); ocSave(); ocDirty();
   });
   el('srcUrl').addEventListener('input', function(){
     if(el('ocUrl')) el('ocUrl').value = this.value;
