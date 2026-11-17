@@ -353,6 +353,23 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
   .tk-l{display:none}
 }
 
+/* ── 원본 링크 → 코덕스 원클릭 ── */
+.oc-card{border-color:#86efac;background:linear-gradient(180deg,#f0fdf4 0%,#ffffff 240px)}
+.oc-card .step .num{background:#16a34a}
+.oc-out{display:grid;gap:12px;margin-top:14px}
+.oc-block{border:1px solid #dbe3ec;border-radius:12px;background:#fff;overflow:hidden}
+.oc-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 12px;background:#f8fafc;border-bottom:1px solid #e2e8f0;font-size:13px;color:#334155}
+.oc-head .nm{font-weight:800;color:#0f172a}
+.oc-head .tip{font-size:12px;color:#64748b}
+.oc-head .sp{flex:1 1 auto}
+.oc-pre{margin:0;padding:12px 13px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Courier New",monospace;
+  font-size:12px;line-height:1.62;color:#e2e8f0;background:#0f172a;white-space:pre-wrap;word-break:break-word;
+  max-height:360px;overflow:auto;-webkit-overflow-scrolling:touch}
+@media(max-width:560px){
+  .oc-pre{font-size:11.5px;max-height:300px;padding:11px}
+  .oc-head{font-size:12.5px;padding:9px 10px}
+  .oc-head .btn{padding:7px 10px;font-size:12px;min-height:34px}
+}
 </style>
 </head>
 <body data-tab="script">
@@ -392,8 +409,86 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
 
 <div class="warnbox">
   <b>이 작업실이 하는 일 / 안 하는 일</b><br>
-  영상을 직접 굽지 않습니다. 대신 <b>대본·자막·장면 지시문·해외 버전</b>을 뽑아 주는 프롬프트를 만듭니다. 실제 영상은 그 프롬프트를 <b>지피티(GPT-6 Luna)·클로드</b>에 넣어 뽑고, PC에서는 <b>build_shorts.py</b>로 조립합니다. 예능·영화·드라마·인물 소재도 <b>전부 선택할 수 있습니다</b>. 다만 그런 소재는 <b>조심</b> 배지로 표시하고, 원본 영상·인물을 그대로 쓰지 않고 <b>AI 이미지·자막 해설·각색</b>으로 안전하게 만드는 규칙을 프롬프트에 자동으로 넣습니다.
+  영상을 직접 굽지 않습니다. 대신 <b>대본·자막·장면 지시문·해외 버전</b>을 뽑아 주는 프롬프트를 만듭니다. 실제 영상은 그 프롬프트를 <b>지피티(GPT-6 Luna)·클로드</b>에 넣어 뽑고, PC에서는 <b>build_shorts_v3.py</b>가 링크를 받아 한 번에 조립합니다. 예능·영화·드라마·인물 소재도 <b>전부 선택할 수 있습니다</b>. 다만 그런 소재는 <b>조심</b> 배지로 표시하고, 원본 영상·인물을 그대로 쓰지 않고 <b>AI 이미지·자막 해설·각색</b>으로 안전하게 만드는 규칙을 프롬프트에 자동으로 넣습니다.
 </div>
+
+<!-- 0 — 원본 링크 → 코덱스 원클릭 -->
+<section class="card oc-card" id="ocCard">
+  <div class="step">
+    <div class="num">⚡</div>
+    <div>
+      <h2>원본 링크 → 코덱스 원클릭</h2>
+      <p class="hint">링크 하나만 넣으면 <b>① 기획·대본·project.json 프롬프트</b>와 <b>② 코덱스에 그대로 붙여넣는 실행 명령문</b>이 바로 나옵니다. 링크 → 다운로드 → 컷·자막·훅TTS·효과음까지 PC에서 한 번에 렌더합니다.</p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="lab" for="ocUrl">원본 영상 링크(URL) <span>(유튜브·쇼츠·릴스·직접 mp4)</span></label>
+    <input type="url" id="ocUrl" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off" spellcheck="false">
+    <p class="note" id="ocUrlNote">탭 2 <b>실시간 소재 검색</b>에서 영상을 고르면 이 칸에 자동으로 들어옵니다. 아래 <b>링크</b> 칸과 같은 값입니다.</p>
+  </div>
+
+  <div class="field two">
+    <div>
+      <label class="lab" for="ocTopic">카테고리</label>
+      <select id="ocTopic"></select>
+    </div>
+    <div>
+      <label class="lab" for="ocLen">영상 길이</label>
+      <select id="ocLen">
+        <option value="15">15초</option>
+        <option value="30" selected>30초</option>
+        <option value="45">45초</option>
+        <option value="60">60초</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field two">
+    <div>
+      <label class="lab" for="ocStart">원본 시작 지점(초)</label>
+      <input type="text" id="ocStart" inputmode="decimal" value="0" placeholder="0">
+    </div>
+    <div>
+      <label class="lab" for="ocTitle2">제목 2줄째 색</label>
+      <select id="ocTitle2">
+        <option value="#FFB800" selected>진한 연주황 #FFB800 (기본)</option>
+        <option value="#FFD400">골드 #FFD400</option>
+        <option value="#FFDC00">밝은 노랑 #FFDC00</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="lab" id="ocLangLab">출력 언어 <span>(여러 개 선택 · 6개국)</span></label>
+    <div class="chips" id="ocLangs" role="group" aria-labelledby="ocLangLab"></div>
+  </div>
+
+  <div class="act-row">
+    <button class="btn primary" id="ocBuild" type="button">⚡ 원클릭 명령 만들기</button>
+    <button class="btn ghost sm" id="ocCopyAll" type="button">두 단계 모두 복사</button>
+  </div>
+
+  <div class="oc-out" id="ocOut" hidden>
+    <div class="oc-block">
+      <div class="oc-head">
+        <span class="nm">1단계</span><span class="tip">기획·대본·project.json 프롬프트</span><span class="sp"></span>
+        <button class="btn ghost sm" id="ocCopy1" type="button">📋 복사</button>
+        <button class="btn ghost sm" id="ocGpt1" type="button">🤖 GPT</button>
+        <button class="btn ghost sm" id="ocClaude1" type="button">🟠 Claude</button>
+      </div>
+      <pre class="oc-pre" id="ocPre1"></pre>
+    </div>
+    <div class="oc-block">
+      <div class="oc-head">
+        <span class="nm">2단계</span><span class="tip">코덱스에 그대로 붙여넣는 실행 명령문</span><span class="sp"></span>
+        <button class="btn ghost sm" id="ocCopy2" type="button">📋 복사</button>
+      </div>
+      <pre class="oc-pre" id="ocPre2"></pre>
+    </div>
+    <p class="note">※ 1단계 결과(<b>project_ko.json</b>)를 작업 폴더에 저장하면, 2단계 명령이 그 파일을 그대로 읽어 제목·훅·자막·구간을 적용합니다.</p>
+  </div>
+</section>
 
 <!-- 1 -->
 <section class="card" id="sec1">
@@ -917,16 +1012,17 @@ var SPECS = {
       '자막 1줄 14~16자, 화면 아래 12% 위. 16:9에서는 오른쪽 아래 구독·추천 UI를 피한다.',
       '챕터(타임스탬프)와 설명란 목차를 함께 만든다.'
     ]},
-  pcjson: { em:'🖥️', name:'PC 원클릭 조립 (build_shorts.py)', tag:'JSON+대본',
-    desc:'01~04.jpg + script.txt + subtitle.srt + upload_info.txt + manifest.json 세트.',
+  pcjson: { em:'🖥️', name:'PC 원클릭 조립 (build_shorts_v3.py)', tag:'링크+JSON',
+    desc:'원본 링크 + project.json 이면 다운로드·컷·자막·훅TTS·효과음까지 한 번에. 사진 4장 세트도 가능.',
     lines:[
-      'build_shorts.py 규격: 폴더 안에 01.jpg~04.jpg(1080×1920), script.txt, subtitle.srt, upload_info.txt, manifest.json.',
-      'script.txt: 한 줄에 한 문장, 4~6문장(총 13~14초). 문장부호로 끊어 읽는다.',
-      'subtitle.srt: 4개 큐, 컷 경계 0 / 3.5 / 7.0 / 10.5 / 14.0초와 정확히 일치. 형식 "00:00:00,000 --> 00:00:03,500", UTF-8.',
-      '이미지 4장: 글자·로고 없는 사진을 전제로, 각 장면에 "무엇이 보여야 하는지"를 카메라·피사체·손동작까지 한 줄로 지시.',
-      'manifest.json: 아래 키를 가진 JSON 한 덩어리로 출력.',
-      '{"date":"YYYY-MM-DD","topic":"주제","voice":"ko-KR-SunHiNeural","rate":"+8%","size":"1080x1920","fps":30,"images":["01.jpg","02.jpg","03.jpg","04.jpg"],"sentences":["문장1","문장2"],"cuts":[{"idx":1,"start":0.0,"end":3.5,"image":"01.jpg","scene":"장면 지시"}],"title":"제목","description":"설명","hashtags":["#태그"],"pinned_comment":"고정댓글"}',
-      'upload_info.txt에는 타입캐스트에 붙일 대본 4줄 + 제목 3안 + 설명 + 해시태그 + 고정댓글 + 업로드 체크리스트를 담는다.'
+      'build_shorts_v3.py 규격: 원본 링크는 --url, 제목·훅·자막·컷은 project.json(--project)으로 넘긴다.',
+      '한 줄 실행: python build_shorts_v3.py --project project_ko.json --url "<링크>" --start 0 --duration 30 --res 608x1080 --hook-only-tts --out shorts_ko.mp4',
+      'project.json 규격: {"lang":"ko","duration":30,"header":["1줄째","2줄째"],"hook":"훅","items":[[0,2.4,"white","자막"]],"shots":[[0,2.5,1.0,0]]}',
+      '제목 header 는 반드시 2줄 — 1줄 흰색 #FFFFFF / 2줄 진한 연주황 #FFB800 (위·아래 색이 다르게), 가장 두꺼운 굵기.',
+      '자막 크기: 608x1080 흰 42 / (괄호) 48 / *강조* 50px, 1080x1920 72/84/88px. 외곽선 4~5px.',
+      '사진 모드도 그대로 됩니다: 폴더에 01.jpg~04.jpg, script.txt, subtitle.srt, title.txt(or manifest 의 title) 를 두고 --source 없이 실행.',
+      'manifest.json: {"date":"YYYY-MM-DD","topic":"주제","voice":"ko-KR-SunHiNeural","rate":"+8%","size":"1080x1920","fps":30,"title":"제목","description":"설명","hashtags":["#태그"],"pinned_comment":"고정댓글"}',
+      'upload_info.txt에는 대본 + 제목 3안 + 설명 + 해시태그 + 고정댓글 + 업로드 체크리스트를 담는다.'
     ]}
 };
 
@@ -1193,6 +1289,258 @@ function loadDraft(){
   }catch(e){}
 }
 
+/* ───────── 원본 링크 → 코덱스 원클릭 ───────── */
+var LS_OC = 'greenroom_studio_oc_v1';
+var OC_LANG_CODE = { kr:'ko', jp:'ja', en:'en', de:'de', es:'es', pt:'pt' };
+var ocState = { topic:'living', len:'30', start:'0', line2:'#FFB800', langs:['kr'] };
+var lastOc1 = '', lastOc2 = '';
+
+function ocSave(){
+  if(!el('ocTopic')) return;
+  ocState.topic = el('ocTopic').value;
+  ocState.len = el('ocLen').value;
+  ocState.start = (el('ocStart').value || '0').trim() || '0';
+  ocState.line2 = el('ocTitle2').value || '#FFB800';
+  try{ localStorage.setItem(LS_OC, JSON.stringify(ocState)); }catch(e){}
+}
+function ocSyncLangs(){
+  var box = el('ocLangs'); if(!box) return;
+  Array.prototype.forEach.call(box.children, function(c){
+    c.setAttribute('aria-pressed', String(ocState.langs.indexOf(c.dataset.l) > -1));
+  });
+}
+function ocBuildUi(){
+  var ts = el('ocTopic'); if(!ts) return;
+  TOPICS.forEach(function(t){ var o = document.createElement('option'); o.value = t[0]; o.textContent = t[1]; ts.appendChild(o); });
+  var box = el('ocLangs');
+  LANG_ORDER.forEach(function(k){
+    var m = LANGS[k];
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.dataset.l = k;
+    b.innerHTML = '<span class="k">' + m.flag + ' ' + esc(m.name) + '</span>';
+    b.addEventListener('click', function(){
+      var i = ocState.langs.indexOf(k);
+      if(i > -1){
+        if(ocState.langs.length === 1){ toast('최소 1개 언어는 선택해야 합니다'); return; }
+        ocState.langs.splice(i, 1);
+      } else {
+        ocState.langs.push(k);
+        ocState.langs.sort(function(a, b2){ return LANG_ORDER.indexOf(a) - LANG_ORDER.indexOf(b2); });
+      }
+      ocSyncLangs(); ocSave();
+    });
+    box.appendChild(b);
+  });
+  try{
+    var raw = localStorage.getItem(LS_OC);
+    if(raw){ var s = JSON.parse(raw); if(s && typeof s === 'object') ocState = Object.assign(ocState, s); }
+  }catch(e){}
+  if(!ocState.langs || !ocState.langs.length) ocState.langs = (state.langs || ['kr']).slice();
+  ts.value = ocState.topic || 'living';
+  el('ocLen').value = ocState.len || '30';
+  el('ocStart').value = ocState.start || '0';
+  el('ocTitle2').value = ocState.line2 || '#FFB800';
+  ocSyncLangs();
+  ['ocTopic','ocLen','ocTitle2'].forEach(function(id){ el(id).addEventListener('change', function(){ ocSave(); ocDirty(); }); });
+  el('ocStart').addEventListener('input', function(){ ocSave(); ocDirty(); });
+}
+function ocDirty(){ lastOc1 = ''; lastOc2 = ''; }
+ocBuildUi();
+
+function ocInfo(){
+  var url = ((el('ocUrl') && el('ocUrl').value) || '').trim();
+  if(!url) url = ((el('srcUrl') && el('srcUrl').value) || '').trim();
+  var len = parseInt(el('ocLen').value, 10); if(!len || len < 5) len = 30;
+  var start = (el('ocStart').value || '0').trim() || '0';
+  var line2 = el('ocTitle2').value || '#FFB800';
+  var langs = (ocState.langs || ['kr']).slice();
+  return {
+    url:url, len:len, start:start, line2:line2, langs:langs,
+    codes:langs.map(function(k){ return OC_LANG_CODE[k] || 'ko'; }),
+    topic:el('ocTopic').value, topicName:topicName(el('ocTopic').value),
+    names:langs.map(function(k){ return LANGS[k].name; }),
+    date:(function(){ try{ return todaySeoul(); }catch(e){ return ''; } })(),
+    channel:((el('channel') && el('channel').value) || '').trim() || '아이템24',
+    features:((el('features') && el('features').value) || '').trim(),
+    notes:((el('notes') && el('notes').value) || '').trim()
+  };
+}
+
+function ocPrompt1(){
+  var o = ocInfo();
+  var L = [];
+  L.push('# 역할');
+  L.push('너는 유튜브 쇼츠·릴스 "카테고리형" 영상의 기획·대본·project.json 초안을 만드는 제작 조교다.');
+  L.push('인사말·설명·변명 없이, 요구한 형식의 결과만 낸다. 모르는 값은 지어내지 말고 [확인 필요]로 남긴다.');
+  L.push('');
+  L.push('# 1. 이번 작업');
+  L.push('- 원본 영상 링크: ' + (o.url || '(없음 — 링크 없이 제목·특징으로만 만든다)'));
+  L.push('- 카테고리: ' + o.topicName);
+  L.push('- 길이: ' + o.len + '초 (원본 ' + o.start + '초 지점부터)');
+  L.push('- 출력 언어: ' + o.names.join(' · ') + ' — 언어마다 project_' + o.codes[0] + '.json 을 따로 만든다.');
+  L.push('- 채널: ' + o.channel);
+  if(o.features) L.push('- 소재 특징: ' + o.features);
+  if(o.notes) L.push('- 추가 요청: ' + o.notes);
+  L.push('');
+  L.push('# 2. 절대 규칙 (렌더 결과에 그대로 반영된다)');
+  L.push('1) 제목은 반드시 2줄. 1줄째 흰색 #FFFFFF / 2줄째 ' + o.line2 + ' — 위·아래 색이 반드시 달라야 한다.');
+  L.push('   · 각 줄 12자 이내. 길게 한 줄로 쓰지 말고 header 배열에 2개로 나눠 넣는다.');
+  L.push('2) 제목 폰트는 가장 두꺼운 굵기(Pretendard Black / Malgun Gothic Bold). 외곽선 4px. 얇은 폰트·그림자 금지.');
+  L.push('3) 자막 크기: 608x1080 기준 흰 42px / (괄호) 48px / *강조* 50px, 외곽선 4~5px. (1080x1920 은 72/84/88px)');
+  L.push('   · 한 줄 12자 이내, 같은 시점에 자막 2개 금지, 한 자막은 1.4초 이상 보이게.');
+  L.push('4) 자막 3종 표기: 일반 대사는 그대로 / 속마음은 (괄호) / 반응·강조는 *별표*로 감싼다.');
+  L.push('   · 별표와 괄호는 화면에 그대로 나오지 않는다(별표는 초록 박스 강조로 그려진다). 장식용 별표는 쓰지 않는다.');
+  L.push('5) 첫 0.8초 안에 결론(금지·숫자·반전). 이유는 0.8~2.5초, 이득은 2.5~3초.');
+  L.push('6) 원본 영상·음성·구도를 그대로 베껴 재업로드하지 않는다. 장면은 참고만 하고 자막·구성은 새로 쓴다.');
+  L.push('7) 확인되지 않은 수치·효능·가격은 쓰지 않는다. 모르면 [확인 필요].');
+  L.push('8) 제휴·광고(쿠팡파트너스 등)가 들어가면 설명란 맨 아래에 대가성 고지 문구를 넣는다.');
+  L.push('');
+  L.push('# 3. 링크를 실제로 볼 수 있을 때');
+  L.push('- 첫 3초 / 중간 / 마지막 장면을 보고 컷 경계(shots)와 배율·피사체 위치를 정한다.');
+  L.push('- 영상을 볼 수 없으면 봤다고 지어내지 말고, 제목·특징만으로 만들고 [확인 필요]로 남긴다.');
+  L.push('');
+  L.push('# 4. 출력 1 — 대본 (script_' + o.codes[0] + '.txt)');
+  L.push('- 한 줄에 한 문장, ' + o.len + '초 기준 ' + Math.max(4, Math.round(o.len / 4)) + '줄 안팎. 소리 내어 읽어 1문장 3~4초.');
+  L.push('- 첫 줄은 훅(hook)과 같은 뜻으로 쓴다.');
+  L.push('');
+  L.push('# 5. 출력 2 — project.json (언어마다 1개, 코드블록으로)');
+  L.push('아래 형식 그대로. 시간은 원본을 --start ' + o.start + ' 로 자른 뒤의 0초 기준이다.');
+  L.push('{"lang":"' + o.codes[0] + '","duration":' + o.len + ',"output":"shorts_' + o.codes[0] + '.mp4",');
+  L.push(' "header":["1줄째 제목(흰색, 12자 이내)","2줄째 제목(' + o.line2 + ', 12자 이내)"],');
+  L.push(' "hook":"첫 문장 음성용 한 줄",');
+  var a1 = Math.round(o.len * 0.16 * 10) / 10;
+  var a2 = Math.round(o.len * 0.33 * 10) / 10;
+  var a3 = Math.round(o.len * 0.66 * 10) / 10;
+  L.push(' "items":[[0,' + a1 + ',"white","첫 자막"],[' + a1 + ',' + a2 + ',"paren","(속마음)"],');
+  L.push('          [' + a2 + ',' + a3 + ',"white","이어지는 자막"],[' + a3 + ',' + o.len + ',"emph","*마지막 반응*"]],');
+  L.push(' "shots":[[0,' + a1 + ',1.0,0],[' + a1 + ',' + a2 + ',1.15,-60],[' + a2 + ',' + a3 + ',1.0,0],[' + a3 + ',' + o.len + ',1.25,-100]]}');
+  L.push('(위 문구와 시간은 형식 예시다. 실제 원본 장면에 맞춰 다시 쓴다.)');
+  L.push('규칙:');
+  L.push('- header 는 정확히 2개. 1줄째와 2줄째 색을 다르게 그린다(1줄 흰색 / 2줄 ' + o.line2 + ').');
+  L.push('- items 는 0초부터 duration 까지 빈틈·겹침 없이. 같은 시점에 2개 금지.');
+  L.push('- shots 는 [시작,끝,배율,Y]. 배율 1~3, Y ≤ 280. 얼굴·피사체가 잘리지 않게.');
+  L.push('- 언어판마다 첫 컷·첫 문장·비유를 다르게 쓴다(번역본처럼 보이면 재사용 판정).');
+  L.push('');
+  L.push('# 6. 출력 3 — 업로드 세트 (언어마다 따로)');
+  L.push('① 제목 3안 ② 설명란 본문(+대가성 고지, 해당 시) ③ 해시태그 8~10개 ④ 고정댓글 1개');
+  L.push('');
+  L.push('# 7. 자체 점검 (O/X, X면 고칠 문장을 바로 제시)');
+  L.push('1) 제목이 2줄이고 1·2줄 색이 다른가  2) 제목 폰트가 가장 두꺼운 굵기인가');
+  L.push('3) 자막이 한 줄 12자·표시 1.4초 이상인가  4) 0.8초 안에 결론이 나오는가');
+  L.push('5) items 가 0~duration 을 빈틈없이 덮는가  6) 확인되지 않은 수치·효능이 없는가');
+  L.push('7) 언어판끼리 첫 컷·첫 문장이 다른가  8) 제휴 고지가 들어갔는가(해당 시)');
+  L.push('');
+  L.push('분량이 길어도 생략하지 말고 끝까지 쓴다.');
+  return L.join('\n');
+}
+
+function ocPrompt2(){
+  var o = ocInfo();
+  var slug = ((el('srcTitle') && el('srcTitle').value) || '').trim().replace(/[^\w가-힣]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 24) || '쇼츠';
+  var folder = 'C:\\Shorts_Auto\\' + (o.date || '2026-11-18') + '_' + slug;
+  var url = o.url || '<원본_영상_링크>';
+  var L = [];
+  L.push('# 코덱스(또는 PC 터미널)에 이 블록을 그대로 붙여넣으세요. 윈도우 PowerShell 기준.');
+  L.push('# 전제: build_shorts_v3.py 를 작업 폴더에 두고, 카테고리형 SKILL.md / references/project-format.md 를 읽을 수 있게 둡니다.');
+  L.push('');
+  L.push('# ── 0. 처음 한 번만 (이미 있으면 건너뜀)');
+  L.push('pip install -U yt-dlp edge-tts');
+  L.push('winget install --id Gyan.FFmpeg -e');
+  L.push('');
+  L.push('# ── 1. 작업 폴더 만들고 그 폴더로 이동');
+  L.push('New-Item -ItemType Directory -Force "' + folder + '" | Out-Null');
+  L.push('Set-Location "' + folder + '"');
+  L.push('Copy-Item "$env:USERPROFILE\\Downloads\\build_shorts_v3.py" . -Force');
+  L.push('');
+  L.push('# ── 2. 코덱스에게 (규칙 파일을 먼저 읽고 초안 만들기)');
+  L.push('#   "SKILL.md 와 references/project-format.md 를 읽고, 원본 링크의 실제 장면을 확인해');
+  L.push('#    project_' + o.codes[0] + '.json 을 만들어라. 제목 header 는 정확히 2줄 —');
+  L.push('#    1줄 흰색 #FFFFFF / 2줄 ' + o.line2 + ', 위·아래 색이 다르게. 제목 폰트는 Pretendard Black 같은');
+  L.push('#    가장 두꺼운 굵기( build_shorts_v3.py 가 자동 적용), 자막 42/48/50px 규격, items 3종(white/paren/emph),');
+  L.push('#    shots 배율·Y 는 실제 프레임 보고 정해라."');
+  L.push('');
+  L.push('# ── 3. 링크 → 영상 한 번에 (다운로드·컷·자막·훅TTS·효과음)');
+  L.push('python build_shorts_v3.py --project project_' + o.codes[0] + '.json --url "' + url + '" --start ' + o.start + ' --duration ' + o.len + ' --res 608x1080 --title-lines 2 --title-line2-color "' + o.line2 + '" --hook-only-tts --out shorts_' + o.codes[0] + '.mp4');
+  if(o.codes.length > 1){
+    L.push('');
+    L.push('# ── 3-1. 다른 언어판 (같은 원본 재사용: --no-download)');
+    o.codes.slice(1).forEach(function(c){
+      L.push('python build_shorts_v3.py --project project_' + c + '.json --url "' + url + '" --start ' + o.start + ' --duration ' + o.len + ' --res 608x1080 --lang ' + c + ' --title-lines 2 --title-line2-color "' + o.line2 + '" --hook-only-tts --no-download --out shorts_' + c + '.mp4');
+    });
+  }
+  L.push('');
+  L.push('# ── 4. 확인');
+  L.push('#  · shorts_' + o.codes[0] + '.mp4 재생 → 0.8초 훅 / 자막 42·48·50px / 제목 2줄(흰색·' + o.line2 + ')');
+  L.push('#  · 다시 렌더할 때는 --no-download (이미 받은 source.mp4 재사용), 대본·자막을 고쳤으면 --force-tts');
+  L.push('#  · 유튜브가 \'로봇 확인\'을 요구하면 위 명령 끝에 --cookies-from-browser chrome 을 붙입니다.');
+  L.push('#  · 세로 1080x1920 로 뽑으려면 --res 1080x1920 (자막 72/84/88px)');
+  L.push('#  · 렌더 전에 명령만 확인하려면 --dry-run');
+  return L.join('\n');
+}
+
+function ocGenerate(){
+  if(!el('ocOut')) return;
+  var o = ocInfo();
+  if(o.url && !/^https?:\/\//i.test(o.url)){
+    el('ocUrl').classList.add('err'); el('ocUrl').focus();
+    toast('링크는 http:// 또는 https:// 로 시작해야 합니다');
+    return;
+  }
+  el('ocUrl').classList.remove('err');
+  lastOc1 = ocPrompt1();
+  lastOc2 = ocPrompt2();
+  el('ocPre1').textContent = lastOc1;
+  el('ocPre2').textContent = lastOc2;
+  el('ocOut').removeAttribute('hidden');
+  ocSave();
+  try{ el('ocOut').scrollIntoView({ behavior:'smooth', block:'start' }); }catch(e){}
+  toast('1단계·2단계를 만들었습니다 — 2단계를 코덱스에 붙여넣으세요');
+}
+function ocCopy(which){
+  if(!lastOc1) ocGenerate();
+  if(!lastOc1) return;
+  var txt = which === '1' ? lastOc1 : (which === 'all' ? (lastOc1 + '\n\n────────── 2단계 ──────────\n\n' + lastOc2) : lastOc2);
+  copyText(txt).then(function(ok){
+    toast(ok ? (which === 'all' ? '두 단계를 한 번에 복사했습니다' : '복사했습니다 — 그대로 붙여넣으세요')
+             : '자동 복사가 막혔습니다 — 길게 눌러 복사하세요');
+  });
+}
+function ocSend(where){
+  if(!lastOc1) ocGenerate();
+  if(!lastOc1) return;
+  var base = where === 'gpt' ? 'https://chatgpt.com/' : 'https://claude.ai/new';
+  try{
+    var a = document.createElement('a');
+    a.href = base; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.style.display = 'none'; document.body.appendChild(a); a.click();
+    setTimeout(function(){ if(a.parentNode) a.parentNode.removeChild(a); }, 1200);
+  }catch(e){}
+  copyText(lastOc1).then(function(ok){
+    toast(ok ? '1단계 프롬프트 복사 완료 — 열린 창에 붙여넣기 하세요' : '창을 열었습니다 — 복사 버튼을 눌러 주세요');
+  });
+}
+if(el('ocBuild')){
+  el('ocBuild').addEventListener('click', ocGenerate);
+  el('ocCopy1').addEventListener('click', function(){ ocCopy('1'); });
+  el('ocCopy2').addEventListener('click', function(){ ocCopy('2'); });
+  el('ocCopyAll').addEventListener('click', function(){ ocCopy('all'); });
+  el('ocGpt1').addEventListener('click', function(){ ocSend('gpt'); });
+  el('ocClaude1').addEventListener('click', function(){ ocSend('claude'); });
+  /* 링크 칸은 아래 '유튜브 링크' 칸과 같은 값 */
+  el('ocUrl').addEventListener('input', function(){
+    var v = this.value;
+    if(el('srcUrl')) el('srcUrl').value = v;
+    state.srcUrl = v; saveDraft(); ocDirty();
+  });
+  el('srcUrl').addEventListener('input', function(){
+    if(el('ocUrl')) el('ocUrl').value = this.value;
+    ocDirty();
+  });
+  el('ocUrl').addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ e.preventDefault(); ocGenerate(); }
+  });
+}
+
 /* ───────── 프롬프트 ───────── */
 function topicName(k){ for(var i=0;i<TOPICS.length;i++){ if(TOPICS[i][0]===k) return TOPICS[i][1]; } return k; }
 
@@ -1268,7 +1616,9 @@ function buildPrompt(){
   L.push('# 4. 선영님 채널 표준 (모든 버전 공통)');
   var standards = [
     '첫 0.8초 안에 결론(금지·숫자·반전)을 말한다. 이유는 0.8~2.5초, 이득은 2.5~3초. 3초를 넘겨 이유를 말하면 이탈한다.',
-    '자막: 1줄 12자 이내, 최대 2줄. 흰 글자 + 검정 외곽선 3~4px, 강조 단어만 노란색(#FFD400). 폰트 1개(Pretendard Bold).',
+        '제목은 반드시 2줄 — 1줄째 흰색 #FFFFFF / 2줄째 진한 연주황 #FFB800(위·아래 색이 다르게). 제목 폰트는 Pretendard Black 같은 가장 두꺼운 굵기.',
+    '자막: 1줄 12자 이내, 최대 2줄. 크기는 608x1080 기준 흰 42px / (괄호) 48px / *강조* 50px(1080x1920 은 72/84/88px), 검정 외곽선 4~5px. 폰트 1개(Pretendard Bold).',
+    '자막 3종: 일반 대사는 그대로, 속마음은 (괄호), 반응·강조는 *별표*로 감싼다. 별표는 화면에 나오지 않고 초록 박스로 그려진다.',
     '자막 위치: 화면 위에서 약 70%(1080×1920 기준 y≈1,340). 오른쪽 20%와 아래 18%는 유튜브 UI가 가리므로 글자·중요 피사체를 두지 않는다.',
     '컷 전환은 하드컷. 전환 효과 금지(클립이 겹쳐 총 길이가 줄고 자막이 어긋난다).',
     '소리: 나레이션 100%, BGM 8%(≈-22dB). 음원은 유튜브 사운드 라이브러리에서 업로드 시 직접 고른다(음원 파일 직접 삽입 금지).',
@@ -1436,7 +1786,7 @@ function aiNoteText(){
   return {
     gpt:'지피티(GPT-6 Luna)에 그대로 붙여넣으세요. 표·SRT를 파일로 받으려면 이어서 "위 결과를 script.txt·subtitle.srt 파일로 따로 만들어 줘"라고 한 번 더 말하면 됩니다.',
     claude:'Claude에 그대로 붙여넣으세요. 표가 깨지면 "표를 코드블록으로 다시 출력해 줘"라고 하면 됩니다.',
-    aside:'PC 어사이드(코덱스·안티그래비티)에 붙여넣으세요. 폴더 C:\\Shorts_Auto\\YYYY-MM-DD_주제\\ 에 01~04.jpg·script.txt·subtitle.srt·upload_info.txt로 저장하게 시키면 됩니다. 실제 MP4는 build_shorts.py가 만듭니다.'
+    aside:'PC 어사이드(코덱스·안티그래비티)에 붙여넣으세요. 폴더 C:\\Shorts_Auto\\YYYY-MM-DD_주제\\ 에 project_ko.json·script.txt를 저장하게 시키면, build_shorts_v3.py --project project_ko.json --url "<링크>" 한 줄로 MP4가 나옵니다(위 ⚡ 원본 링크 → 코덱스 원클릭 참고).'
   }[state.ai] || '';
 }
 function generate(scroll){
@@ -1769,7 +2119,7 @@ function pxCard(v, i){
         '<span class="px-mult' + cls + '">' + mult + '</span>' +
         '<span>' + relDays(v.published) + ' · ' + dstr(v.published) + '</span></div>' +
       '<div class="px-acts">' +
-        '<button class="btn primary sm" type="button" data-act="script" data-i="' + i + '">✍️ 이 소재로 대본</button>' +
+        '<button class="btn primary sm" type="button" data-act="script" data-i="' + i + '">🎬 이 영상으로 작업실로</button>' +
         '<a class="btn ghost sm" href="' + url + '" target="_blank" rel="noopener">▶ 열기</a>' +
       '</div>' +
     '</div>' +
@@ -1780,6 +2130,8 @@ function useSource(v){
   var url = 'https://www.youtube.com/watch?v=' + v.id;
   el('srcTitle').value = v.title; state.srcTitle = v.title;
   el('srcUrl').value = url; state.srcUrl = url;
+  if(el('ocUrl')){ el('ocUrl').value = url; ocDirty(); ocSave(); }
+  if(el('features')){ el('features').classList.remove('err'); }
   var f = el('features'), cur = (f.value || '').trim();
   if(!cur){
     f.value = '조회수 ' + fmtNum(v.views) + ' · ' + (v.hidden ? '구독자 비공개' : '구독자 ' + fmtNum(v.subs)) +
@@ -1790,11 +2142,11 @@ function useSource(v){
   saveDraft();
   switchTab('script', true);
   setTimeout(function(){
-    el('srcTitle').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    var sec = el('sec2');
-    if(sec){ sec.classList.remove('cardflash'); void sec.offsetWidth; sec.classList.add('cardflash'); }
+    var card = el('ocCard') || el('sec2');
+    if(card){ card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      card.classList.remove('cardflash'); void card.offsetWidth; card.classList.add('cardflash'); }
   }, 80);
-  toast(cur ? '제목·링크만 넣었습니다 (특징은 그대로 뒀어요)' : '제목·링크·조회수 정보를 넣었습니다');
+  toast(cur ? '링크를 작업실로 보냈습니다 — ⚡ 원본 링크 칸 확인' : '제목·링크를 작업실로 보냈습니다 — ⚡ 원클릭 명령 만들기');
 }
 async function runSearch(){
   var key = ytKey();
