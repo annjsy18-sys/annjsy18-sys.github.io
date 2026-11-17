@@ -1902,7 +1902,7 @@ async function runSearch(){
 /* ═══════════════════ 탭3 · 업로드 기록 · 조회수 체크 ═══════════════════ */
 var LS_LOG = 'greenroom_upload_log_v1';
 var logEditId = null;
-var pendingDelId = null, pendingDelTimer = null;
+
 
 function readLog(){
   try{
@@ -2068,26 +2068,12 @@ if(el('tkList')){
     var ed = t.getAttribute('data-edit'), dl = t.getAttribute('data-del');
     if(ed){ logEdit(ed); return; }
     if(!dl) return;
-    if(pendingDelId === dl){
-      clearTimeout(pendingDelTimer);
-      pendingDelId = null;
-      var arr = readLog().filter(function(x){ return x.id !== dl; });
-      writeLog(arr);
-      renderLog();
-      toast('삭제했습니다');
-    } else {
-      if(pendingDelId){
-        var prev = el('tkList').querySelector('[data-del="' + pendingDelId + '"]');
-        if(prev) prev.textContent = '삭제';
-      }
-      pendingDelId = dl;
-      t.textContent = '삭제 확인';
-      clearTimeout(pendingDelTimer);
-      pendingDelTimer = setTimeout(function(){
-        pendingDelId = null;
-        if(t.parentNode) t.textContent = '삭제';
-      }, 8000);
-    }
+    var rec = readLog().filter(function(x){ return x.id === dl; })[0];
+    var label = rec ? String(rec.title || '').replace(/https?:[^ ]+/, '').trim() : '';
+    if(!window.confirm('이 기록을 삭제할까요?\n\n' + (label || '(제목 없음)'))) return;
+    writeLog(readLog().filter(function(x){ return x.id !== dl; }));
+    renderLog();
+    toast('삭제했습니다');
   });
   el('tkAdd').addEventListener('click', function(){
     var title = (el('tkTitle').value || '').trim();
