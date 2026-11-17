@@ -799,6 +799,13 @@ function validate(){
   }
   return true;
 }
+function aiNoteText(){
+  return {
+    gpt:'지피티(GPT-6 Luna)에 그대로 붙여넣으세요. 표·SRT를 파일로 받으려면 이어서 "위 결과를 script.txt·subtitle.srt 파일로 따로 만들어 줘"라고 한 번 더 말하면 됩니다.',
+    claude:'Claude에 그대로 붙여넣으세요. 표가 깨지면 "표를 코드블록으로 다시 출력해 줘"라고 하면 됩니다.',
+    aside:'PC 어사이드(코덱스·안티그래비티)에 붙여넣으세요. 폴더 C:\\Shorts_Auto\\YYYY-MM-DD_주제\\ 에 01~04.jpg·script.txt·subtitle.srt·upload_info.txt로 저장하게 시키면 됩니다. 실제 MP4는 build_shorts.py가 만듭니다.'
+  }[state.ai] || '';
+}
 function generate(scroll){
   if(!validate()) return;
   state.srcTitle = el('srcTitle').value;
@@ -810,12 +817,7 @@ function generate(scroll){
   el('promptOut').textContent = lastPrompt;
   el('pcount').textContent = lastPrompt.length.toLocaleString('ko-KR') + '자 · ' + SPECS[state.spec].name;
   el('result').classList.add('show');
-  var aiNote = {
-    gpt:'지피티(GPT-6 Luna)에 그대로 붙여넣으세요. 표·SRT를 파일로 받으려면 이어서 "위 결과를 script.txt·subtitle.srt 파일로 따로 만들어 줘"라고 한 번 더 말하면 됩니다.',
-    claude:'Claude에 그대로 붙여넣으세요. 표가 깨지면 "표를 코드블록으로 다시 출력해 줘"라고 하면 됩니다.',
-    aside:'PC 어사이드(코덱스·안티그래비티)에 붙여넣으세요. 폴더 C:\\Shorts_Auto\\YYYY-MM-DD_주제\\ 에 01~04.jpg·script.txt·subtitle.srt·upload_info.txt로 저장하게 시키면 됩니다. 실제 MP4는 build_shorts.py가 만듭니다.'
-  }[state.ai];
-  el('whereNote').innerHTML = '<b>다음 단계</b> — ' + esc(aiNote);
+  el('whereNote').innerHTML = '<b>다음 단계</b> — ' + esc(aiNoteText());
   saveDraft();
   if(scroll !== false) el('result').scrollIntoView({behavior:'smooth', block:'start'});
 }
@@ -874,6 +876,7 @@ function renderRecords(){
         el('promptOut').textContent = lastPrompt;
         el('pcount').textContent = lastPrompt.length.toLocaleString('ko-KR');
         el('result').classList.add('show');
+        el('whereNote').innerHTML = '<b>다음 단계</b> — ' + esc(aiNoteText());
         el('result').scrollIntoView({behavior:'smooth', block:'start'});
       }
       toast('불러왔습니다');
