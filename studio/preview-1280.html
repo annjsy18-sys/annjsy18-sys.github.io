@@ -18,6 +18,7 @@
   var y = Number(new URLSearchParams(location.search).get('y') || 0);
   var fr = document.getElementById('fr');
   fr.style.height = h + 'px';
+  fr.src = './index.html?v=' + Date.now();
   fr.addEventListener('load', function(){
     try { fr.contentWindow.scrollTo(0, y); } catch(e){}
   });
