@@ -23,6 +23,22 @@
   fr.addEventListener('load', function(){
     try { fr.contentWindow.scrollTo(0, y); } catch(e){}
   });
+
+  if (new URLSearchParams(location.search).get('demo')) {
+    window.addEventListener('load', function(){
+      setTimeout(function(){
+        try {
+          var d = fr.contentDocument;
+          var u = d.getElementById('ocUrl');
+          u.value = 'https://www.youtube.com/watch?v=aqz-KE-bpKQ';
+          u.dispatchEvent(new Event('input', {bubbles:true}));
+          d.getElementById('ocStart').value = '12';
+          d.getElementById('ocStart').dispatchEvent(new Event('input', {bubbles:true}));
+          d.getElementById('ocBuild').click();
+        } catch(e){}
+      }, 250);
+    });
+  }
 </script>
 </body>
 </html>
