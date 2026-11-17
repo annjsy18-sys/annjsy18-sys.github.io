@@ -28,6 +28,7 @@
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
+html{scroll-padding-top:76px}
 body{
   background:
     radial-gradient(900px 520px at 100% -12%, rgba(16,185,129,.10), transparent 60%),
@@ -1318,7 +1319,7 @@ function buildPrompt(){
       '※ 제목 3안·설명란·해시태그는 아래 \"📺 유튜브 업로드 복붙 세트\" 블록에서 언어별로 따로 낸다(여기서 중복해 쓰지 않는다).'
     ].forEach(function(x){ L.push(x); });
     if(k !== 'kr'){
-      L.push('7) 현지화 메모 — 이 언어에서 바꾼 것 3줄(훅·비유·단위·가격·계절).');
+      L.push('6) 현지화 메모 — 이 언어에서 바꾼 것 3줄(훅·비유·단위·가격·계절).');
     }
     m.notes.forEach(function(n){ L.push('   · ' + n); });
     if(k !== 'kr'){
@@ -2085,7 +2086,7 @@ if(el('tkList')){
       pendingDelTimer = setTimeout(function(){
         pendingDelId = null;
         if(t.parentNode) t.textContent = '삭제';
-      }, 4000);
+      }, 8000);
     }
   });
   el('tkAdd').addEventListener('click', function(){
