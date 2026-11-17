@@ -112,8 +112,10 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent-line);box-shad
 textarea{resize:vertical;min-height:84px;line-height:1.65}
 select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,#475569 50%),linear-gradient(135deg,#475569 50%,transparent 50%);background-position:calc(100% - 19px) 21px,calc(100% - 14px) 21px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:38px}
 .row{display:grid;grid-template-columns:1fr;gap:10px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(min-width:560px){.two{grid-template-columns:1fr 1fr}.fmt-grid{grid-template-columns:1fr 1fr}}
+.two{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:560px){.fmt-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:700px){.two{grid-template-columns:1fr 1fr}}
+@media(max-width:699px){.two .switch{width:100%}}
 /* switch */
 .switch{display:flex;align-items:center;gap:12px;background:#f8fafc;border:1px solid var(--line);border-radius:11px;padding:12px 13px;cursor:pointer}
 .switch input{position:absolute;opacity:0;pointer-events:none}
