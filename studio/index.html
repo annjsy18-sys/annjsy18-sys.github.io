@@ -1224,6 +1224,7 @@ Array.prototype.forEach.call(document.querySelectorAll('.mini tr[data-fmt]'), fu
   if(!bar) return;
   var fields = document.querySelectorAll('input,textarea,select');
   Array.prototype.forEach.call(fields, function(n){
+    if(n.tagName === 'INPUT' && /^(checkbox|radio|submit|button|hidden)$/i.test(n.type)) return;
     n.addEventListener('focus', function(){ bar.classList.add('hide'); });
     n.addEventListener('blur', function(){ setTimeout(function(){ if(!document.activeElement || !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) bar.classList.remove('hide'); }, 120); });
   });
