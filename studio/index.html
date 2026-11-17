@@ -209,7 +209,7 @@ details .body{padding:0 0 14px;font-size:13.5px;color:var(--txt2);line-height:1.
 .mini tr[data-fmt]:hover td,.mini tr[data-fmt]:focus td{background:#f1f5f9}
 .mini tr[data-fmt]:focus{outline:2px solid #f59e0b;outline-offset:-2px}
 .mini .pick{display:inline-block;margin-left:5px;font-size:11px;font-weight:700;color:#b45309;background:#fffbeb;border:1px solid #fcd34d;border-radius:5px;padding:0 5px;white-space:nowrap}
-@media(max-width:480px){.mini .pick{font-size:0;padding:0 4px;margin-left:3px}.mini .pick::after{content:"›";font-size:13px;line-height:1}}
+@media(max-width:480px){.mini .pick{display:none}}
 #sec1.flash{animation:flash .9s ease}
 @keyframes flash{0%{box-shadow:0 0 0 3px rgba(217,119,6,.45)}100%{box-shadow:var(--shadow)}}
 /* toast */
@@ -427,22 +427,22 @@ footer.foot{text-align:center;font-size:12.5px;color:var(--muted);padding:14px 0
       <p style="margin:0 0 8px;font-size:12.5px;color:#475569">👇 <b>행을 누르면</b> 위 ① 카테고리 &amp; 포맷에서 그 포맷이 선택되고 맨 위 입력창으로 이동합니다(참고 제목이 비어 있으면 예시 주제도 채워집니다).</p>
       <table class="mini">
         <tr><th>수집 칩</th><th>개수</th><th>우리 판단</th></tr>
-        <tr data-fmt="adapt" data-topic="" data-title="[예시] 화제의 예능 장면, 원본 없이 해설로" tabindex="0"><td>나 혼자 산다</td><td>64</td><td><span class="tag warn">조심</span> 예능 짜집기 → 해설 각색 <span class="pick">선택 ›</span></td></tr>
-        <tr data-fmt="adapt" data-topic="" data-title="[예시] 시상식 무대, 화제 된 순간 해설" tabindex="0"><td>#시상식</td><td>26</td><td><span class="tag warn">조심</span> 예능·인물 편집 → 해설 각색 <span class="pick">선택 ›</span></td></tr>
-        <tr data-fmt="onetake" data-topic="art" data-title="[예시] 수채화 번짐 과정 15초" tabindex="0"><td>#Painting</td><td>19</td><td><span class="tag">사용</span> 그림·미술 과정 <span class="pick">선택 ›</span></td></tr>
-        <tr data-fmt="onetake" data-topic="food" data-title="[예시] 10초에 끝나는 주방 정리" tabindex="0"><td>#Food</td><td>18</td><td><span class="tag">사용</span> 주방·요리 <span class="pick">선택 ›</span></td></tr>
-        <tr data-fmt="onetake" data-topic="interior" data-title="[예시] 좁은 현관 수납 한 줄" tabindex="0"><td>#Interior</td><td>18</td><td><span class="tag">사용</span> 인테리어·정리 <span class="pick">선택 ›</span></td></tr>
-        <tr data-fmt="onetake" data-topic="sports" data-title="[예시] 야구 글러브 관리, 이렇게 하면 망합니다" tabindex="0"><td>#Baseball</td><td>11</td><td><span class="tag">조건부</span> 경기 영상 재사용 금지, 규칙·장비 설명만 <span class="pick">선택 ›</span></td></tr>
-        <tr data-fmt="adapt" data-topic="" data-title="[예시] 브랜드 캠페인이 화제인 이유 해설" tabindex="0"><td>#McDonalds · #Picture · #애드립 등</td><td>각 3~7</td><td><span class="tag warn">조심</span> 브랜드·예능 편집 → 해설 각색 <span class="pick">선택 ›</span></td></tr>
+        <tr data-fmt="adapt" data-topic="" data-title="[예시] 화제의 예능 장면, 원본 없이 해설로" tabindex="0"><td>나 혼자 산다</td><td>64</td><td><span class="tag warn">조심</span> 예능 짜집기 → 해설 각색 <span class="pick" aria-hidden="true">선택 ›</span></td></tr>
+        <tr data-fmt="adapt" data-topic="" data-title="[예시] 시상식 무대, 화제 된 순간 해설" tabindex="0"><td>#시상식</td><td>26</td><td><span class="tag warn">조심</span> 예능·인물 편집 → 해설 각색 <span class="pick" aria-hidden="true">선택 ›</span></td></tr>
+        <tr data-fmt="onetake" data-topic="art" data-title="[예시] 수채화 번짐 과정 15초" tabindex="0"><td>#Painting</td><td>19</td><td><span class="tag">사용</span> 그림·미술 과정 <span class="pick" aria-hidden="true">선택 ›</span></td></tr>
+        <tr data-fmt="onetake" data-topic="food" data-title="[예시] 10초에 끝나는 주방 정리" tabindex="0"><td>#Food</td><td>18</td><td><span class="tag">사용</span> 주방·요리 <span class="pick" aria-hidden="true">선택 ›</span></td></tr>
+        <tr data-fmt="onetake" data-topic="interior" data-title="[예시] 좁은 현관 수납 한 줄" tabindex="0"><td>#Interior</td><td>18</td><td><span class="tag">사용</span> 인테리어·정리 <span class="pick" aria-hidden="true">선택 ›</span></td></tr>
+        <tr data-fmt="onetake" data-topic="sports" data-title="[예시] 야구 글러브 관리, 이렇게 하면 망합니다" tabindex="0"><td>#Baseball</td><td>11</td><td><span class="tag">조건부</span> 경기 영상 재사용 금지, 규칙·장비 설명만 <span class="pick" aria-hidden="true">선택 ›</span></td></tr>
+        <tr data-fmt="adapt" data-topic="" data-title="[예시] 브랜드 캠페인이 화제인 이유 해설" tabindex="0"><td>#McDonalds · #Picture · #애드립 등</td><td>각 3~7</td><td><span class="tag warn">조심</span> 브랜드·예능 편집 → 해설 각색 <span class="pick" aria-hidden="true">선택 ›</span></td></tr>
       </table>
       <p style="margin:10px 0 8px"><b>강의에서 말한 '돈 되는 카테고리' 12개</b> 중 이 작업실에서 고를 수 있는 것:</p>
       <table class="mini">
         <tr><th>카테고리</th><th>우리 판단</th></tr>
-        <tr data-fmt="shopping" data-topic="living" data-title="[예시] 겨울철 앞유리 성에 10초 해결법" tabindex="0"><td>③ 쇼핑형</td><td><span class="tag">사용</span> 쇼핑형 <span class="pick">선택 ›</span></td></tr>
-        <tr data-fmt="ranking" data-topic="living" data-title="[예시] 의외로 1위인 겨울 살림템 3" tabindex="0"><td>⑥ 랭킹형</td><td><span class="tag">사용</span> 랭킹형 <span class="pick">선택 ›</span></td></tr>
-        <tr data-fmt="onetake" data-topic="living" data-title="[예시] 한 장면으로 끝나는 원테이크" tabindex="0"><td>⑤ 노래형 원테이크</td><td><span class="tag">사용</span> 원테이크형(음원은 상업 이용 가능한 것만) <span class="pick">선택 ›</span></td></tr>
-        <tr data-fmt="review" data-topic="" data-title="[예시] 그 배우의 인생작, 클립 없이 리뷰" tabindex="0"><td>⑦ 인물형</td><td><span class="tag warn">조심</span> 초상권 위험 → 인물 리뷰 각색 <span class="pick">선택 ›</span></td></tr>
-        <tr data-fmt="review" data-topic="" data-title="[예시] 결말 포함, 영화 한 편 요약 리뷰" tabindex="0"><td>① 팬튜브 ② 영화·드라마 ⑧ 정치형 ⑪ 영화 롱폼</td><td><span class="tag warn">조심</span> 저작권·부분차단 → 스토리 요약 각색 <span class="pick">선택 ›</span></td></tr>
+        <tr data-fmt="shopping" data-topic="living" data-title="[예시] 겨울철 앞유리 성에 10초 해결법" tabindex="0"><td>③ 쇼핑형</td><td><span class="tag">사용</span> 쇼핑형 <span class="pick" aria-hidden="true">선택 ›</span></td></tr>
+        <tr data-fmt="ranking" data-topic="living" data-title="[예시] 의외로 1위인 겨울 살림템 3" tabindex="0"><td>⑥ 랭킹형</td><td><span class="tag">사용</span> 랭킹형 <span class="pick" aria-hidden="true">선택 ›</span></td></tr>
+        <tr data-fmt="onetake" data-topic="living" data-title="[예시] 한 장면으로 끝나는 원테이크" tabindex="0"><td>⑤ 노래형 원테이크</td><td><span class="tag">사용</span> 원테이크형(음원은 상업 이용 가능한 것만) <span class="pick" aria-hidden="true">선택 ›</span></td></tr>
+        <tr data-fmt="review" data-topic="" data-title="[예시] 그 배우의 인생작, 클립 없이 리뷰" tabindex="0"><td>⑦ 인물형</td><td><span class="tag warn">조심</span> 초상권 위험 → 인물 리뷰 각색 <span class="pick" aria-hidden="true">선택 ›</span></td></tr>
+        <tr data-fmt="review" data-topic="" data-title="[예시] 결말 포함, 영화 한 편 요약 리뷰" tabindex="0"><td>① 팬튜브 ② 영화·드라마 ⑧ 정치형 ⑪ 영화 롱폼</td><td><span class="tag warn">조심</span> 저작권·부분차단 → 스토리 요약 각색 <span class="pick" aria-hidden="true">선택 ›</span></td></tr>
       </table>
       <p style="margin:10px 0 0;color:#475569">※ 수익 수치(월 2,600만 원 등)는 강사·카페 측 주장이며 검증되지 않았습니다. 계획 근거로 쓰지 않습니다.</p>
     </div>
