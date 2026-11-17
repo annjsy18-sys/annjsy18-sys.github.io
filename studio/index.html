@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1512">
+<meta name="description" content="포맷·소재·규격을 고르면 지피티·클로드에 바로 붙여넣는 쇼츠 제작 지침서(한국어+일본어/영어)를 만들어 주는 무료 작업실.">
+<title>그린룸 스타일 쇼츠 작업실 (무료)</title>
+<style>
+:root{
+  --bg:#0a1210;
+  --bg2:#0d1a16;
+  --card:#111e1a;
+  --card2:#16261f;
+  --line:#223a31;
+  --line2:#2d4a3e;
+  --txt:#e8f4ee;
+  --muted:#93aaa1;
+  --accent:#2ee6a8;
+  --accent-dim:#1a8f68;
+  --warn:#ffcf5c;
+  --danger:#ff7b7b;
+  --r:16px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:
+    radial-gradient(900px 500px at 100% -10%, rgba(46,230,168,.10), transparent 60%),
+    radial-gradient(700px 400px at -10% 10%, rgba(46,230,168,.07), transparent 55%),
+    var(--bg);
+  color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","맑은 고딕","Noto Sans KR",Roboto,sans-serif;
+  font-size:15px;line-height:1.6;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:780px;margin:0 auto;padding:14px 14px 132px}
+a{color:var(--accent)}
+/* header */
+header.top{padding:10px 2px 14px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .logo{
+  width:42px;height:42px;border-radius:13px;flex:0 0 auto;
+  background:linear-gradient(145deg,#1d6f52,#0e3a2c);
+  display:grid;place-items:center;font-size:21px;
+  border:1px solid #2f6a55;box-shadow:0 6px 18px rgba(0,0,0,.35);
+}
+.brand h1{margin:0;font-size:18px;letter-spacing:-.3px;font-weight:800}
+.brand .sub{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.badge{font-size:11px;padding:5px 9px;border-radius:999px;border:1px solid var(--line2);color:#bfe6d6;background:#0f201a}
+.badge.on{border-color:#2b7a5d;color:#8ff2cd;background:#0d2a20}
+/* card */
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,0));
+  background-color:var(--card);
+  border:1px solid var(--line);border-radius:var(--r);
+  padding:15px;margin:0 0 12px;
+}
+.step{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.num{
+  flex:0 0 auto;width:25px;height:25px;border-radius:8px;display:grid;place-items:center;
+  background:#0e2a21;border:1px solid #2b5c49;color:var(--accent);font-size:12px;font-weight:800;
+}
+.step h2{margin:0;font-size:15px;font-weight:800;letter-spacing:-.2px}
+.step .hint{margin:1px 0 0;font-size:12px;color:var(--muted);font-weight:400;line-height:1.5}
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  appearance:none;cursor:pointer;font:inherit;color:var(--txt);
+  background:#0d1a15;border:1px solid var(--line);border-radius:11px;
+  padding:9px 11px;min-height:42px;display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;line-height:1.25;transition:border-color .12s,background .12s,transform .06s;
+}
+.chip:active{transform:scale(.985)}
+.chip[aria-pressed="true"]{background:#0f2e23;border-color:var(--accent-dim);box-shadow:inset 0 0 0 1px rgba(46,230,168,.25)}
+.chip .k{font-weight:800}
+.chip small{color:var(--muted);font-size:11px}
+/* format cards */
+.fmt-grid{display:grid;grid-template-columns:1fr;gap:8px}
+.fmt{
+  text-align:left;cursor:pointer;font:inherit;color:var(--txt);
+  background:#0d1a15;border:1px solid var(--line);border-radius:13px;padding:11px 12px;
+  display:grid;grid-template-columns:26px 1fr;gap:2px 9px;align-items:start;
+}
+.fmt:hover{border-color:var(--line2)}
+.fmt[aria-pressed="true"]{background:#0f2e23;border-color:var(--accent-dim)}
+.fmt .em{grid-row:1 / span 2;font-size:19px;line-height:1.2}
+.fmt .nm{font-weight:800;font-size:14px;display:flex;gap:7px;align-items:baseline;flex-wrap:wrap}
+.fmt .nm i{font-style:normal;font-size:10.5px;color:#8ff2cd;border:1px solid #2b6a55;border-radius:6px;padding:1px 5px;font-weight:600}
+.fmt .ds{font-size:11.5px;color:var(--muted);line-height:1.45}
+/* fields */
+.field{margin:0 0 12px}
+.field:last-child{margin-bottom:0}
+label.lab{display:block;font-size:12px;font-weight:700;color:#cfe6dc;margin:0 0 6px}
+label.lab span{font-weight:400;color:var(--muted)}
+input[type=text],input[type=url],textarea,select{
+  width:100%;font:inherit;font-size:16px;color:var(--txt);
+  background:#0b1713;border:1px solid var(--line);border-radius:11px;padding:11px 12px;
+  outline:none;transition:border-color .12s;
+}
+input::placeholder,textarea::placeholder{color:#6c837a;font-size:14px}
+input:focus,textarea:focus,select:focus{border-color:var(--accent-dim);box-shadow:0 0 0 3px rgba(46,230,168,.10)}
+textarea{resize:vertical;min-height:74px;line-height:1.55}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,#7ea79a 50%),linear-gradient(135deg,#7ea79a 50%,transparent 50%);background-position:calc(100% - 18px) 20px,calc(100% - 13px) 20px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:36px}
+.row{display:grid;grid-template-columns:1fr;gap:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(min-width:560px){.two{grid-template-columns:1fr 1fr}.fmt-grid{grid-template-columns:1fr 1fr}}
+/* switch */
+.switch{display:flex;align-items:center;gap:11px;background:#0b1713;border:1px solid var(--line);border-radius:11px;padding:11px 12px;cursor:pointer}
+.switch input{position:absolute;opacity:0;pointer-events:none}
+.track{flex:0 0 auto;width:42px;height:24px;border-radius:999px;background:#22352d;position:relative;transition:background .15s;border:1px solid #2c463c}
+.track::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#8aa39a;transition:transform .15s,background .15s}
+.switch input:checked + .track{background:#14543f;border-color:#2f8a68}
+.switch input:checked + .track::after{transform:translateX(18px);background:var(--accent)}
+.switch .txt{font-size:12.5px;line-height:1.45}
+.switch .txt b{display:block;font-size:13px}
+.switch .txt small{color:var(--muted);font-size:11.5px}
+/* note */
+.note{font-size:11.5px;color:var(--muted);margin:9px 0 0;line-height:1.55}
+.note b{color:#ffd98a;font-weight:700}
+.warnbox{border:1px solid #4a3c1c;background:#1c1810;color:#f0d9a8;border-radius:11px;padding:10px 12px;font-size:12px;line-height:1.55;margin:0 0 12px}
+.warnbox b{color:#ffcf5c}
+/* buttons */
+.btn{
+  appearance:none;font:inherit;cursor:pointer;border-radius:12px;border:1px solid var(--line2);
+  background:#14251f;color:var(--txt);padding:12px 14px;font-size:14px;font-weight:700;
+  min-height:46px;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  transition:transform .06s,filter .12s;
+}
+.btn:active{transform:scale(.99)}
+.btn.primary{background:linear-gradient(180deg,#28c495,#149a70);border-color:#37d6a5;color:#04241a;font-weight:800}
+.btn.primary:hover{filter:brightness(1.06)}
+.btn.ghost{background:#0d1a15}
+.btn.sm{padding:8px 10px;min-height:38px;font-size:12.5px;font-weight:600;border-radius:9px}
+.btn:disabled{opacity:.45;cursor:default}
+/* sticky bar */
+.bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:40;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(10,18,16,.93);backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);
+}
+.bar .inner{max-width:780px;margin:0 auto;display:flex;gap:8px}
+.bar .btn{flex:1}
+/* result */
+#result{display:none}
+#result.show{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.prompt-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:9px}
+.prompt-head .t{font-size:13px;font-weight:800}
+.prompt-head .c{font-size:11px;color:var(--muted)}
+pre.prompt{
+  margin:0;padding:12px;border-radius:12px;border:1px solid var(--line);
+  background:#081310;color:#d6ece3;font-size:12px;line-height:1.62;
+  font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace;
+  white-space:pre-wrap;word-break:break-word;
+  max-height:58vh;overflow:auto;-webkit-overflow-scrolling:touch;
+}
+.act-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+/* records */
+.rec{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px dashed #1e3229}
+.rec:last-child{border-bottom:0}
+.rec .meta{flex:1;min-width:0}
+.rec .meta b{display:block;font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rec .meta small{color:var(--muted);font-size:11px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.empty{font-size:12px;color:var(--muted);padding:6px 0}
+/* details */
+details{border:1px solid var(--line);border-radius:12px;background:#0c1814;padding:0 12px}
+details + details{margin-top:8px}
+details summary{cursor:pointer;padding:11px 0;font-size:13px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:8px}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"＋";color:var(--accent);font-size:14px}
+details[open] summary::after{content:"－"}
+details .body{padding:0 0 12px;font-size:12px;color:#c6ddd3;line-height:1.6}
+.mini{width:100%;border-collapse:collapse;font-size:11.5px}
+.mini th,.mini td{border-bottom:1px solid #1c2f27;padding:6px 4px;text-align:left;vertical-align:top}
+.mini th{color:#8fb3a5;font-weight:700;font-size:11px}
+.tag{display:inline-block;font-size:10px;padding:1px 6px;border-radius:5px;border:1px solid #2b6a55;color:#8ff2cd;white-space:nowrap}
+.tag.no{border-color:#5c3030;color:#ff9d9d}
+/* toast */
+#toast{
+  position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(10px);
+  background:#e9fff7;color:#04241a;font-weight:800;font-size:13px;
+  padding:11px 16px;border-radius:11px;z-index:80;opacity:0;pointer-events:none;
+  transition:opacity .18s,transform .18s;box-shadow:0 10px 30px rgba(0,0,0,.45);max-width:88vw;text-align:center;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.err{border-color:#7a3b3b !important;box-shadow:0 0 0 3px rgba(255,123,123,.12) !important}
+footer.foot{text-align:center;font-size:11px;color:#6d857b;padding:10px 0 0;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="brand">
+    <div class="logo">🎬</div>
+    <div>
+      <h1>그린룸 스타일 쇼츠 작업실</h1>
+      <p class="sub">포맷·소재·규격만 고르면 → 지피티·클로드용 제작 지침서 <b>한 방에</b></p>
+    </div>
+  </div>
+  <div class="badges">
+    <span class="badge on">무료 · 서버 0원</span>
+    <span class="badge">저작권 안전 포맷만</span>
+    <span class="badge">한국어 + 일본어/영어</span>
+    <span class="badge">모바일·PC 공용</span>
+  </div>
+</header>
+
+<div class="warnbox">
+  <b>이 작업실이 하는 일 / 안 하는 일</b><br>
+  영상을 직접 굽지 않습니다. 대신 <b>대본·자막·장면 지시문·해외 버전</b>을 뽑아 주는 프롬프트를 만듭니다. 실제 영상은 그 프롬프트를 <b>지피티(GPT-6 Luna)·클로드</b>에 넣어 뽑고, PC에서는 <b>build_shorts.py</b>로 조립합니다. 예능·영화·드라마 짜집기는 넣지 않았습니다(저작권·부분차단 위험).
+</div>
+
+<!-- 1 -->
+<section class="card" id="sec1">
+  <div class="step">
+    <div class="num">1</div>
+    <div>
+      <h2>카테고리 &amp; 포맷</h2>
+      <p class="hint">그린룸 카테고리형 중 우리 채널에 맞는 <b>5개</b>만. 누르면 그 포맷 규칙이 프롬프트에 그대로 들어갑니다.</p>
+    </div>
+  </div>
+  <div class="fmt-grid" id="fmtGrid"></div>
+  <p class="note"><b>참고</b> — 영화·예능·드라마 짜집기와 인물 편집은 제외했습니다. 조회수는 잘 나오지만 저작권 클레임(부분 차단)·재사용 콘텐츠 판정 위험이 커서, 수익화 심사 중인 채널에는 손해입니다.</p>
+</section>
+
+<!-- 2 -->
+<section class="card">
+  <div class="step">
+    <div class="num">2</div>
+    <div>
+      <h2>소재 · 3필터</h2>
+      <p class="hint">조회수만 보고 가져오지 않습니다. <b>국가 · 기간 · 중복도</b>를 같이 봅니다.</p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="lab" for="srcTitle">참고 영상 제목 <span>(권장)</span></label>
+    <input type="text" id="srcTitle" placeholder="예: 겨울철 앞유리 성에 10초 해결법">
+  </div>
+
+  <div class="field">
+    <label class="lab" for="srcUrl">유튜브 링크 <span>(있으면)</span></label>
+    <input type="url" id="srcUrl" placeholder="https://www.youtube.com/watch?v=...">
+  </div>
+
+  <div class="field">
+    <label class="lab" for="features">주요 특징 1~2줄 <span>(무엇이 터졌는지)</span></label>
+    <textarea id="features" placeholder="예: 앞유리에 뜨거운 물 붓지 말라는 경고 훅. 10초 만에 끝나는 방법 제시. 조회수 260만."></textarea>
+  </div>
+
+  <div class="field">
+    <label class="lab" for="topicCat">주제 영역 <span>(안전 카테고리)</span></label>
+    <select id="topicCat"></select>
+  </div>
+
+  <div class="field">
+    <label class="lab" for="country">타깃 국가</label>
+    <select id="country">
+      <option value="kr">한국만</option>
+      <option value="jp">한국 → 일본</option>
+      <option value="en">한국 → 영어권</option>
+      <option value="all" selected>3개국 동시 (한국·일본·영어권)</option>
+    </select>
+  </div>
+
+  <div class="field two">
+    <div>
+      <label class="swit wch" for="longLasting" style="display:block">
+        <span class="switch">
+          <input type="checkbox" id="longLasting">
+          <span class="track"></span>
+          <span class="txt"><b>1년 이상 지속 소재</b><small>오래된 영상인데 조회수가 계속 나오는가</small></span>
+        </span>
+      </label>
+    </div>
+    <div>
+      <label class="lab" for="dup" style="margin-top:2px">중복도 <span>(같은 소재 영상 수)</span></label>
+      <select id="dup">
+        <option value="low">낮음 — 거의 없음</option>
+        <option value="mid" selected>보통 — 몇 개 있음</option>
+        <option value="high">높음 — 이미 많음</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field" style="margin-top:12px">
+    <label class="lab">1소재 3관점</label>
+    <div class="chips" id="angleChips"></div>
+    <p class="note">3관점을 고르면 <b>대본·첫 컷·자막이 서로 다른 3편</b>으로 나눠 나옵니다(같은 SRT 돌려쓰면 재사용 판정 위험). 주 1회만 쓰는 걸 권합니다.</p>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="card">
+  <div class="step">
+    <div class="num">3</div>
+    <div>
+      <h2>영상 디자인 툴 규격</h2>
+      <p class="hint">만들 곳에 맞춰 규격을 고르세요. 타임라인·컷 수·자막 위치까지 프롬프트에 박힙니다.</p>
+    </div>
+  </div>
+  <div class="fmt-grid" id="specGrid"></div>
+
+  <div class="field" style="margin-top:12px">
+    <label class="lab" for="ai">붙여넣을 곳</label>
+    <select id="ai">
+      <option value="gpt" selected>ChatGPT (GPT-6 Luna)</option>
+      <option value="claude">Claude</option>
+      <option value="aside">PC 어사이드 (코덱스·안티그래비티)</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label class="lab" for="channel">채널명 <span>(선택)</span></label>
+    <input type="text" id="channel" placeholder="아이템24" value="아이템24">
+  </div>
+
+  <div class="field">
+    <label class="lab" for="notes">추가 요청 <span>(선택)</span></label>
+    <textarea id="notes" placeholder="예: 4번째 컷에 제품 클로즈업. 말투는 차분하게. 가격은 넣지 말 것."></textarea>
+  </div>
+</section>
+
+<!-- result -->
+<section class="card" id="result">
+  <div class="prompt-head">
+    <div class="t">✅ 완성 프롬프트</div>
+    <div class="c" id="pcount"></div>
+  </div>
+  <pre class="prompt" id="promptOut"></pre>
+  <div class="act-row">
+    <button class="btn primary" id="copyBtn" type="button">📋 복사</button>
+    <button class="btn ghost sm" id="dlBtn" type="button">.txt 저장</button>
+    <button class="btn ghost sm" id="saveBtn" type="button">💾 작업 기록 저장</button>
+  </div>
+  <p class="note" id="whereNote"></p>
+</section>
+
+<!-- records -->
+<section class="card">
+  <div class="step" style="margin-bottom:8px">
+    <div class="num">4</div>
+    <div>
+      <h2>작업 기록 <span style="font-weight:400;font-size:11px;color:var(--muted)">(이 브라우저에만 저장)</span></h2>
+      <p class="hint">저장해 두면 다음에 눌러서 그대로 불러옵니다.</p>
+    </div>
+  </div>
+  <div id="recList"></div>
+</section>
+
+<!-- category reference -->
+<section class="card">
+  <details>
+    <summary>조회수 터지는 카테고리 — 확인해서 반영한 자료</summary>
+    <div class="body">
+      <p style="margin:0 0 8px">아이템24 11/17 비공개 영상(쇼프33 42:47 화면)의 그린룸 소재 보관함 실제 수집 칩 <b>296개</b> 기준입니다. 우리 작업실은 이 중 <b>저작권 위험이 없는 주제 영역만</b> 골라 넣었습니다.</p>
+      <table class="mini">
+        <tr><th>수집 칩</th><th>개수</th><th>우리 판단</th></tr>
+        <tr><td>나 혼자 산다</td><td>64</td><td><span class="tag no">제외</span> 예능 짜집기</td></tr>
+        <tr><td>#시상식</td><td>26</td><td><span class="tag no">제외</span> 예능·인물 편집</td></tr>
+        <tr><td>#Painting</td><td>19</td><td><span class="tag">사용</span> 그림·미술 과정</td></tr>
+        <tr><td>#Food</td><td>18</td><td><span class="tag">사용</span> 주방·요리</td></tr>
+        <tr><td>#Interior</td><td>18</td><td><span class="tag">사용</span> 인테리어·정리</td></tr>
+        <tr><td>#Baseball</td><td>11</td><td><span class="tag">조건부</span> 경기 영상 재사용 금지, 규칙·장비 설명만</td></tr>
+        <tr><td>#McDonalds · #Picture · #애드립 등</td><td>각 3~7</td><td><span class="tag no">제외</span> 브랜드·예능 편집</td></tr>
+      </table>
+      <p style="margin:10px 0 8px"><b>강의에서 말한 '돈 되는 카테고리' 12개</b> 중 우리가 쓸 수 있는 것:</p>
+      <table class="mini">
+        <tr><th>카테고리</th><th>우리 판단</th></tr>
+        <tr><td>③ 쇼핑형</td><td><span class="tag">사용</span> 쇼핑형</td></tr>
+        <tr><td>⑥ 랭킹형</td><td><span class="tag">사용</span> 랭킹형</td></tr>
+        <tr><td>⑤ 노래형 원테이크</td><td><span class="tag">사용</span> 원테이크형(음원은 상업 이용 가능한 것만)</td></tr>
+        <tr><td>⑦ 인물형</td><td><span class="tag no">제외</span> 초상권·편집 위험</td></tr>
+        <tr><td>① 팬튜브 ② 영화·드라마 ⑧ 정치형 ⑪ 영화 롱폼</td><td><span class="tag no">제외</span> 저작권·부분차단</td></tr>
+      </table>
+      <p style="margin:10px 0 0;color:#9db8ac">※ 수익 수치(월 2,600만 원 등)는 강사·카페 측 주장이며 검증되지 않았습니다. 계획 근거로 쓰지 않습니다.</p>
+    </div>
+  </details>
+</section>
+
+<footer class="foot">
+  그린룸 스타일 쇼츠 작업실 · 무료 단일 파일 도구<br>
+  자료: 아이템24 비공개 영상 3편 분석(2026-11-17) · 캡컷 15초 쇼츠 반자동 가이드(2026-11-15)
+</footer>
+</div>
+
+<div class="bar">
+  <div class="inner">
+    <button class="btn primary" id="genBtn" type="button">⚡ 프롬프트 생성</button>
+    <button class="btn ghost" id="copyBtn2" type="button">📋 복사</button>
+  </div>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ───────── 데이터 ───────── */
+var FORMATS = {
+  shopping: { em:'🛍️', name:'쇼핑형', tag:'제품 소개',
+    desc:'문제 → 제품 등장 → 3가지 포인트 → 고정댓글 유도. 하루 20~40분으로 돌리는 기본형.',
+    rules:[
+      '제품 1개만 다룬다. 여러 개를 한 편에 넣으면 어느 것도 기억에 안 남는다.',
+      '0~0.8초: 쓰기 전 불편(금지·숫자). 3~4초: 제품 등장. 이후 실제 사용 장면 3포인트.',
+      '포인트는 "무엇이 편해졌는지"를 몸의 감각으로 말한다(손목이 안 시렵다 / 10초에 끝난다).',
+      '가격·할인·효능은 확인된 것만. 모르면 쓰지 말고 [확인 필요]로 남긴다.',
+      '마지막 컷은 화면 글자 대신 "고정댓글 확인" 한 줄. 쇼츠 UI가 아래를 가리기 때문.',
+      '제휴·광고가 들어가면 대가성 고지 문구를 넣는다.'
+    ]},
+  daily: { em:'👀', name:'일상 관찰형', tag:'공감·동물',
+    desc:'익숙한 장면을 다르게 보여주기. 강아지·주방·현관처럼 매일 보는 것을 소재로.',
+    rules:[
+      '결론을 먼저 말하지 않고 "이거 왜 이럴까요?" 관찰 한 줄로 시작해도 된다. 단 0.8초 안에 질문이 끝나야 한다.',
+      '장면은 실제 생활 공간(주방·현관·책상)에서. 배경이 예쁠 필요 없고, 손이 보이면 충분하다.',
+      '중간에 의외의 사실 1개(통념 반전)를 넣는다.',
+      '정보는 3줄을 넘기지 않는다. 관찰형은 정보량보다 장면이 본체다.',
+      '마지막은 공감 한 줄 + 질문(댓글 유도).'
+    ]},
+  ranking: { em:'🏆', name:'랭킹형', tag:'카운트다운',
+    desc:'N위부터 1위까지. 항목마다 1컷, 자막에 순위 숫자를 크게.',
+    rules:[
+      '항목 수는 3~5개. 15초면 3개, 30초면 5개.',
+      '꼴찌(3위)부터 시작해 1위에서 끊는다. 1위는 가장 의외인 것.',
+      '각 항목 자막에 순위 숫자를 크게, 이유는 한 줄만.',
+      '랭킹 기준을 첫 컷에서 밝힌다(조회수 순 / 황당한 순 / 가성비 순).',
+      '1위는 결과를 먼저 보여주고 이유를 뒤에 붙인다(마지막 이탈 방지).',
+      '남의 영상 순위가 아니라 "내가 정리한 순위"로 만든다. 원본 클립 재사용 금지.'
+    ]},
+  onetake: { em:'🎯', name:'원테이크형', tag:'한 장면',
+    desc:'한 장면·한 호흡. 컷 전환 없이 자막 3개. 사진 1~2장뿐인 날 쓰는 형식.',
+    rules:[
+      '장면 1개(또는 2개), 컷 전환 없음. 편집은 자막·음악만.',
+      '자막 3개 이하: 결론(0~0.8초) → 이유 1줄 → 방법·이득 1줄.',
+      '화면은 아주 느린 줌(100→108%)만. 흔들림·전환 금지.',
+      '나레이션 3문장, 총 12~15초.',
+      '사진이면 1080×1920 세로, 글자·로고 없는 것.'
+    ]},
+  twist: { em:'💬', name:'커뮤·반전형', tag:'댓글·질문',
+    desc:'질문 하나 → 통념 → 반전 → 정리. 커뮤니티 글은 캡처 대신 새로 각색.',
+    rules:[
+      '첫 컷은 질문 또는 상황 한 줄(예: "이거 왜 이렇게 사는 거예요?").',
+      '통념(다들 이렇게 한다)을 1컷, 반전(실은 반대)을 1컷에 배치한다.',
+      '커뮤니티 글·댓글을 그대로 캡처해 올리지 않는다. 개인정보·초상권 문제. 상황만 새로 쓴다.',
+      '반전 뒤에 근거 1개(숫자·경험)를 붙여 신뢰를 만든다.',
+      '마지막은 "여러분은 어느 쪽?" 같은 한 줄 질문으로 끝낸다.'
+    ]}
+};
+
+var SPECS = {
+  one15: { em:'⏱️', name:'15초 원테이크 쇼츠', tag:'14~15초',
+    desc:'4컷 × 3.5초 하드컷 또는 한 장면. 아이템24 기본형.',
+    lines:[
+      '총 14.0초. 4컷 × 3.5초, 전부 하드컷(전환 효과 금지).',
+      '30fps 기준 컷 지점: 프레임 0 / 105 / 210 / 315 / 420.',
+      '컷 구성: ①훅(문제·금지·숫자) ②원인·잘못된 상식 ③해결(방법·제품) ④정리 + 고정댓글 유도.',
+      '나레이션 4문장, 문장당 3~4초(한 문장 12~18자). 자막 4개가 컷 경계와 1:1로 맞는다.',
+      '규격 1080×1920 / 30fps / H.264 + AAC. 이미지는 화면 채우기(크롭).',
+      '자막은 화면 위에서 70%(y≈1,340), 1줄 12자 이내·최대 2줄, 흰 글자 + 검정 외곽선 3~4px.'
+    ]},
+  hook30: { em:'🎣', name:'30초 3단 훅 쇼츠', tag:'30초',
+    desc:'3초 훅을 3단으로 쪼개고 본문 3포인트. 같은 소재를 더 길게.',
+    lines:[
+      '총 30초. 0~3초 훅 / 3~8초 이유·공감 / 8~25초 본문 3포인트(각 5~6초) / 25~30초 정리 + CTA.',
+      '훅 3단: 0~0.8초 결론(금지·숫자) → 0.8~2.5초 이유 → 2.5~3초 이득.',
+      '컷 8~10개(2.5~4초), 하드컷. 3초마다 화면이 바뀌어야 이탈이 없다.',
+      '나레이션 8문장. 자막 8~10개, 1줄 12자 이내.',
+      '본문 3포인트는 각각 "무엇 / 어떻게 / 결과" 순서로 짧게.',
+      '규격 1080×1920 / 30fps. 자막 위치·색 규칙은 15초형과 동일.'
+    ]},
+  long3m: { em:'📺', name:'3분 생활꿀팁 롱폼', tag:'180초',
+    desc:'섹션 5개로 늘린 롱폼. 검색 유입·광고 수익용.',
+    lines:[
+      '총 180초. 0~5초 훅 / 5~25초 문제 / 25~150초 해결 3단계(각 40초 내외) / 150~170초 검증·주의 / 170~180초 정리 + CTA.',
+      '컷 20~30개(5~8초), 하드컷 기본. 섹션 경계에만 짧은 페이드 1개.',
+      '규격 1920×1080(16:9) 기본. 쇼츠로 다시 자를 계획이면 1080×1920 세로 3분 버전도 함께 설계.',
+      '나레이션 25~30문장. 단계마다 "무엇을 / 어떤 순서로 / 몇 초 걸리는지"를 숫자로 말한다.',
+      '자막 1줄 14~16자, 화면 아래 12% 위. 16:9에서는 오른쪽 아래 구독·추천 UI를 피한다.',
+      '챕터(타임스탬프)와 설명란 목차를 함께 만든다.'
+    ]},
+  pcjson: { em:'🖥️', name:'PC 원클릭 조립 (build_shorts.py)', tag:'JSON+대본',
+    desc:'01~04.jpg + script.txt + subtitle.srt + upload_info.txt + manifest.json 세트.',
+    lines:[
+      'build_shorts.py 규격: 폴더 안에 01.jpg~04.jpg(1080×1920), script.txt, subtitle.srt, upload_info.txt, manifest.json.',
+      'script.txt: 한 줄에 한 문장, 4~6문장(총 13~14초). 문장부호로 끊어 읽는다.',
+      'subtitle.srt: 4개 큐, 컷 경계 0 / 3.5 / 7.0 / 10.5 / 14.0초와 정확히 일치. 형식 "00:00:00,000 --> 00:00:03,500", UTF-8.',
+      '이미지 4장: 글자·로고 없는 사진을 전제로, 각 장면에 "무엇이 보여야 하는지"를 카메라·피사체·손동작까지 한 줄로 지시.',
+      'manifest.json: 아래 키를 가진 JSON 한 덩어리로 출력.',
+      '{"date":"YYYY-MM-DD","topic":"주제","voice":"ko-KR-SunHiNeural","rate":"+8%","size":"1080x1920","fps":30,"images":["01.jpg","02.jpg","03.jpg","04.jpg"],"sentences":["문장1","문장2"],"cuts":[{"idx":1,"start":0.0,"end":3.5,"image":"01.jpg","scene":"장면 지시"}],"title":"제목","description":"설명","hashtags":["#태그"],"pinned_comment":"고정댓글"}',
+      'upload_info.txt에는 타입캐스트에 붙일 대본 4줄 + 제목 3안 + 설명 + 해시태그 + 고정댓글 + 업로드 체크리스트를 담는다.'
+    ]}
+};
+
+var ANGLES = {
+  one:     { name:'1편만',   tag:'기본' },
+  problem: { name:'문제해결', tag:'이렇게 하면 망합니다' },
+  compare: { name:'비교',     tag:'A vs B' },
+  result:  { name:'결과반전', tag:'결과 먼저' },
+  all:     { name:'3관점 전부', tag:'3편 세트' }
+};
+
+var TOPICS = [
+  ['living','생활꿀팁 (청소·세탁·수납)'],
+  ['food','주방·요리 (Food 18)'],
+  ['interior','인테리어·정리 (Interior 18)'],
+  ['art','그림·미술 과정 (Painting 19)'],
+  ['pet','반려동물'],
+  ['beauty','뷰티·패션'],
+  ['digital','디지털·가전'],
+  ['health','운동·건강 (효능 단정 금지)'],
+  ['sports','스포츠 규칙·장비 (경기 영상 재사용 금지)'],
+  ['etc','기타']
+];
+
+var COUNTRY_LABEL = { kr:'한국어만', jp:'한국어 + 일본어', en:'한국어 + 영어', all:'한국어 + 일본어 + 영어' };
+var DUP_LABEL = { low:'낮음(거의 없음)', mid:'보통(몇 개 있음)', high:'높음(이미 많음)' };
+
+var LS_REC = 'greenroom_studio_v1';
+var LS_DRAFT = 'greenroom_studio_draft_v1';
+
+/* ───────── 상태 ───────── */
+var state = { format:'shopping', topicCat:'living', srcTitle:'', srcUrl:'', features:'',
+  country:'all', longLasting:false, dup:'mid', angles:'problem', spec:'one15',
+  ai:'gpt', channel:'아이템24', notes:'' };
+
+/* ───────── 렌더 ───────── */
+function el(id){ return document.getElementById(id); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+var fmtGrid = el('fmtGrid'), specGrid = el('specGrid');
+Object.keys(FORMATS).forEach(function(k){
+  var f = FORMATS[k];
+  var b = document.createElement('button');
+  b.type='button'; b.className='fmt'; b.dataset.k=k;
+  b.setAttribute('aria-pressed', String(state.format===k));
+  b.innerHTML = '<span class="em">'+f.em+'</span><span class="nm">'+esc(f.name)+' <i>'+esc(f.tag)+'</i></span><span class="ds">'+esc(f.desc)+'</span>';
+  b.addEventListener('click', function(){ state.format=k; syncFormat(); saveDraft(); });
+  fmtGrid.appendChild(b);
+});
+Object.keys(SPECS).forEach(function(k){
+  var s = SPECS[k];
+  var b = document.createElement('button');
+  b.type='button'; b.className='fmt'; b.dataset.s=k;
+  b.setAttribute('aria-pressed', String(state.spec===k));
+  b.innerHTML = '<span class="em">'+s.em+'</span><span class="nm">'+esc(s.name)+' <i>'+esc(s.tag)+'</i></span><span class="ds">'+esc(s.desc)+'</span>';
+  b.addEventListener('click', function(){ state.spec=k; syncSpec(); saveDraft(); });
+  specGrid.appendChild(b);
+});
+function syncFormat(){ Array.prototype.forEach.call(fmtGrid.children, function(c){ c.setAttribute('aria-pressed', String(c.dataset.k===state.format)); }); }
+function syncSpec(){ Array.prototype.forEach.call(specGrid.children, function(c){ c.setAttribute('aria-pressed', String(c.dataset.s===state.spec)); }); }
+
+var angleChips = el('angleChips');
+Object.keys(ANGLES).forEach(function(k){
+  var a = ANGLES[k];
+  var b = document.createElement('button');
+  b.type='button'; b.className='chip'; b.dataset.a=k;
+  b.setAttribute('aria-pressed', String(state.angles===k));
+  b.innerHTML = '<span class="k">'+esc(a.name)+'</span> <small>'+esc(a.tag)+'</small>';
+  b.addEventListener('click', function(){ state.angles=k; syncAngle(); saveDraft(); });
+  angleChips.appendChild(b);
+});
+function syncAngle(){ Array.prototype.forEach.call(angleChips.children, function(c){ c.setAttribute('aria-pressed', String(c.dataset.a===state.angles)); }); }
+
+var topicSel = el('topicCat');
+TOPICS.forEach(function(t){ var o=document.createElement('option'); o.value=t[0]; o.textContent=t[1]; topicSel.appendChild(o); });
+
+/* ───────── 폼 바인딩 ───────── */
+var bind = [['srcTitle','srcTitle'],['srcUrl','srcUrl'],['features','features'],['topicCat','topicCat'],
+  ['country','country'],['dup','dup'],['ai','ai'],['channel','channel'],['notes','notes']];
+bind.forEach(function(p){
+  var node = el(p[1]);
+  node.addEventListener('input', function(){ state[p[0]] = node.value; saveDraft(); });
+  node.addEventListener('change', function(){ state[p[0]] = node.value; saveDraft(); });
+});
+el('longLasting').addEventListener('change', function(){ state.longLasting = this.checked; saveDraft(); });
+
+function applyState(s){
+  state = s;
+  el('srcTitle').value = s.srcTitle||'';
+  el('srcUrl').value = s.srcUrl||'';
+  el('features').value = s.features||'';
+  el('topicCat').value = s.topicCat||'living';
+  el('country').value = s.country||'all';
+  el('dup').value = s.dup||'mid';
+  el('ai').value = s.ai||'gpt';
+  el('channel').value = s.channel||'';
+  el('notes').value = s.notes||'';
+  el('longLasting').checked = !!s.longLasting;
+  syncFormat(); syncSpec(); syncAngle();
+}
+
+/* ───────── draft ───────── */
+var draftTimer = null;
+function saveDraft(){
+  clearTimeout(draftTimer);
+  draftTimer = setTimeout(function(){
+    try{ localStorage.setItem(LS_DRAFT, JSON.stringify(state)); }catch(e){}
+  }, 250);
+}
+function loadDraft(){
+  try{
+    var raw = localStorage.getItem(LS_DRAFT);
+    if(!raw) return;
+    var s = JSON.parse(raw);
+    if(s && typeof s === 'object'){ applyState(Object.assign({}, state, s)); }
+  }catch(e){}
+}
+
+/* ───────── 프롬프트 ───────── */
+function topicName(k){ for(var i=0;i<TOPICS.length;i++){ if(TOPICS[i][0]===k) return TOPICS[i][1]; } return k; }
+
+function angleBlock(a){
+  if(a==='one') return ['관점: 1편만 만든다. 가장 반응이 좋을 관점 1개를 골라 이유를 한 줄 적는다.'];
+  if(a==='all'){
+    return [
+      '관점: 1소재 3관점으로 3편을 만든다. 3편은 첫 컷·훅·자막 문장이 서로 달라야 한다(같은 SRT 재사용 금지).',
+      '  · 1편 문제해결형 — "이거 이렇게 하면 망합니다" / 첫 컷: 잘못된 사용 장면',
+      '  · 2편 비교형 — "A vs B, 답은 이쪽" / 첫 컷: 두 제품 나란히',
+      '  · 3편 결과반전형 — "10초 후 이렇게 됩니다" / 첫 컷: 결과 장면 먼저',
+      '  3편 업로드는 3일에 나눠 올린다(같은 날 연속 업로드는 중복으로 보인다).'
+    ];
+  }
+  var map = { problem:'문제해결형 — "이거 이렇게 하면 망합니다" / 첫 컷: 잘못된 사용 장면',
+              compare:'비교형 — "A vs B, 답은 이쪽" / 첫 컷: 두 제품 나란히',
+              result:'결과반전형 — "10초 후 이렇게 됩니다" / 첫 컷: 결과 장면 먼저' };
+  return ['관점: ' + map[a] + ' 하나로 만든다. 다른 관점의 문장을 섞지 않는다.'];
+}
+
+function langTargets(c){
+  if(c==='kr') return ['kr'];
+  if(c==='jp') return ['kr','jp'];
+  if(c==='en') return ['kr','en'];
+  return ['kr','jp','en'];
+}
+
+function buildPrompt(){
+  var f = FORMATS[state.format];
+  var sp = SPECS[state.spec];
+  var langs = langTargets(state.country);
+  var title = (state.srcTitle||'').trim();
+  var url = (state.srcUrl||'').trim();
+  var feats = (state.features||'').trim();
+  var L = [];
+
+  L.push('# 역할');
+  L.push('너는 유튜브 쇼츠·릴스 "카테고리형" 영상의 대본·자막·장면을 설계하는 제작 지침서 작성자다.');
+  L.push('아래 조건으로 바로 촬영·편집에 넣을 수 있는 완성형 제작 지침서를 만들어라.');
+  L.push('인사말·설명·변명 없이, 요구한 형식의 결과만 출력한다.');
+  L.push('');
+  L.push('# 1. 이번 작업');
+  L.push('- 채널: ' + ((state.channel||'').trim() || '아이템24'));
+  L.push('- 포맷: ' + f.name + ' (' + f.tag + ') — ' + f.desc);
+  L.push('- 규격: ' + sp.name + ' — ' + sp.desc);
+  L.push('- 주제 영역: ' + topicName(state.topicCat));
+  L.push('- 참고 소재 제목: ' + (title || '(없음 — 아래 특징으로 판단)'));
+  L.push('- 참고 소재 링크: ' + (url || '(없음)'));
+  L.push('- 소재 특징: ' + (feats || '(없음 — 제목만으로 추정하지 말고, 모르는 것은 [확인 필요]로 표시)'));
+  L.push('- 타깃 국가: ' + COUNTRY_LABEL[state.country]);
+  L.push('- 1년 이상 지속 소재: ' + (state.longLasting ? '예 (오래됐는데도 조회수가 계속 나오는 소재)' : '아니오 / 확인 전'));
+  L.push('- 중복도: ' + DUP_LABEL[state.dup]);
+  if((state.notes||'').trim()) L.push('- 추가 요청: ' + state.notes.trim());
+  L.push('');
+  L.push('중요: 링크 내용을 실제로 읽을 수 없으면 영상을 봤다고 지어내지 마라. 제목·특징만으로 만들고, 확인되지 않은 내용은 [확인 필요]로 남긴다.');
+  L.push('');
+  L.push('# 2. 이 포맷의 규칙 (반드시 지킬 것)');
+  f.rules.forEach(function(r,i){ L.push((i+1) + ') ' + r); });
+  L.push('');
+  L.push('# 3. 규격·타임라인');
+  sp.lines.forEach(function(r){ L.push('- ' + r); });
+  L.push('');
+  L.push('# 4. 선영님 채널 표준 (모든 버전 공통)');
+  [
+    '첫 0.8초 안에 결론(금지·숫자·반전)을 말한다. 이유는 0.8~2.5초, 이득은 2.5~3초. 3초를 넘겨 이유를 말하면 이탈한다.',
+    '자막: 1줄 12자 이내, 최대 2줄. 흰 글자 + 검정 외곽선 3~4px, 강조 단어만 노란색(#FFD400). 폰트 1개(Pretendard Bold).',
+    '자막 위치: 화면 위에서 약 70%(1080×1920 기준 y≈1,340). 오른쪽 20%와 아래 18%는 유튜브 UI가 가리므로 글자·중요 피사체를 두지 않는다.',
+    '컷 전환은 하드컷. 전환 효과 금지(클립이 겹쳐 총 길이가 줄고 자막이 어긋난다).',
+    '소리: 나레이션 100%, BGM 8%(≈-22dB). 음원은 상업적 사용 가능한 것만(유튜브 오디오 보관함 우선).',
+    '문장은 소리 내어 읽어 1문장 3~4초. 15초면 4문장, 30초면 8문장, 3분이면 25~30문장.',
+    '원본 영상·해외 영상을 그대로 베끼거나 재업로드하지 않는다. 구도·아이디어만 참고해 새 대본·새 장면으로 만든다.',
+    '예능·영화·드라마 짜집기, 인물 편집, 정치 소재는 쓰지 않는다(저작권·부분차단 위험).',
+    '확인되지 않은 수치·효능·가격은 쓰지 않는다. 모르면 [확인 필요].',
+    '광고·제휴(쿠팡파트너스 등)가 들어가면 대가성 고지 문구를 넣는다.'
+  ].forEach(function(r,i){ L.push((i+1) + ') ' + r); });
+  L.push('');
+  L.push('# 5. 소재 판정 (3필터)');
+  L.push('아래 3가지를 각각 한 줄로 평가하고, 마지막에 "제작 권장 / 조건부 / 비권장" 중 하나와 이유 2줄을 쓴다.');
+  L.push('- 국가: 이 소재가 한국에서만 통하는지, 일본·영어권에서도 통할 여지가 있는지(문화·계절·제품 접근성).');
+  L.push('- 기간: 1년 뒤에도 검색·추천에 남을 소재인지(계절성·유행성 여부).');
+  L.push('- 중복도: 같은 소재 영상이 이미 많은지. 많으면 어떤 각도로 비켜갈지 한 줄.');
+  L.push('');
+  angleBlock(state.angles).forEach(function(x){ L.push(x); });
+  L.push('');
+  L.push('# 6. 출력 형식 (아래 순서·형식 그대로, 표를 써서)');
+
+  L.push('');
+  L.push('## A. 한국어 버전');
+  L.push('1) 훅 후보 3개 — 각 20자 이내, 서로 다른 각도.');
+  L.push('2) 3초 훅 3단 표 — | 구간 | 대사 | 화면 | 로 0~0.8초 / 0.8~2.5초 / 2.5~3초.');
+  L.push('3) 대본 표 — | 컷 | 시간 | 길이 | 나레이션(실제 읽을 문장) | 화면 자막 | 장면 지시(카메라·피사체·손동작) |');
+  L.push('4) 자막 SRT — 코드블록으로, 형식은 00:00:00,000 --> 00:00:03,500. 대본과 1:1.');
+  L.push('5) 업로드 세트 — 제목 3안(숫자·사연·궁금증형) / 설명(첫 100자에 핵심 + 고정댓글 유도) / 해시태그 5~8개 / 고정댓글 1개.');
+  L.push('6) 첫 프레임에 넣을 3~6단어(썸네일 문구).');
+
+  if(langs.indexOf('jp') > -1){
+    L.push('');
+    L.push('## B. 일본어 버전 (일본 채널용)');
+    L.push('직역하지 말고 일본 시청자 기준으로 훅을 다시 쓴다. 같은 영상의 번역본처럼 보이면 재사용 판정 위험이 있으니 첫 컷과 첫 문장을 다르게 만든다.');
+    L.push('1) 日本語のフック3案(各20文字以内).');
+    L.push('2) ナレーション台本 — 1行12〜14文字の字幕、文は短く(体言止め可)。');
+    L.push('3) 字幕SRT(同じ形式)。');
+    L.push('4) タイトル3案 / 説明欄(最初の100文字に核心) / ハッシュタグ5〜8個 / 固定コメント。');
+    L.push('5) 日本向けの注意 — 単位・金額・季節感・商品名の現地化、漢字の読み違い、敬語は字幕では簡潔に。');
+    L.push('6) 각 항목 옆에 괄호로 한국어 뜻을 붙인다.');
+  }
+  if(langs.indexOf('en') > -1){
+    L.push('');
+    L.push('## C. 영어권 버전 (English)');
+    L.push('Do not translate literally. Rewrite the hook for a US/global audience; the first shot and first sentence must differ from the Korean cut.');
+    L.push('1) 3 hook options (max 6 words each).');
+    L.push('2) Narration script — subtitle lines max 6 words, 2 lines max.');
+    L.push('3) Subtitle SRT (same format).');
+    L.push('4) 3 title options / description (first 100 characters carry the point) / 5–8 hashtags / pinned comment.');
+    L.push('5) Localization notes — units (inches, °F), brand availability, no literal Korean idioms.');
+    L.push('6) Add the Korean meaning in parentheses next to each line.');
+  }
+
+  if(state.spec === 'pcjson'){
+    L.push('');
+    L.push('## D. PC 조립용 파일');
+    L.push('1) script.txt — 한 줄에 한 문장(4~6줄), 파일에 그대로 저장할 수 있는 형태.');
+    L.push('2) subtitle.srt — 위와 동일한 4큐.');
+    L.push('3) 01~04.jpg 장면 지시 — 각 장에 "무엇이 보여야 하는지" 2줄(피사체·구도·손 위치·배경).');
+    L.push('4) manifest.json — 지정한 키를 가진 JSON 한 덩어리(코드블록).');
+    L.push('5) upload_info.txt — 대본 4줄 + 제목 3안 + 설명 + 해시태그 + 고정댓글 + 업로드 체크리스트.');
+  }
+
+  L.push('');
+  L.push('## ' + (state.spec === 'pcjson' ? 'E' : 'D') + '. 업로드 전 자체 점검');
+  L.push('아래 항목을 O/X로 점검하고, X면 고칠 문장을 바로 제시한다.');
+  [
+    '0.8초 안에 결론이 나오는가',
+    '자막이 1줄 12자·최대 2줄을 넘지 않는가',
+    '자막이 아래 18%·오른쪽 20%를 침범하지 않는가',
+    '원본 영상과 장면·대사가 겹치지 않는가(재사용 위험)',
+    '확인되지 않은 수치·효능이 없는가',
+    '언어별 첫 컷·첫 문장이 서로 다른가(일본어·영어 버전)',
+    '광고·제휴 고지가 들어갔는가(해당 시)'
+  ].forEach(function(r,i){ L.push((i+1) + ') ' + r); });
+
+  L.push('');
+  L.push('출력 언어: 설명과 표는 한국어. 일본어·영어 대사는 원문 + 괄호 안 한국어 뜻.');
+  L.push('분량이 길어도 생략하지 말고 끝까지 쓴다. 표가 길어지면 나눠서 이어 쓴다.');
+
+  return L.join('\n');
+}
+
+/* ───────── 액션 ───────── */
+var lastPrompt = '';
+var toastTimer = null;
+function toast(msg){
+  var t = el('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2100);
+}
+function copyText(txt){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    return navigator.clipboard.writeText(txt).then(function(){ return true; }).catch(function(){ return legacyCopy(txt); });
+  }
+  return Promise.resolve(legacyCopy(txt));
+}
+function legacyCopy(txt){
+  try{
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.setAttribute('readonly','');
+    ta.style.position='fixed'; ta.style.top='-2000px'; ta.style.left='0'; ta.style.opacity='0';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    var ok = false;
+    try{ ok = document.execCommand('copy'); }catch(e){ ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }catch(e){ return false; }
+}
+function validate(){
+  var t = (el('srcTitle').value||'').trim();
+  var u = (el('srcUrl').value||'').trim();
+  var f = (el('features').value||'').trim();
+  el('srcTitle').classList.remove('err'); el('srcUrl').classList.remove('err'); el('features').classList.remove('err');
+  if(!t && !u && !f){
+    el('srcTitle').classList.add('err'); el('features').classList.add('err');
+    toast('소재 제목이나 특징을 먼저 넣어 주세요');
+    el('srcTitle').focus();
+    return false;
+  }
+  return true;
+}
+function generate(scroll){
+  if(!validate()) return;
+  state.srcTitle = el('srcTitle').value;
+  state.srcUrl = el('srcUrl').value;
+  state.features = el('features').value;
+  state.notes = el('notes').value;
+  state.channel = el('channel').value;
+  lastPrompt = buildPrompt();
+  el('promptOut').textContent = lastPrompt;
+  el('pcount').textContent = lastPrompt.length.toLocaleString('ko-KR') + '자 · ' + SPECS[state.spec].name;
+  el('result').classList.add('show');
+  var aiNote = {
+    gpt:'지피티(GPT-6 Luna)에 그대로 붙여넣으세요. 표·SRT를 파일로 받으려면 이어서 "위 결과를 script.txt·subtitle.srt 파일로 따로 만들어 줘"라고 한 번 더 말하면 됩니다.',
+    claude:'Claude에 그대로 붙여넣으세요. 표가 깨지면 "표를 코드블록으로 다시 출력해 줘"라고 하면 됩니다.',
+    aside:'PC 어사이드(코덱스·안티그래비티)에 붙여넣으세요. 폴더 C:\\Shorts_Auto\\YYYY-MM-DD_주제\\ 에 01~04.jpg·script.txt·subtitle.srt·upload_info.txt로 저장하게 시키면 됩니다. 실제 MP4는 build_shorts.py가 만듭니다.'
+  }[state.ai];
+  el('whereNote').innerHTML = '<b>다음 단계</b> — ' + esc(aiNote);
+  saveDraft();
+  if(scroll !== false) el('result').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+el('genBtn').addEventListener('click', function(){ generate(true); });
+
+function doCopy(){
+  if(!lastPrompt){ generate(false); if(!lastPrompt) return; }
+  copyText(lastPrompt).then(function(ok){
+    if(ok) toast('복사됐습니다 — 지피티·클로드에 붙여넣으세요');
+    else {
+      el('result').classList.add('show');
+      var r = document.createRange(); r.selectNodeContents(el('promptOut'));
+      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      toast('자동 복사가 막혔습니다 — 선택된 내용을 길게 눌러 복사하세요');
+    }
+  });
+}
+el('copyBtn').addEventListener('click', doCopy);
+el('copyBtn2').addEventListener('click', doCopy);
+
+el('dlBtn').addEventListener('click', function(){
+  if(!lastPrompt){ generate(false); if(!lastPrompt) return; }
+  try{
+    var blob = new Blob([lastPrompt], {type:'text/plain;charset=utf-8'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'shorts_prompt_' + new Date().toISOString().slice(0,10) + '.txt';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+    toast('.txt 파일로 저장했습니다');
+  }catch(e){ toast('저장이 막혔습니다 — 복사 버튼을 쓰세요'); }
+});
+
+function readRecords(){
+  try{ var raw = localStorage.getItem(LS_REC); var arr = raw ? JSON.parse(raw) : []; return Array.isArray(arr) ? arr : []; }
+  catch(e){ return []; }
+}
+function writeRecords(arr){
+  try{ localStorage.setItem(LS_REC, JSON.stringify(arr)); return true; }
+  catch(e){ toast('저장 공간이 부족합니다'); return false; }
+}
+function renderRecords(){
+  var arr = readRecords(); var box = el('recList');
+  if(!arr.length){ box.innerHTML = '<div class="empty">아직 저장한 기록이 없습니다. 프롬프트를 만든 뒤 <b>💾 작업 기록 저장</b>을 누르세요.</div>'; return; }
+  box.innerHTML = '';
+  arr.slice().reverse().forEach(function(rec){
+    var row = document.createElement('div'); row.className = 'rec';
+    var meta = document.createElement('div'); meta.className='meta';
+    meta.innerHTML = '<b>'+esc(rec.label)+'</b><small>'+esc(rec.when)+'</small>';
+    var load = document.createElement('button'); load.type='button'; load.className='btn ghost sm'; load.textContent='불러오기';
+    load.addEventListener('click', function(){
+      applyState(Object.assign({}, state, rec.state));
+      lastPrompt = rec.prompt || '';
+      if(lastPrompt){
+        el('promptOut').textContent = lastPrompt;
+        el('pcount').textContent = lastPrompt.length.toLocaleString('ko-KR');
+        el('result').classList.add('show');
+        el('result').scrollIntoView({behavior:'smooth', block:'start'});
+      }
+      toast('불러왔습니다');
+    });
+    var del = document.createElement('button'); del.type='button'; del.className='btn ghost sm'; del.textContent='삭제';
+    del.addEventListener('click', function(){
+      var arr2 = readRecords().filter(function(x){ return x.id !== rec.id; });
+      writeRecords(arr2); renderRecords(); toast('삭제했습니다');
+    });
+    row.appendChild(meta); row.appendChild(load); row.appendChild(del);
+    box.appendChild(row);
+  });
+}
+el('saveBtn').addEventListener('click', function(){
+  if(!lastPrompt){ toast('먼저 프롬프트를 생성하세요'); return; }
+  var arr = readRecords();
+  var d = new Date();
+  var pad = function(n){ return n<10?'0'+n:''+n; };
+  var stamp = d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes());
+  var label = (state.srcTitle||state.features||'제목 없음').slice(0,26) + ' · ' + FORMATS[state.format].name;
+  arr.push({ id:'r'+Date.now(), when:stamp, label:label, state:JSON.parse(JSON.stringify(state)), prompt:lastPrompt });
+  if(writeRecords(arr)){ renderRecords(); toast('작업 기록에 저장했습니다'); }
+});
+
+/* ───────── 시작 ───────── */
+loadDraft();
+syncFormat(); syncSpec(); syncAngle();
+renderRecords();
+})();
+</script>
+</body>
+</html>
