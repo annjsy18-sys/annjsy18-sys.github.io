@@ -1111,12 +1111,19 @@ function sendTo(where){
   var base = where==='gpt' ? 'https://chatgpt.com/' : 'https://claude.ai/new';
   var prefilled = lastPrompt.length <= 1500;
   var target = prefilled ? base + '?q=' + encodeURIComponent(lastPrompt) : base;
-  var w = window.open(target, '_blank', 'noopener');
+  try{
+    var a = document.createElement('a');
+    a.href = target; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){ if(a.parentNode) a.parentNode.removeChild(a); }, 1500);
+  }catch(e){ toast('창을 열지 못했습니다 — 프롬프트는 복사됩니다'); }
   copyText(lastPrompt).then(function(ok){
-    if(!ok){ toast('창은 열렸습니다 — 복사가 막혔으니 복사 버튼을 눌러 주세요'); return; }
-    toast(prefilled ? '복사 완료! 열린 창에 바로 붙여넣기 하세요' : '복사 완료! 열린 창에 바로 붙여넣기 하세요');
+    toast(ok
+      ? '복사 완료! 열린 창에 바로 붙여넣기 하세요'
+      : '창을 열었습니다 — 자동 복사가 막혔으니 복사 버튼을 눌러 주세요');
   });
-  if(!w) toast('팝업이 막혔습니다 — 프롬프트는 복사됐으니 새 탭에 붙여넣으세요');
 }
 ['gptBtn','gptBtn2'].forEach(function(id){ el(id).addEventListener('click', function(){ sendTo('gpt'); }); });
 ['claudeBtn','claudeBtn2'].forEach(function(id){ el(id).addEventListener('click', function(){ sendTo('claude'); }); });
