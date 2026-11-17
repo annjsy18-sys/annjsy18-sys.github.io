@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>검증 프레임</title>
+<style>
+  body{margin:0;padding:16px;background:#0f172a;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;font-size:13px}
+  #stage{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+  .box{background:#1e293b;border:1px solid #334155;border-radius:10px;padding:8px}
+  .cap{font-size:12px;color:#94a3b8;margin:0 0 6px}
+  iframe{border:0;background:#fff;display:block}
+  pre{background:#1e293b;border:1px solid #334155;border-radius:10px;padding:10px;white-space:pre-wrap;font-size:12px;color:#a7f3d0;max-width:900px}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<pre id="out">측정 중…</pre>
+<script>
+(function(){
+  var p = new URLSearchParams(location.search);
+  var w = Number(p.get('w') || 375);
+  var h = Number(p.get('h') || 812);
+  var tab = p.get('tab') || '';
+  var src = 'preview-tabs.html?v=' + Date.now() + (tab ? ('#' + tab) : '');
+  var stage = document.getElementById('stage');
+  stage.innerHTML = '<div class="box"><p class="cap">' + w + ' × ' + h + (tab ? (' · ' + tab) : '') + '</p>' +
+    '<iframe id="fr" src="' + src + '" width="' + w + '" height="' + h + '" style="width:' + w + 'px;height:' + h + 'px"></iframe></div>';
+  var fr = document.getElementById('fr');
+  fr.addEventListener('load', function(){
+    setTimeout(function(){
+      try{
+        var d = fr.contentDocument;
+        var de = d.documentElement;
+        var over = [];
+        var all = d.querySelectorAll('body *');
+        for(var i = 0; i < all.length; i++){
+          var el = all[i];
+          var st = fr.contentWindow.getComputedStyle(el);
+          if(st.display === 'none' || st.visibility === 'hidden') continue;
+          var r = el.getBoundingClientRect();
+          if(r.width > 0 && (r.right > w + 0.5 || r.left < -0.5)){
+            over.push(el.tagName.toLowerCase() + (el.id ? ('#' + el.id) : '') +
+              (typeof el.className === 'string' && el.className ? ('.' + el.className.split(' ')[0]) : '') +
+              ' [' + Math.round(r.left) + '→' + Math.round(r.right) + ']');
+          }
+        }
+        document.getElementById('out').textContent = JSON.stringify({
+          viewport: w + 'x' + h,
+          docScrollWidth: de.scrollWidth,
+          docClientWidth: de.clientWidth,
+          bodyScrollWidth: d.body.scrollWidth,
+          horizontalOverflow: de.scrollWidth - de.clientWidth,
+          overflowingCount: over.length,
+          overflowing: over.slice(0, 15)
+        }, null, 2);
+      }catch(e){
+        document.getElementById('out').textContent = 'ERR ' + e.message;
+      }
+    }, 900);
+  });
+})();
+</script>
+</body>
+</html>
