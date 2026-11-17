@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f8fafc">
-<meta name="description" content="포맷·소재·규격을 고르면 지피티·클로드에 바로 붙여넣는 쇼츠 제작 지침서(한국어+일본어/영어)를 만들어 주는 무료 작업실.">
+<meta name="description" content="포맷·소재·규격·국가를 고르면 지피티·클로드에 바로 붙여넣는 쇼츠 제작 지침서(6개국 다중 출력)를 만들어 주는 무료 작업실. 조심 포맷은 원본 재사용 없는 각색 규칙이 자동 포함됩니다.">
 <title>그린룸 스타일 쇼츠 작업실 (무료)</title>
 <style>
 :root{
@@ -92,6 +92,10 @@ header.top{padding:8px 2px 18px}
 }
 .fmt:hover{border-color:var(--line2);box-shadow:0 2px 8px rgba(15,23,42,.07)}
 .fmt[aria-pressed="true"]{background:var(--accent-bg);border-color:var(--accent-line);box-shadow:0 0 0 2px rgba(5,150,105,.20)}
+.fmt.caution{border-left:3px solid #f59e0b}
+.fmt.caution .nm i{color:#b45309;background:#fffbeb;border-color:#fcd34d}
+.fmt.caution[aria-pressed="true"]{background:#fffbeb;border-color:#f59e0b;box-shadow:0 0 0 2px rgba(217,119,6,.20)}
+.fmt.caution[aria-pressed="true"] .ds{color:#78350f}
 .fmt .em{grid-row:1 / span 2;font-size:21px;line-height:1.2}
 .fmt .nm{font-weight:800;font-size:15.5px;display:flex;gap:7px;align-items:baseline;flex-wrap:wrap;color:var(--txt)}
 .fmt .nm i{font-style:normal;font-size:11.5px;color:var(--accent);background:#fff;border:1px solid var(--soft);border-radius:6px;padding:1px 6px;font-weight:700}
@@ -127,6 +131,13 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,#4
 .switch .txt{font-size:13px;line-height:1.5;color:var(--txt)}
 .switch .txt b{display:block;font-size:14px;color:var(--txt)}
 .switch .txt small{color:var(--muted);font-size:12.5px}
+.chips.bgm{gap:7px;margin:0 0 4px}
+.chips.bgm .chip{padding:8px 11px;font-size:13px;min-height:38px;gap:6px}
+.chips.bgm .chip .k{font-weight:700}
+.chips.bgm .chip small{font-size:11.5px}
+.bgm-group{margin:0 0 13px}
+.bgm-group:last-child{margin-bottom:0}
+.bgm-group .gt{font-size:12.5px;font-weight:800;color:#475569;margin:0 0 6px;letter-spacing:-.2px}
 /* note */
 .note{font-size:13px;color:var(--muted);margin:10px 0 0;line-height:1.65}
 .note b{color:var(--warn);font-weight:700}
@@ -153,8 +164,9 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,#4
   background:rgba(255,255,255,.96);backdrop-filter:blur(10px);
   border-top:1px solid #e2e8f0;box-shadow:0 -4px 18px rgba(15,23,42,.06);
 }
-.bar .inner{max-width:860px;margin:0 auto;display:flex;gap:9px}
-.bar .btn{flex:1}
+.bar .inner{max-width:860px;margin:0 auto;display:flex;gap:8px}
+.bar .btn{flex:1;padding-left:9px;padding-right:9px;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .btn.sm2{flex:0 0 auto;font-size:12.5px;min-height:46px}
 .bar.hide{transform:translateY(120%);transition:transform .16s ease}
 @media(prefers-reduced-motion:reduce){.bar.hide{transition:none}}
 /* result */
@@ -192,6 +204,13 @@ details .body{padding:0 0 14px;font-size:13.5px;color:var(--txt2);line-height:1.
 .mini th{color:#334155;font-weight:700;font-size:12.5px}
 .tag{display:inline-block;font-size:11.5px;padding:2px 7px;border-radius:5px;border:1px solid var(--soft);color:var(--accent);background:var(--accent-bg);white-space:nowrap;font-weight:700}
 .tag.no{border-color:#fca5a5;color:var(--danger);background:#fef2f2}
+.tag.warn{border-color:#fcd34d;color:#b45309;background:#fffbeb}
+.mini tr[data-fmt]{cursor:pointer}
+.mini tr[data-fmt]:hover td,.mini tr[data-fmt]:focus td{background:#f1f5f9}
+.mini tr[data-fmt]:focus{outline:2px solid #f59e0b;outline-offset:-2px}
+.mini .pick{display:inline-block;margin-left:5px;font-size:11px;font-weight:700;color:#b45309;background:#fffbeb;border:1px solid #fcd34d;border-radius:5px;padding:0 5px;white-space:nowrap}
+#sec1.flash{animation:flash .9s ease}
+@keyframes flash{0%{box-shadow:0 0 0 3px rgba(217,119,6,.45)}100%{box-shadow:var(--shadow)}}
 /* toast */
 #toast{
   position:fixed;left:50%;bottom:100px;transform:translateX(-50%) translateY(10px);
@@ -217,15 +236,15 @@ footer.foot{text-align:center;font-size:12.5px;color:var(--muted);padding:14px 0
   </div>
   <div class="badges">
     <span class="badge on">무료 · 서버 0원</span>
-    <span class="badge">저작권 안전 포맷만</span>
-    <span class="badge">한국어 + 일본어/영어</span>
+    <span class="badge">기본 5 + 조심 2 · 전부 선택 가능</span>
+    <span class="badge">6개국 다중 출력 · 현지화</span>
     <span class="badge">모바일·PC 공용</span>
   </div>
 </header>
 
 <div class="warnbox">
   <b>이 작업실이 하는 일 / 안 하는 일</b><br>
-  영상을 직접 굽지 않습니다. 대신 <b>대본·자막·장면 지시문·해외 버전</b>을 뽑아 주는 프롬프트를 만듭니다. 실제 영상은 그 프롬프트를 <b>지피티(GPT-6 Luna)·클로드</b>에 넣어 뽑고, PC에서는 <b>build_shorts.py</b>로 조립합니다. 예능·영화·드라마 짜집기는 넣지 않았습니다(저작권·부분차단 위험).
+  영상을 직접 굽지 않습니다. 대신 <b>대본·자막·장면 지시문·해외 버전</b>을 뽑아 주는 프롬프트를 만듭니다. 실제 영상은 그 프롬프트를 <b>지피티(GPT-6 Luna)·클로드</b>에 넣어 뽑고, PC에서는 <b>build_shorts.py</b>로 조립합니다. 예능·영화·드라마·인물 소재도 <b>전부 선택할 수 있습니다</b>. 다만 그런 소재는 <b>조심</b> 배지로 표시하고, 원본 영상·인물을 그대로 쓰지 않고 <b>AI 이미지·자막 해설·각색</b>으로 안전하게 만드는 규칙을 프롬프트에 자동으로 넣습니다.
 </div>
 
 <!-- 1 -->
@@ -234,11 +253,11 @@ footer.foot{text-align:center;font-size:12.5px;color:var(--muted);padding:14px 0
     <div class="num">1</div>
     <div>
       <h2>카테고리 &amp; 포맷</h2>
-      <p class="hint">그린룸 카테고리형 중 우리 채널에 맞는 <b>5개</b>만. 누르면 그 포맷 규칙이 프롬프트에 그대로 들어갑니다.</p>
+      <p class="hint">기본 <b>5개</b> + <b>조심 2개</b> = 7개. 전부 고를 수 있고, 누르면 그 포맷 규칙이 프롬프트에 그대로 들어갑니다. <b>조심</b> 포맷은 원본 재사용 금지·각색 규칙이 함께 들어갑니다.</p>
     </div>
   </div>
   <div class="fmt-grid" id="fmtGrid"></div>
-  <p class="note"><b>참고</b> — 영화·예능·드라마 짜집기와 인물 편집은 제외했습니다. 조회수는 잘 나오지만 저작권 클레임(부분 차단)·재사용 콘텐츠 판정 위험이 커서, 수익화 심사 중인 채널에는 손해입니다.</p>
+  <p class="note"><b>참고</b> — 영화·예능·드라마·인물 소재는 <b>조심</b> 포맷으로 전부 선택할 수 있습니다. 조회수는 잘 나오지만 저작권 클레임(부분 차단)·재사용 콘텐츠 판정 위험이 크므로, 원본 영상·사진·음성·얼굴을 그대로 쓰지 않고 <b>직접 만든 AI 이미지·자막 해설·각색</b>으로만 만드는 규칙이 자동으로 들어갑니다.</p>
 </section>
 
 <!-- 2 -->
@@ -267,18 +286,18 @@ footer.foot{text-align:center;font-size:12.5px;color:var(--muted);padding:14px 0
   </div>
 
   <div class="field">
-    <label class="lab" for="topicCat">주제 영역 <span>(안전 카테고리)</span></label>
+    <label class="lab" for="topicCat">주제 영역 <span>(카테고리)</span></label>
     <select id="topicCat"></select>
   </div>
 
   <div class="field">
-    <label class="lab" for="country">타깃 국가</label>
-    <select id="country">
-      <option value="kr">한국만</option>
-      <option value="jp">한국 → 일본</option>
-      <option value="en">한국 → 영어권</option>
-      <option value="all" selected>3개국 동시 (한국·일본·영어권)</option>
-    </select>
+    <label class="lab" id="langLab">출력 언어 <span>(여러 개 선택 · 6개국)</span></label>
+    <div class="chips" id="langChips" role="group" aria-labelledby="langLab"></div>
+    <div class="act-row" style="margin-top:9px">
+      <button class="btn ghost sm" id="langAll" type="button">🌏 6개국 한 번에 선택</button>
+      <button class="btn ghost sm" id="langKr" type="button">한국어만</button>
+    </div>
+    <p class="note" id="langNote"></p>
   </div>
 
   <div class="field two">
@@ -301,10 +320,20 @@ footer.foot{text-align:center;font-size:12.5px;color:var(--muted);padding:14px 0
     </div>
   </div>
 
+  <div class="field">
+    <label for="variants3" style="display:block">
+      <span class="switch">
+        <input type="checkbox" id="variants3">
+        <span class="track"></span>
+        <span class="txt"><b>1소재 3변주</b><small>같은 소재로 ① 공감형 ② 비교·반전형 ③ 손실·이득형 3편을 한 번에</small></span>
+      </span>
+    </label>
+  </div>
+
   <div class="field" style="margin-top:12px">
     <label class="lab">1소재 3관점</label>
     <div class="chips" id="angleChips"></div>
-    <p class="note">3관점을 고르면 <b>대본·첫 컷·자막이 서로 다른 3편</b>으로 나눠 나옵니다(같은 SRT 돌려쓰면 재사용 판정 위험). 주 1회만 쓰는 걸 권합니다.</p>
+    <p class="note">3관점을 고르면 <b>대본·첫 컷·자막이 서로 다른 3편</b>으로 나눠 나옵니다(같은 SRT 돌려쓰면 재사용 판정 위험). 주 1회만 쓰는 걸 권합니다. ※ 위 <b>1소재 3변주</b>와 함께 켜면 3×3(9편)이 되니, 둘 중 하나만 켜세요.</p>
   </div>
 </section>
 
@@ -334,9 +363,28 @@ footer.foot{text-align:center;font-size:12.5px;color:var(--muted);padding:14px 0
   </div>
 
   <div class="field">
+    <label class="lab" for="bgm">BGM 지정 <span>(선택 — 아래 🍀 목록에서 곡을 누르면 들어갑니다)</span></label>
+    <input type="text" id="bgm" placeholder="예: Beggin' — Måneskin">
+  </div>
+
+  <div class="field">
     <label class="lab" for="notes">추가 요청 <span>(선택)</span></label>
     <textarea id="notes" placeholder="예: 4번째 컷에 제품 클로즈업. 말투는 차분하게. 가격은 넣지 말 것."></textarea>
   </div>
+</section>
+
+<!-- bgm -->
+<section class="card" id="bgmCard">
+  <div class="step">
+    <div class="num">🍀</div>
+    <div>
+      <h2>쇼츠 상황별 추천 BGM 20선</h2>
+      <p class="hint">분위기를 고르고 곡을 누르면 <b>곡명이 복사</b>되고 위 <b>BGM 지정</b> 란에 바로 들어갑니다.</p>
+    </div>
+  </div>
+  <div id="bgmList"></div>
+  <p class="note" style="margin-top:12px">※ 각 곡명을 다시 누르면 복사만 됩니다. 프롬프트에 적힌 곡은 <b>편집 방향을 정하는 참고</b>이고, 실제 음원은 업로드할 때 고릅니다.</p>
+  <p class="warnbox" style="margin:12px 0 0">⚠️ <b>유튜브 쇼츠 업로드 시 앱 내 사운드 라이브러리에서 직접 선택</b>해야 저작권 안전합니다 (음원 파일 직접 삽입 금지).</p>
 </section>
 
 <!-- result -->
@@ -348,9 +396,12 @@ footer.foot{text-align:center;font-size:12.5px;color:var(--muted);padding:14px 0
   <pre class="prompt" id="promptOut"></pre>
   <div class="act-row">
     <button class="btn primary" id="copyBtn" type="button">📋 복사</button>
+    <button class="btn" id="gptBtn" type="button">🤖 ChatGPT로 보내기</button>
+    <button class="btn" id="claudeBtn" type="button">🟠 Claude로 보내기</button>
     <button class="btn ghost sm" id="dlBtn" type="button">.txt 저장</button>
     <button class="btn ghost sm" id="saveBtn" type="button">💾 작업 기록 저장</button>
   </div>
+  <p class="note" style="margin-top:8px">보내기 버튼은 <b>프롬프트를 복사한 뒤 새 창을 열어</b> 줍니다. 1,500자를 넘는 긴 지침은 주소창에 담기지 않아 창만 열리니, 열린 창에 <b>붙여넣기</b>하세요.</p>
   <p class="note" id="whereNote"></p>
 </section>
 
@@ -371,25 +422,26 @@ footer.foot{text-align:center;font-size:12.5px;color:var(--muted);padding:14px 0
   <details>
     <summary>조회수 터지는 카테고리 — 확인해서 반영한 자료</summary>
     <div class="body">
-      <p style="margin:0 0 8px">아이템24 11/17 비공개 영상(쇼프33 42:47 화면)의 그린룸 소재 보관함 실제 수집 칩 <b>296개</b> 기준입니다. 우리 작업실은 이 중 <b>저작권 위험이 없는 주제 영역만</b> 골라 넣었습니다.</p>
+      <p style="margin:0 0 8px">아이템24 11/17 비공개 영상(쇼프33 42:47 화면)의 그린룸 소재 보관함 실제 수집 칩 <b>296개</b> 기준입니다. <b>전부 선택할 수 있습니다.</b> 위험이 있는 소재는 <b>조심</b> 배지로 표시하고, 원본을 그대로 쓰지 않는 각색 규칙을 자동으로 넣습니다.</p>
+      <p style="margin:0 0 8px;font-size:12.5px;color:#475569">👇 <b>행을 누르면</b> 위 ① 카테고리 &amp; 포맷에서 그 포맷이 선택되고 맨 위 입력창으로 이동합니다(참고 제목이 비어 있으면 예시 주제도 채워집니다).</p>
       <table class="mini">
         <tr><th>수집 칩</th><th>개수</th><th>우리 판단</th></tr>
-        <tr><td>나 혼자 산다</td><td>64</td><td><span class="tag no">제외</span> 예능 짜집기</td></tr>
-        <tr><td>#시상식</td><td>26</td><td><span class="tag no">제외</span> 예능·인물 편집</td></tr>
-        <tr><td>#Painting</td><td>19</td><td><span class="tag">사용</span> 그림·미술 과정</td></tr>
-        <tr><td>#Food</td><td>18</td><td><span class="tag">사용</span> 주방·요리</td></tr>
-        <tr><td>#Interior</td><td>18</td><td><span class="tag">사용</span> 인테리어·정리</td></tr>
-        <tr><td>#Baseball</td><td>11</td><td><span class="tag">조건부</span> 경기 영상 재사용 금지, 규칙·장비 설명만</td></tr>
-        <tr><td>#McDonalds · #Picture · #애드립 등</td><td>각 3~7</td><td><span class="tag no">제외</span> 브랜드·예능 편집</td></tr>
+        <tr data-fmt="adapt" data-topic="" data-title="[예시] 화제의 예능 장면, 원본 없이 해설로" tabindex="0"><td>나 혼자 산다</td><td>64</td><td><span class="tag warn">조심</span> 예능 짜집기 → 해설 각색 <span class="pick">선택 ›</span></td></tr>
+        <tr data-fmt="adapt" data-topic="" data-title="[예시] 시상식 무대, 화제 된 순간 해설" tabindex="0"><td>#시상식</td><td>26</td><td><span class="tag warn">조심</span> 예능·인물 편집 → 해설 각색 <span class="pick">선택 ›</span></td></tr>
+        <tr data-fmt="onetake" data-topic="art" data-title="[예시] 수채화 번짐 과정 15초" tabindex="0"><td>#Painting</td><td>19</td><td><span class="tag">사용</span> 그림·미술 과정 <span class="pick">선택 ›</span></td></tr>
+        <tr data-fmt="onetake" data-topic="food" data-title="[예시] 10초에 끝나는 주방 정리" tabindex="0"><td>#Food</td><td>18</td><td><span class="tag">사용</span> 주방·요리 <span class="pick">선택 ›</span></td></tr>
+        <tr data-fmt="onetake" data-topic="interior" data-title="[예시] 좁은 현관 수납 한 줄" tabindex="0"><td>#Interior</td><td>18</td><td><span class="tag">사용</span> 인테리어·정리 <span class="pick">선택 ›</span></td></tr>
+        <tr data-fmt="onetake" data-topic="sports" data-title="[예시] 야구 글러브 관리, 이렇게 하면 망합니다" tabindex="0"><td>#Baseball</td><td>11</td><td><span class="tag">조건부</span> 경기 영상 재사용 금지, 규칙·장비 설명만 <span class="pick">선택 ›</span></td></tr>
+        <tr data-fmt="adapt" data-topic="" data-title="[예시] 브랜드 캠페인이 화제인 이유 해설" tabindex="0"><td>#McDonalds · #Picture · #애드립 등</td><td>각 3~7</td><td><span class="tag warn">조심</span> 브랜드·예능 편집 → 해설 각색 <span class="pick">선택 ›</span></td></tr>
       </table>
-      <p style="margin:10px 0 8px"><b>강의에서 말한 '돈 되는 카테고리' 12개</b> 중 우리가 쓸 수 있는 것:</p>
+      <p style="margin:10px 0 8px"><b>강의에서 말한 '돈 되는 카테고리' 12개</b> 중 이 작업실에서 고를 수 있는 것:</p>
       <table class="mini">
         <tr><th>카테고리</th><th>우리 판단</th></tr>
-        <tr><td>③ 쇼핑형</td><td><span class="tag">사용</span> 쇼핑형</td></tr>
-        <tr><td>⑥ 랭킹형</td><td><span class="tag">사용</span> 랭킹형</td></tr>
-        <tr><td>⑤ 노래형 원테이크</td><td><span class="tag">사용</span> 원테이크형(음원은 상업 이용 가능한 것만)</td></tr>
-        <tr><td>⑦ 인물형</td><td><span class="tag no">제외</span> 초상권·편집 위험</td></tr>
-        <tr><td>① 팬튜브 ② 영화·드라마 ⑧ 정치형 ⑪ 영화 롱폼</td><td><span class="tag no">제외</span> 저작권·부분차단</td></tr>
+        <tr data-fmt="shopping" data-topic="living" data-title="[예시] 겨울철 앞유리 성에 10초 해결법" tabindex="0"><td>③ 쇼핑형</td><td><span class="tag">사용</span> 쇼핑형 <span class="pick">선택 ›</span></td></tr>
+        <tr data-fmt="ranking" data-topic="living" data-title="[예시] 의외로 1위인 겨울 살림템 3" tabindex="0"><td>⑥ 랭킹형</td><td><span class="tag">사용</span> 랭킹형 <span class="pick">선택 ›</span></td></tr>
+        <tr data-fmt="onetake" data-topic="living" data-title="[예시] 한 장면으로 끝나는 원테이크" tabindex="0"><td>⑤ 노래형 원테이크</td><td><span class="tag">사용</span> 원테이크형(음원은 상업 이용 가능한 것만) <span class="pick">선택 ›</span></td></tr>
+        <tr data-fmt="review" data-topic="" data-title="[예시] 그 배우의 인생작, 클립 없이 리뷰" tabindex="0"><td>⑦ 인물형</td><td><span class="tag warn">조심</span> 초상권 위험 → 인물 리뷰 각색 <span class="pick">선택 ›</span></td></tr>
+        <tr data-fmt="review" data-topic="" data-title="[예시] 결말 포함, 영화 한 편 요약 리뷰" tabindex="0"><td>① 팬튜브 ② 영화·드라마 ⑧ 정치형 ⑪ 영화 롱폼</td><td><span class="tag warn">조심</span> 저작권·부분차단 → 스토리 요약 각색 <span class="pick">선택 ›</span></td></tr>
       </table>
       <p style="margin:10px 0 0;color:#475569">※ 수익 수치(월 2,600만 원 등)는 강사·카페 측 주장이며 검증되지 않았습니다. 계획 근거로 쓰지 않습니다.</p>
     </div>
@@ -405,7 +457,9 @@ footer.foot{text-align:center;font-size:12.5px;color:var(--muted);padding:14px 0
 <div class="bar">
   <div class="inner">
     <button class="btn primary" id="genBtn" type="button">⚡ 프롬프트 생성</button>
-    <button class="btn ghost" id="copyBtn2" type="button">📋 복사</button>
+    <button class="btn ghost sm2" id="gptBtn2" type="button" aria-label="ChatGPT로 보내기">🤖 GPT</button>
+    <button class="btn ghost sm2" id="claudeBtn2" type="button" aria-label="Claude로 보내기">🟠 Claude</button>
+    <button class="btn ghost sm2" id="copyBtn2" type="button" aria-label="복사">📋</button>
   </div>
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
@@ -462,6 +516,26 @@ var FORMATS = {
       '커뮤니티 글·댓글을 그대로 캡처해 올리지 않는다. 개인정보·초상권 문제. 상황만 새로 쓴다.',
       '반전 뒤에 근거 1개(숫자·경험)를 붙여 신뢰를 만든다.',
       '마지막은 "여러분은 어느 쪽?" 같은 한 줄 질문으로 끝낸다.'
+    ]},
+  adapt: { em:'🎭', name:'예능·이슈·브랜드 각색형', tag:'조심', caution:true,
+    desc:'「나 혼자 산다」·#시상식·#McDonalds·#애드립·팬튜브/정치류를 원본 짜집기 없이 자막 해설·반응·트렌드 요약으로 각색.',
+    rules:[
+      '원본 예능·무대·광고 영상은 한 프레임도 쓰지 않는다. 화면은 직접 만든 AI 이미지·텍스트 카드·자막뿐이다.',
+      '인물은 실명 대신 "한 예능 출연자" "한 아이돌"처럼 일반화하고, 얼굴·목소리를 재현하지 않는다.',
+      '사실만 요약한다. 확인되지 않은 말·행동·뒷이야기는 [확인 필요]로 남기고 지어내지 않는다.',
+      '구성: 0~0.8초 화제 한 줄 → 왜 화제인지 1컷 → 반응·맥락 2컷 → 내 해석·교훈 1컷.',
+      '자막 해설이 본체다. 원본 장면이 없으므로 "무슨 일이 있었는지"를 문장으로 설명한다.',
+      '브랜드 이름은 비방·비교 우위 없이 중립으로. 광고·제휴가 있으면 대가성 고지.'
+    ]},
+  review: { em:'🎬', name:'영화·드라마·인물 리뷰형', tag:'조심', caution:true,
+    desc:'⑦ 인물형·② 영화·드라마·⑪ 영화 롱폼을 원본 클립·초상권 없이 AI 일러스트·스토리 요약·교훈 각색으로.',
+    rules:[
+      '원본 영화·드라마 클립, 포스터, 인물 사진, 배우 음성을 쓰지 않는다.',
+      '화면은 직접 생성한 AI 일러스트(분위기 위주)·텍스트 카드·자막으로만 만든다.',
+      '줄거리는 스포일러 범위를 첫 컷에 밝히고, 결말은 "결말 포함" 표시가 있을 때만 말한다.',
+      '인물은 실명·초상 대신 역할로 부른다("그 형사", "주인공"). 실존 인물이면 공개된 사실만.',
+      '구성: 0~0.8초 한 줄 평 → 1컷 무엇인지 → 2컷 왜 볼 만한지(장면 대신 상황 설명) → 1컷 누구에게 맞는지.',
+      '평점·추천은 내 판단임을 밝히고, 제작사·배급사와 무관하다는 점을 설명란에 적는다.'
     ]}
 };
 
@@ -517,6 +591,82 @@ var ANGLES = {
   all:     { name:'3관점 전부', tag:'3편 세트' }
 };
 
+var LANGS = {
+  kr: { name:'한국어', flag:'🇰🇷', native:'Korean', notes:[] },
+  jp: { name:'일본어', flag:'🇯🇵', native:'Japanese', notes:[
+    '直訳禁止。体言止め(名詞で切る)を使い、字幕は1行12〜14文字。',
+    '単位・金額は円・cm・リットルに変える。',
+    '季節感(桜・梅雨・年末)と生活の文脈を日本基準に置き換える。',
+    '敬語は字幕では簡潔に。過剰な敬語は離脱を招く。東京の情報番組の口調を基準にする。'
+  ]},
+  en: { name:'영어(미국)', flag:'🇺🇸', native:'English (US)', notes:[
+    'Do not translate literally — rewrite for a US audience.',
+    'Subtitles max 6 words per line, 2 lines. Hook max 6 words.',
+    'Units in inches / °F / cups; prices in USD.',
+    '한국식 관용구·존댓말 뉘앙스는 버리고 직설적 이득 중심으로 쓴다.'
+  ]},
+  de: { name:'독일어', flag:'🇩🇪', native:'Deutsch', notes:[
+    'Sie/du를 먼저 정한다. 정보·생활형은 Sie, 밝은 일상형은 du. 한 편 안에서 섞지 않는다.',
+    '긴 명사 합성어는 쪼개고, 동사는 두 번째 자리에 둔다(주어–동사–목적어).',
+    '숫자·단위는 유럽식(1.000 / 12,5 cm / °C).',
+    '과장·최상급(“das Beste”)은 독일 광고 규제(UWG) 위험이 있어 쓰지 않고 근거 있는 표현으로 쓴다.'
+  ]},
+  es: { name:'스페인어', flag:'🇪🇸', native:'Español', notes:[
+    '스페인·중남미 공통이 되는 중립 스페인어로 쓰고 tú를 쓴다.',
+    '감정·가족·생활 훅이 잘 통한다. 첫 문장에 감정을 먼저 놓는다.',
+    '단위는 미터법, 숫자는 1.000 / 12,5 표기.',
+    '지역별 상품명 차이(자동차·식품)를 확인하고 특정 국가 전용 표현은 피한다.'
+  ]},
+  pt: { name:'포르투갈어(브라질)', flag:'🇧🇷', native:'Português (BR)', notes:[
+    '브라질 포르투갈어(você)로 쓴다. 유럽 포르투갈어 어휘·억양은 쓰지 않는다.',
+    '밝고 친근한 톤. 첫 0.8초에 질문이나 놀람을 놓는다.',
+    '금액은 헤알(R$), 단위는 미터법.',
+    '속어(gíria)는 과하게 쓰지 않는다. 가족·축구·생활 소재 반응이 좋다.'
+  ]}
+};
+var LANG_ORDER = ['kr','jp','en','de','es','pt'];
+
+var BGM = [
+  { g:'뒤장면이 궁금한', songs:[
+    ["Let's Go — JAXSONGAMBLE C", '오프닝'],
+    ["Beggin' — Måneskin", '오프닝']
+  ]},
+  { g:'뒤에 뭔가 나올 때', songs:[
+    ["What I've Done — Linkin Park", '전개'],
+    ["Among Us — Sembari", '전개']
+  ]},
+  { g:'긴장 / 반전 예고', songs:[
+    ['Mission: Impossible Theme — michaelgiacchino6676', '긴장'],
+    ['Runaway — @kanyewest', '긴장·뒤에 뭔가 나올 때']
+  ]},
+  { g:'섹시 / 정신없을 때', songs:[
+    ['Toxic — Britney Spears', '섹시한'],
+    ['Free Bird — MOONLGHT', '정신없을 때']
+  ]},
+  { g:'알쏭달쏭 / 유머', songs:[
+    ['Golden Brown — The Stranglers', '알쏭달쏭'],
+    ['Buttercup — Jack Stauber', '약간 유머']
+  ]},
+  { g:'슬픔 / 몽환 / 신기함', songs:[
+    ['Before spring ends — 王OK, 李天责', '슬플 때'],
+    ['Sweets — isaintjames', '몽환'],
+    ['Cornfield Chase — Hans Zimmer', '몽환·신기할 때']
+  ]},
+  { g:'감동', songs:[
+    ['blue — young kai', '감동'],
+    ['은방울 — 다니엘', '감동']
+  ]},
+  { g:'애매할 때 / 스토리', songs:[
+    ['MONTAGEM COMA — ANDROMEDA, elysian.', '애매할 때'],
+    ['Lemon Tree — FoolsGardenOfficial G', '스토리'],
+    ['bounce (i just wanna dance) — фрози, joyful', '애매할 때'],
+    ['Chess (Type Beat) (Slowed) — joyful', '애매할 때']
+  ]},
+  { g:'최신유행', songs:[
+    ['Pretender — Official髭男dism', '최신유행']
+  ]}
+];
+
 var TOPICS = [
   ['living','생활꿀팁 (청소·세탁·수납)'],
   ['food','주방·요리 (Food 18)'],
@@ -530,7 +680,6 @@ var TOPICS = [
   ['etc','기타']
 ];
 
-var COUNTRY_LABEL = { kr:'한국어만', jp:'한국어 + 일본어', en:'한국어 + 영어', all:'한국어 + 일본어 + 영어' };
 var DUP_LABEL = { low:'낮음(거의 없음)', mid:'보통(몇 개 있음)', high:'높음(이미 많음)' };
 
 var LS_REC = 'greenroom_studio_v1';
@@ -538,8 +687,8 @@ var LS_DRAFT = 'greenroom_studio_draft_v1';
 
 /* ───────── 상태 ───────── */
 var state = { format:'shopping', topicCat:'living', srcTitle:'', srcUrl:'', features:'',
-  country:'all', longLasting:false, dup:'mid', angles:'problem', spec:'one15',
-  ai:'gpt', channel:'아이템24', notes:'' };
+  langs:['kr','jp','en'], longLasting:false, variants3:false, dup:'mid', angles:'problem',
+  spec:'one15', ai:'gpt', channel:'아이템24', bgm:'', notes:'' };
 
 /* ───────── 렌더 ───────── */
 function el(id){ return document.getElementById(id); }
@@ -549,7 +698,7 @@ var fmtGrid = el('fmtGrid'), specGrid = el('specGrid');
 Object.keys(FORMATS).forEach(function(k){
   var f = FORMATS[k];
   var b = document.createElement('button');
-  b.type='button'; b.className='fmt'; b.dataset.k=k;
+  b.type='button'; b.className='fmt' + (f.caution ? ' caution' : ''); b.dataset.k=k;
   b.setAttribute('aria-pressed', String(state.format===k));
   b.innerHTML = '<span class="em">'+f.em+'</span><span class="nm">'+esc(f.name)+' <i>'+esc(f.tag)+'</i></span><span class="ds">'+esc(f.desc)+'</span>';
   b.addEventListener('click', function(){ state.format=k; syncFormat(); saveDraft(); });
@@ -582,15 +731,80 @@ function syncAngle(){ Array.prototype.forEach.call(angleChips.children, function
 var topicSel = el('topicCat');
 TOPICS.forEach(function(t){ var o=document.createElement('option'); o.value=t[0]; o.textContent=t[1]; topicSel.appendChild(o); });
 
+/* ───────── 출력 언어 (6개국 다중 선택) ───────── */
+var langChips = el('langChips');
+LANG_ORDER.forEach(function(k){
+  var m = LANGS[k];
+  var b = document.createElement('button');
+  b.type='button'; b.className='chip'; b.dataset.l=k;
+  b.setAttribute('aria-pressed', String(state.langs.indexOf(k)>-1));
+  b.innerHTML = '<span class="k">'+m.flag+' '+esc(m.name)+'</span>';
+  b.addEventListener('click', function(){
+    var i = state.langs.indexOf(k);
+    if(i>-1){
+      if(state.langs.length===1){ toast('최소 1개 언어는 선택해야 합니다'); return; }
+      state.langs.splice(i,1);
+    } else {
+      state.langs.push(k);
+      state.langs.sort(function(a,b){ return LANG_ORDER.indexOf(a)-LANG_ORDER.indexOf(b); });
+    }
+    syncLang(); saveDraft();
+  });
+  langChips.appendChild(b);
+});
+function syncLang(){
+  Array.prototype.forEach.call(langChips.children, function(c){
+    c.setAttribute('aria-pressed', String(state.langs.indexOf(c.dataset.l)>-1));
+  });
+  var note = el('langNote');
+  if(note){
+    note.innerHTML = '<b>'+state.langs.length+'개국</b> 출력 — ' + state.langs.map(function(k){ return LANGS[k].name; }).join(' · ') +
+      '. 국가마다 <b>번역이 아니라</b> 그 나라 시청자 기준으로 훅·제목·대본을 새로 씁니다.';
+  }
+}
+el('langAll').addEventListener('click', function(){ state.langs = LANG_ORDER.slice(); syncLang(); saveDraft(); toast('6개국을 모두 선택했습니다'); });
+el('langKr').addEventListener('click', function(){ state.langs = ['kr']; syncLang(); saveDraft(); toast('한국어만 선택했습니다'); });
+
+/* ───────── BGM 20선 ───────── */
+(function(){
+  var box = el('bgmList');
+  if(!box) return;
+  BGM.forEach(function(group){
+    var wrap = document.createElement('div'); wrap.className='bgm-group';
+    var gt = document.createElement('p'); gt.className='gt'; gt.textContent = group.g;
+    var chips = document.createElement('div'); chips.className='chips bgm';
+    group.songs.forEach(function(song){
+      var b = document.createElement('button');
+      b.type='button'; b.className='chip'; b.dataset.song=song[0];
+      b.innerHTML = '<span class="k">'+esc(song[0])+'</span>' + (song[1] ? ' <small>'+esc(song[1])+'</small>' : '');
+      b.addEventListener('click', function(){ pickBgm(song[0]); });
+      chips.appendChild(b);
+    });
+    wrap.appendChild(gt); wrap.appendChild(chips); box.appendChild(wrap);
+  });
+})();
+function pickBgm(name){
+  el('bgm').value = name;
+  state.bgm = name;
+  saveDraft();
+  Array.prototype.forEach.call(document.querySelectorAll('#bgmList .chip'), function(c){
+    c.setAttribute('aria-pressed', String(c.dataset.song===name));
+  });
+  copyText(name).then(function(ok){
+    toast(ok ? ('곡명 복사 + BGM 칸에 넣었습니다 — ' + name) : ('BGM 칸에 넣었습니다 — ' + name));
+  });
+}
+
 /* ───────── 폼 바인딩 ───────── */
 var bind = [['srcTitle','srcTitle'],['srcUrl','srcUrl'],['features','features'],['topicCat','topicCat'],
-  ['country','country'],['dup','dup'],['ai','ai'],['channel','channel'],['notes','notes']];
+  ['dup','dup'],['ai','ai'],['channel','channel'],['bgm','bgm'],['notes','notes']];
 bind.forEach(function(p){
   var node = el(p[1]);
   node.addEventListener('input', function(){ state[p[0]] = node.value; saveDraft(); });
   node.addEventListener('change', function(){ state[p[0]] = node.value; saveDraft(); });
 });
 el('longLasting').addEventListener('change', function(){ state.longLasting = this.checked; saveDraft(); });
+el('variants3').addEventListener('change', function(){ state.variants3 = this.checked; saveDraft(); });
 
 function applyState(s){
   state = s;
@@ -598,13 +812,16 @@ function applyState(s){
   el('srcUrl').value = s.srcUrl||'';
   el('features').value = s.features||'';
   el('topicCat').value = s.topicCat||'living';
-  el('country').value = s.country||'all';
   el('dup').value = s.dup||'mid';
   el('ai').value = s.ai||'gpt';
   el('channel').value = s.channel||'';
+  el('bgm').value = s.bgm||'';
   el('notes').value = s.notes||'';
   el('longLasting').checked = !!s.longLasting;
-  syncFormat(); syncSpec(); syncAngle();
+  el('variants3').checked = !!s.variants3;
+  if(!s.langs || !s.langs.length) s.langs = state.langs && state.langs.length ? state.langs.slice() : ['kr'];
+  state.langs = s.langs.slice();
+  syncFormat(); syncSpec(); syncAngle(); syncLang();
 }
 
 /* ───────── draft ───────── */
@@ -620,7 +837,12 @@ function loadDraft(){
     var raw = localStorage.getItem(LS_DRAFT);
     if(!raw) return;
     var s = JSON.parse(raw);
-    if(s && typeof s === 'object'){ applyState(Object.assign({}, state, s)); }
+    if(s && typeof s === 'object'){
+      if(!s.langs && s.country){
+        s.langs = s.country==='kr' ? ['kr'] : s.country==='jp' ? ['kr','jp'] : s.country==='en' ? ['kr','en'] : ['kr','jp','en'];
+      }
+      applyState(Object.assign({}, state, s));
+    }
   }catch(e){}
 }
 
@@ -644,20 +866,14 @@ function angleBlock(a){
   return ['관점: ' + map[a] + ' 하나로 만든다. 다른 관점의 문장을 섞지 않는다.'];
 }
 
-function langTargets(c){
-  if(c==='kr') return ['kr'];
-  if(c==='jp') return ['kr','jp'];
-  if(c==='en') return ['kr','en'];
-  return ['kr','jp','en'];
-}
-
 function buildPrompt(){
   var f = FORMATS[state.format];
   var sp = SPECS[state.spec];
-  var langs = langTargets(state.country);
+  var langs = state.langs.slice();
   var title = (state.srcTitle||'').trim();
   var url = (state.srcUrl||'').trim();
   var feats = (state.features||'').trim();
+  var bgm = (state.bgm||'').trim();
   var L = [];
 
   L.push('# 역할');
@@ -673,12 +889,28 @@ function buildPrompt(){
   L.push('- 참고 소재 제목: ' + (title || '(없음 — 아래 특징으로 판단)'));
   L.push('- 참고 소재 링크: ' + (url || '(없음)'));
   L.push('- 소재 특징: ' + (feats || '(없음 — 제목만으로 추정하지 말고, 모르는 것은 [확인 필요]로 표시)'));
-  L.push('- 타깃 국가: ' + COUNTRY_LABEL[state.country]);
+  L.push('- 출력 언어: ' + langs.map(function(k){ return LANGS[k].name; }).join(' · ') + ' — 선택한 ' + langs.length + '개 언어만 만든다. 선택하지 않은 언어는 만들지 않는다.');
   L.push('- 1년 이상 지속 소재: ' + (state.longLasting ? '예 (오래됐는데도 조회수가 계속 나오는 소재)' : '아니오 / 확인 전'));
   L.push('- 중복도: ' + DUP_LABEL[state.dup]);
+  L.push('- 1소재 3변주: ' + (state.variants3 ? '예 — 같은 소재로 공감형·비교반전형·손실이득형 3편을 함께 만든다' : '아니오'));
+  if(bgm) L.push('- BGM 지정: ' + bgm + ' (이 곡의 분위기에 맞춰 컷 리듬을 잡는다. 실제 음원은 업로드 시 유튜브 사운드 라이브러리에서 직접 고른다)');
   if((state.notes||'').trim()) L.push('- 추가 요청: ' + state.notes.trim());
   L.push('');
   L.push('중요: 링크 내용을 실제로 읽을 수 없으면 영상을 봤다고 지어내지 마라. 제목·특징만으로 만들고, 확인되지 않은 내용은 [확인 필요]로 남긴다.');
+  L.push('중요: 언어별 결과는 번역이 아니라 그 나라 시청자 기준으로 새로 쓴 것이다. 첫 컷·첫 문장·비유·단위가 언어마다 달라야 한다.');
+
+  if(f.caution){
+    L.push('');
+    L.push('# ⚠️ 저작권·초상권 주의 (조심 포맷)');
+    L.push('저작권·초상권 주의(조심 포맷): 원본 영상/사진/음성 그대로 사용 금지, 직접 생성한 이미지·텍스트 해설·각색으로만 구성');
+    L.push('- 원본 클립·캡처·포스터·음성·얼굴을 재현하거나 흉내 내는 장면 지시를 쓰지 않는다.');
+    L.push('- 장면 지시에는 실제 장면 대신 "무엇을 보여줄 새 이미지인지"를 적는다(예: 실제 무대 대신 조명과 실루엣 일러스트).');
+    L.push('- 인물은 실명·실제 얼굴 대신 일반 표현으로 쓴다("한 예능 출연자", "한 배우"). 실존 인물의 발언은 확인된 것만 짧게 요약 인용한다.');
+    L.push('- 브랜드·작품 이름은 비방·비교 우위 주장 없이 중립으로 쓴다.');
+    L.push('- 설명란에 출처와 "원본 영상과 무관한 자체 제작 해설" 문구를 넣는다.');
+    L.push('- 그래도 클레임 위험은 남는다. 업로드 후 "부분 차단" 표시가 뜨면 해당 구간을 지우고 다시 올린다.');
+  }
+
   L.push('');
   L.push('# 2. 이 포맷의 규칙 (반드시 지킬 것)');
   f.rules.forEach(function(r,i){ L.push((i+1) + ') ' + r); });
@@ -687,65 +919,83 @@ function buildPrompt(){
   sp.lines.forEach(function(r){ L.push('- ' + r); });
   L.push('');
   L.push('# 4. 선영님 채널 표준 (모든 버전 공통)');
-  [
+  var standards = [
     '첫 0.8초 안에 결론(금지·숫자·반전)을 말한다. 이유는 0.8~2.5초, 이득은 2.5~3초. 3초를 넘겨 이유를 말하면 이탈한다.',
     '자막: 1줄 12자 이내, 최대 2줄. 흰 글자 + 검정 외곽선 3~4px, 강조 단어만 노란색(#FFD400). 폰트 1개(Pretendard Bold).',
     '자막 위치: 화면 위에서 약 70%(1080×1920 기준 y≈1,340). 오른쪽 20%와 아래 18%는 유튜브 UI가 가리므로 글자·중요 피사체를 두지 않는다.',
     '컷 전환은 하드컷. 전환 효과 금지(클립이 겹쳐 총 길이가 줄고 자막이 어긋난다).',
-    '소리: 나레이션 100%, BGM 8%(≈-22dB). 음원은 상업적 사용 가능한 것만(유튜브 오디오 보관함 우선).',
+    '소리: 나레이션 100%, BGM 8%(≈-22dB). 음원은 유튜브 사운드 라이브러리에서 업로드 시 직접 고른다(음원 파일 직접 삽입 금지).',
     '문장은 소리 내어 읽어 1문장 3~4초. 15초면 4문장, 30초면 8문장, 3분이면 25~30문장.',
     '원본 영상·해외 영상을 그대로 베끼거나 재업로드하지 않는다. 구도·아이디어만 참고해 새 대본·새 장면으로 만든다.',
-    '예능·영화·드라마 짜집기, 인물 편집, 정치 소재는 쓰지 않는다(저작권·부분차단 위험).',
+    f.caution
+      ? '조심 포맷이다. 예능·영화·드라마·인물·브랜드의 원본 영상·사진·음성·얼굴을 쓰지 않고, 직접 만든 이미지·자막 해설·각색으로만 만든다(저작권·초상권·부분차단 방지).'
+      : '예능·영화·드라마 짜집기와 인물 편집은 이 포맷에서 하지 않는다(필요하면 조심 포맷을 고른다).',
     '확인되지 않은 수치·효능·가격은 쓰지 않는다. 모르면 [확인 필요].',
-    '광고·제휴(쿠팡파트너스 등)가 들어가면 대가성 고지 문구를 넣는다.'
-  ].forEach(function(r,i){ L.push((i+1) + ') ' + r); });
+    '광고·제휴(쿠팡파트너스 등)가 들어가면 대가성 고지 문구를 넣는다.',
+    '언어판끼리 같은 영상의 번역본처럼 보이면 재사용 판정을 받는다. 첫 컷·첫 문장·편집 리듬을 언어마다 다르게 만든다.'
+  ];
+  standards.forEach(function(r,i){ L.push((i+1) + ') ' + r); });
   L.push('');
   L.push('# 5. 소재 판정 (3필터)');
   L.push('아래 3가지를 각각 한 줄로 평가하고, 마지막에 "제작 권장 / 조건부 / 비권장" 중 하나와 이유 2줄을 쓴다.');
-  L.push('- 국가: 이 소재가 한국에서만 통하는지, 일본·영어권에서도 통할 여지가 있는지(문화·계절·제품 접근성).');
+  L.push('- 국가: 이 소재가 어느 언어권에서 통하는지. 국가마다 문화·계절·제품 접근성이 어떻게 다른지 한 줄씩.');
   L.push('- 기간: 1년 뒤에도 검색·추천에 남을 소재인지(계절성·유행성 여부).');
   L.push('- 중복도: 같은 소재 영상이 이미 많은지. 많으면 어떤 각도로 비켜갈지 한 줄.');
   L.push('');
-  angleBlock(state.angles).forEach(function(x){ L.push(x); });
+  if(state.variants3 && state.angles === 'all'){
+    L.push('관점: 3관점 세트 대신 아래 "# 6-3. 1소재 3변주"로 만든다(3×3 중복은 만들지 않는다).');
+  } else if(state.variants3){
+    L.push('관점: 기본 1편 + 아래 "# 6-3. 1소재 3변주" 3편을 함께 만든다.');
+  } else {
+    angleBlock(state.angles).forEach(function(x){ L.push(x); });
+  }
   L.push('');
   L.push('# 6. 출력 형식 (아래 순서·형식 그대로, 표를 써서)');
+  L.push('설명·표의 머리글은 한국어로 쓰되, 각 언어 버전의 대사·자막·제목은 그 언어로 쓴다.');
 
-  L.push('');
-  L.push('## A. 한국어 버전');
-  L.push('1) 훅 후보 3개 — 각 20자 이내, 서로 다른 각도.');
-  L.push('2) 3초 훅 3단 표 — | 구간 | 대사 | 화면 | 로 0~0.8초 / 0.8~2.5초 / 2.5~3초.');
-  L.push('3) 대본 표 — | 컷 | 시간 | 길이 | 나레이션(실제 읽을 문장) | 화면 자막 | 장면 지시(카메라·피사체·손동작) |');
-  L.push('4) 자막 SRT — 코드블록으로, 형식은 00:00:00,000 --> 00:00:03,500. 대본과 1:1.');
-  L.push('5) 업로드 세트 — 제목 3안(숫자·사연·궁금증형) / 설명(첫 100자에 핵심 + 고정댓글 유도) / 해시태그 5~8개 / 고정댓글 1개.');
-  L.push('6) 첫 프레임에 넣을 3~6단어(썸네일 문구).');
+  var idx = 0;
+  function nextLetter(){ return String.fromCharCode(65 + (idx++)); }
+  function blockTitle(code, text){ return '## ' + code + '. ' + text; }
 
-  if(langs.indexOf('jp') > -1){
+  langs.forEach(function(k, i){
+    var m = LANGS[k];
     L.push('');
-    L.push('## B. 일본어 버전 (일본 채널용)');
-    L.push('직역하지 말고 일본 시청자 기준으로 훅을 다시 쓴다. 같은 영상의 번역본처럼 보이면 재사용 판정 위험이 있으니 첫 컷과 첫 문장을 다르게 만든다.');
-    L.push('1) 日本語のフック3案(各20文字以内).');
-    L.push('2) ナレーション台本 — 1行12〜14文字の字幕、文は短く(体言止め可)。');
-    L.push('3) 字幕SRT(同じ形式)。');
-    L.push('4) タイトル3案 / 説明欄(最初の100文字に核心) / ハッシュタグ5〜8個 / 固定コメント。');
-    L.push('5) 日本向けの注意 — 単位・金額・季節感・商品名の現地化、漢字の読み違い、敬語は字幕では簡潔に。');
-    L.push('6) 각 항목 옆에 괄호로 한국어 뜻을 붙인다.');
-  }
-  if(langs.indexOf('en') > -1){
+    L.push(blockTitle(nextLetter(), m.name + ' 버전 (' + m.native + ')' + (i===0 ? ' — 기준판' : '')));
+    if(k !== 'kr'){
+      L.push('※ 번역 금지. ' + m.name + ' 시청자 기준으로 훅·제목·비유를 새로 쓴다. 첫 컷과 첫 문장은 다른 언어판과 달라야 한다.');
+    }
+    [
+      '1) 제목 3안 — 현지 검색어 기준, 숫자·사연·궁금증형으로 서로 다르게.',
+      '2) 3초 훅 3단 표 — | 구간 | 대사 | 화면 | 로 0~0.8초 / 0.8~2.5초 / 2.5~3초.',
+      '3) 대본 표 — | 컷 | 시간 | 길이 | 나레이션(실제 읽을 문장) | 화면 자막 | 장면 지시(카메라·피사체·손동작) |',
+      '4) 화면 자막 — 줄별 표(| # | 시작 | 끝 | 자막 |)와 SRT 코드블록(00:00:00,000 --> 00:00:03,500). 대본과 1:1.',
+      '5) 업로드 세트 — 설명(첫 100자에 핵심 + 고정댓글 유도) / 해시태그 5~8개 / 고정댓글 1개.',
+      '6) 첫 프레임에 넣을 3~6단어(썸네일 문구).'
+    ].forEach(function(x){ L.push(x); });
+    if(k !== 'kr'){
+      L.push('7) 현지화 메모 — 이 언어에서 바꾼 것 3줄(훅·비유·단위·가격·계절).');
+    }
+    m.notes.forEach(function(n){ L.push('   · ' + n); });
+    if(k !== 'kr'){
+      L.push('   · 대사·자막 줄 옆에 괄호로 한국어 뜻을 붙인다.');
+    }
+  });
+
+  if(state.variants3){
     L.push('');
-    L.push('## C. 영어권 버전 (English)');
-    L.push('Do not translate literally. Rewrite the hook for a US/global audience; the first shot and first sentence must differ from the Korean cut.');
-    L.push('1) 3 hook options (max 6 words each).');
-    L.push('2) Narration script — subtitle lines max 6 words, 2 lines max.');
-    L.push('3) Subtitle SRT (same format).');
-    L.push('4) 3 title options / description (first 100 characters carry the point) / 5–8 hashtags / pinned comment.');
-    L.push('5) Localization notes — units (inches, °F), brand availability, no literal Korean idioms.');
-    L.push('6) Add the Korean meaning in parentheses next to each line.');
+    L.push(blockTitle(nextLetter(), '1소재 3변주 (같은 소재, 3편)'));
+    L.push('같은 소재를 3가지 심리로 나눠 3편을 만든다. 3편의 첫 컷·첫 문장·마지막 문장은 모두 달라야 하고, 같은 SRT를 돌려쓰지 않는다.');
+    L.push('표로 정리: | 변주 | 노리는 심리 | 첫 0.8초 대사 | 본문 3줄(자막) | 마지막 한 줄 |');
+    L.push('① 공감형 — "나도 그래". 익숙한 장면·같은 실수로 시작해 공감과 위로를 준다.');
+    L.push('② 비교·반전형 — "다들 반대로 한다". A vs B 또는 통념 → 반전으로 시작한다.');
+    L.push('③ 손실·이득형 — "이거 모르면 손해". 숫자(초·원·회)로 잃는 것과 얻는 것을 먼저 말한다.');
+    L.push('이어서 3편 각각의 제목 3안과 업로드 순서(3일에 나눠 올리기)를 붙인다.');
   }
 
   if(state.spec === 'pcjson'){
     L.push('');
-    L.push('## D. PC 조립용 파일');
-    L.push('1) script.txt — 한 줄에 한 문장(4~6줄), 파일에 그대로 저장할 수 있는 형태.');
+    L.push(blockTitle(nextLetter(), 'PC 조립용 파일'));
+    L.push('1) script.txt — 한 줄에 한 문장(4~6줄), 파일에 그대로 저장할 수 있는 형태(한국어판).');
     L.push('2) subtitle.srt — 위와 동일한 4큐.');
     L.push('3) 01~04.jpg 장면 지시 — 각 장에 "무엇이 보여야 하는지" 2줄(피사체·구도·손 위치·배경).');
     L.push('4) manifest.json — 지정한 키를 가진 JSON 한 덩어리(코드블록).');
@@ -753,20 +1003,23 @@ function buildPrompt(){
   }
 
   L.push('');
-  L.push('## ' + (state.spec === 'pcjson' ? 'E' : 'D') + '. 업로드 전 자체 점검');
+  L.push(blockTitle(nextLetter(), '업로드 전 자체 점검'));
   L.push('아래 항목을 O/X로 점검하고, X면 고칠 문장을 바로 제시한다.');
-  [
+  var checks = [
     '0.8초 안에 결론이 나오는가',
     '자막이 1줄 12자·최대 2줄을 넘지 않는가',
     '자막이 아래 18%·오른쪽 20%를 침범하지 않는가',
     '원본 영상과 장면·대사가 겹치지 않는가(재사용 위험)',
     '확인되지 않은 수치·효능이 없는가',
-    '언어별 첫 컷·첫 문장이 서로 다른가(일본어·영어 버전)',
+    '선택한 언어 ' + langs.length + '개를 전부 만들었는가',
+    '언어별 첫 컷·첫 문장이 서로 다른가(번역본처럼 보이지 않는가)',
     '광고·제휴 고지가 들어갔는가(해당 시)'
-  ].forEach(function(r,i){ L.push((i+1) + ') ' + r); });
+  ];
+  if(f.caution) checks.push('원본 영상·사진·음성·얼굴이 한 장면도 들어가지 않았는가');
+  checks.forEach(function(r,i){ L.push((i+1) + ') ' + r); });
 
   L.push('');
-  L.push('출력 언어: 설명과 표는 한국어. 일본어·영어 대사는 원문 + 괄호 안 한국어 뜻.');
+  L.push('출력 언어: 설명과 표는 한국어. 각 언어 버전의 대사·자막은 그 언어 원문 + 괄호 안 한국어 뜻.');
   L.push('분량이 길어도 생략하지 말고 끝까지 쓴다. 표가 길어지면 나눠서 이어 쓴다.');
 
   return L.join('\n');
@@ -851,6 +1104,22 @@ function doCopy(){
 el('copyBtn').addEventListener('click', doCopy);
 el('copyBtn2').addEventListener('click', doCopy);
 
+/* ───────── ChatGPT / Claude로 보내기 ───────── */
+function sendTo(where){
+  if(!lastPrompt){ generate(false); if(!lastPrompt) return; }
+  var base = where==='gpt' ? 'https://chatgpt.com/' : 'https://claude.ai/new';
+  var prefilled = lastPrompt.length <= 1500;
+  var target = prefilled ? base + '?q=' + encodeURIComponent(lastPrompt) : base;
+  var w = window.open(target, '_blank', 'noopener');
+  copyText(lastPrompt).then(function(ok){
+    if(!ok){ toast('창은 열렸습니다 — 복사가 막혔으니 복사 버튼을 눌러 주세요'); return; }
+    toast(prefilled ? '복사 완료! 열린 창에 바로 붙여넣기 하세요' : '복사 완료! 열린 창에 바로 붙여넣기 하세요');
+  });
+  if(!w) toast('팝업이 막혔습니다 — 프롬프트는 복사됐으니 새 탭에 붙여넣으세요');
+}
+['gptBtn','gptBtn2'].forEach(function(id){ el(id).addEventListener('click', function(){ sendTo('gpt'); }); });
+['claudeBtn','claudeBtn2'].forEach(function(id){ el(id).addEventListener('click', function(){ sendTo('claude'); }); });
+
 el('dlBtn').addEventListener('click', function(){
   if(!lastPrompt){ generate(false); if(!lastPrompt) return; }
   try{
@@ -913,6 +1182,42 @@ el('saveBtn').addEventListener('click', function(){
   if(writeRecords(arr)){ renderRecords(); toast('작업 기록에 저장했습니다'); }
 });
 
+/* ───────── 표 행 → 포맷 선택 ───────── */
+function flashSec1(){
+  var sec = el('sec1');
+  if(!sec) return;
+  sec.classList.remove('flash');
+  void sec.offsetWidth;
+  sec.classList.add('flash');
+  setTimeout(function(){ sec.classList.remove('flash'); }, 1000);
+}
+function pickFromRow(tr){
+  var fmt = tr.getAttribute('data-fmt');
+  if(!fmt || !FORMATS[fmt]) return;
+  var topic = tr.getAttribute('data-topic');
+  var ttl = tr.getAttribute('data-title');
+  state.format = fmt;
+  if(topic){ state.topicCat = topic; el('topicCat').value = topic; }
+  var cur = (el('srcTitle').value||'').trim();
+  if(ttl && !cur){
+    el('srcTitle').value = ttl;
+    state.srcTitle = ttl;
+  } else if(ttl && cur && cur !== ttl){
+    toast('포맷만 바꿨습니다 — 입력해 둔 제목은 그대로 뒀어요');
+  }
+  syncFormat(); saveDraft();
+  el('sec1').scrollIntoView({behavior:'smooth', block:'start'});
+  flashSec1();
+}
+Array.prototype.forEach.call(document.querySelectorAll('.mini tr[data-fmt]'), function(tr){
+  tr.setAttribute('role','button');
+  tr.setAttribute('aria-label', (tr.getAttribute('data-title')||'') + ' — 이 포맷 선택');
+  tr.addEventListener('click', function(){ pickFromRow(tr); });
+  tr.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); pickFromRow(tr); }
+  });
+});
+
 /* ───────── 입력 중에는 하단 바를 숨겨 글자를 가리지 않게 ───────── */
 (function(){
   var bar = document.querySelector('.bar');
@@ -926,7 +1231,7 @@ el('saveBtn').addEventListener('click', function(){
 
 /* ───────── 시작 ───────── */
 loadDraft();
-syncFormat(); syncSpec(); syncAngle();
+syncFormat(); syncSpec(); syncAngle(); syncLang();
 renderRecords();
 })();
 </script>
