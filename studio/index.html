@@ -143,6 +143,8 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,#7
 }
 .bar .inner{max-width:780px;margin:0 auto;display:flex;gap:8px}
 .bar .btn{flex:1}
+.bar.hide{transform:translateY(120%);transition:transform .16s ease}
+@media(prefers-reduced-motion:reduce){.bar.hide{transition:none}}
 /* result */
 #result{display:none}
 #result.show{display:block;animation:fade .25s ease}
@@ -895,6 +897,17 @@ el('saveBtn').addEventListener('click', function(){
   arr.push({ id:'r'+Date.now(), when:stamp, label:label, state:JSON.parse(JSON.stringify(state)), prompt:lastPrompt });
   if(writeRecords(arr)){ renderRecords(); toast('작업 기록에 저장했습니다'); }
 });
+
+/* ───────── 입력 중에는 하단 바를 숨겨 글자를 가리지 않게 ───────── */
+(function(){
+  var bar = document.querySelector('.bar');
+  if(!bar) return;
+  var fields = document.querySelectorAll('input,textarea,select');
+  Array.prototype.forEach.call(fields, function(n){
+    n.addEventListener('focus', function(){ bar.classList.add('hide'); });
+    n.addEventListener('blur', function(){ setTimeout(function(){ if(!document.activeElement || !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) bar.classList.remove('hide'); }, 120); });
+  });
+})();
 
 /* ───────── 시작 ───────── */
 loadDraft();
