@@ -233,7 +233,7 @@ footer.foot{text-align:center;font-size:12.5px;color:var(--muted);padding:14px 0
   margin:0 -16px 14px;padding:8px 16px;
 }
 .tabbar .in{
-  max-width:860px;margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;
+  max-width:860px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;
   background:#eef2f7;border:1px solid #dbe3ea;border-radius:14px;padding:4px;
 }
 .tab{
@@ -480,13 +480,83 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
 .xhs-rec .ra .btn{min-height:36px;padding:7px 11px;font-size:12.5px;border-radius:9px}
 .xhs-rec .ra .btn.del{color:var(--danger);border-color:#fca5a5;background:#fef2f2}
 #panel-xhs .note,#panel-xhs .hint,#panel-xhs label.lab,#panel-xhs .xhs-tip,#panel-xhs .warnbox{word-break:keep-all}
-/* 탭이 4개가 되어 좁은 화면에서 글자·여백을 줄인다 */
-@media(max-width:719px){
-  .tab{font-size:12.5px;padding:10px 4px;gap:3px}
+
+/* ═════════════ 탭5 · 스타일 DNA · 프롬프트 ═════════════ */
+#panel-dna .hint,#panel-dna .note,#panel-dna label.lab,#panel-dna .warnbox,#panel-dna .dna-sub,#panel-dna .dna-h3{word-break:keep-all}
+.dna-badge{display:inline-block;font-size:11.5px;font-weight:800;padding:3px 8px;border-radius:999px;border:1px solid var(--soft);background:var(--accent-bg);color:var(--accent);vertical-align:middle;margin-left:4px}
+.dna-picks{display:grid;grid-template-columns:1fr;gap:9px}
+@media(min-width:720px){.dna-picks{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.dna-pick{
+  text-align:left;cursor:pointer;font:inherit;color:var(--txt);
+  background:#fff;border:1.5px solid var(--line);border-radius:13px;padding:12px 13px;
+  display:block;min-width:0;transition:border-color .12s,background .12s,box-shadow .12s;
 }
-@media(max-width:360px){
-  .tab{font-size:11.5px;padding:9px 2px;gap:2px}
+.dna-pick:hover{border-color:var(--line2)}
+.dna-pick:active{transform:scale(.99)}
+.dna-pick[aria-pressed="true"]{background:var(--accent-bg);border-color:var(--accent-line);box-shadow:0 0 0 2px rgba(5,150,105,.18)}
+.dna-pick .top{display:flex;align-items:center;gap:8px;margin:0 0 5px}
+.dna-pick .em{font-size:20px;line-height:1}
+.dna-pick .nm{font-size:14.5px;font-weight:800;line-height:1.4;letter-spacing:-.2px}
+.dna-pick .tg{display:inline-block;font-size:11px;font-weight:800;padding:2px 7px;border-radius:6px;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;margin:0 0 6px}
+.dna-pick[aria-pressed="true"] .tg{background:#fff;border-color:var(--soft);color:var(--accent)}
+.dna-pick .ds{font-size:12.5px;color:var(--muted);line-height:1.6;margin:0}
+.dna-pick[aria-pressed="true"] .ds{color:var(--txt2)}
+.dna-pick .ok{display:none;float:right;font-size:11.5px;font-weight:800;color:var(--accent)}
+.dna-pick[aria-pressed="true"] .ok{display:inline}
+.dna-h3{font-size:13px;font-weight:800;color:#334155;margin:16px 0 8px;letter-spacing:-.2px}
+.dna-dna{display:grid;grid-template-columns:1fr;gap:9px}
+@media(min-width:640px){.dna-dna{grid-template-columns:1fr 1fr}}
+.dna-item{border:1px solid #dbe3ea;border-left:3px solid var(--accent-line);border-radius:12px;background:#fff;padding:11px 12px;min-width:0}
+.dna-item .h{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin:0}
+.dna-item .h .lb{font-size:11.5px;font-weight:800;color:#64748b;letter-spacing:.2px}
+.dna-item .h .vl{font-size:13.5px;font-weight:800;color:var(--txt);line-height:1.45}
+.dna-item p{margin:4px 0 0;font-size:12.5px;color:#475569;line-height:1.7}
+.dna-tl{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.dna-tl li{display:grid;grid-template-columns:66px 1fr;gap:10px;align-items:start;background:#f8fafc;border:1px solid #e2e8f0;border-radius:11px;padding:10px 11px}
+.dna-tl .t{font-size:11.5px;font-weight:800;color:var(--accent);white-space:nowrap;line-height:1.6;letter-spacing:-.2px}
+.dna-tl b{display:block;font-size:13.5px;font-weight:800;color:var(--txt);line-height:1.45}
+.dna-tl small{display:block;font-size:12.5px;color:var(--muted);line-height:1.65;margin-top:2px}
+.dna-checks{display:grid;gap:7px}
+.dna-check{display:flex;align-items:flex-start;gap:10px;padding:11px 12px;border:1px solid #e2e8f0;border-radius:11px;background:#fff;cursor:pointer;font-size:13px;line-height:1.6;color:var(--txt2);min-height:44px}
+.dna-check:hover{border-color:var(--line2)}
+.dna-check input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:20px;height:20px;margin:1px 0 0;border:2px solid #94a3b8;border-radius:6px;background:#fff;cursor:pointer;position:relative}
+.dna-check input:checked{background:var(--accent-line);border-color:var(--accent)}
+.dna-check input:checked::after{content:"";position:absolute;left:5px;top:2px;width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(43deg)}
+.dna-check input:focus-visible{outline:2px solid var(--accent-line);outline-offset:2px}
+.dna-check.on{background:#f0fdf4;border-color:var(--soft)}
+.dna-check.on span{color:var(--txt);font-weight:600}
+.dna-check span{flex:1;min-width:0}
+.dna-count{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);margin:10px 0 0;flex-wrap:wrap}
+.dna-count b{color:var(--accent);font-size:13.5px}
+.dna-meter{flex:1 1 120px;height:7px;border-radius:999px;background:#e2e8f0;overflow:hidden;min-width:80px}
+.dna-meter i{display:block;height:100%;background:linear-gradient(90deg,#34d399,#059669);border-radius:999px;transition:width .2s}
+.dna-form .field{margin:0 0 12px}
+.dna-form .field:last-child{margin-bottom:0}
+.dna-form .act-row{display:grid;grid-template-columns:1fr;gap:8px;margin-top:2px}
+@media(min-width:560px){.dna-form .act-row{grid-template-columns:1.6fr 1fr}}
+.dna-form .act-row .btn{width:100%}
+.dna-quick{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.dna-quick button{appearance:none;font:inherit;cursor:pointer;font-size:12px;font-weight:700;color:#475569;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:999px;padding:5px 10px;line-height:1.3}
+.dna-quick button:hover{border-color:var(--accent-line);color:var(--accent);background:var(--accent-bg)}
+.dna-live{font-size:12px;color:var(--muted);margin:8px 0 0}
+.dna-live.on b{color:var(--accent)}
+.dna-links{display:grid;gap:8px}
+.dna-link{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;border:1px solid #e2e8f0;border-radius:12px;padding:11px 12px;background:#fff}
+.dna-link:hover{border-color:var(--soft);box-shadow:0 2px 8px rgba(15,23,42,.06)}
+.dna-link .ic{flex:0 0 auto;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:17px;background:var(--accent-bg);border:1px solid var(--soft);line-height:1}
+.dna-link .tx{flex:1;min-width:0}
+.dna-link .tx b{display:block;font-size:14px;font-weight:800;line-height:1.4;color:var(--txt);word-break:keep-all}
+.dna-link .tx small{display:block;margin-top:1px;font-size:11.5px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}
+.dna-link .go{flex:0 0 auto;color:#94a3b8;font-size:15px;font-weight:800;line-height:1}
+
+/* 탭이 5개가 되어 좁은 화면에서 글자·여백을 줄인다 */
+@media(max-width:719px){
+  .tab{font-size:11.5px;padding:10px 3px;gap:3px}
   .tab>span[aria-hidden="true"]{font-size:13px}
+}
+@media(max-width:400px){
+  .tab{font-size:11px;padding:9px 2px;gap:2px}
+  .tab>span[aria-hidden="true"]{font-size:12.5px}
 }
 </style>
 </head>
@@ -508,6 +578,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
     <span class="badge on">쇼핑 15초 · 4문장 공식</span>
     <span class="badge">직촬 카메라 무빙 35종</span>
     <span class="badge on">샤오홍슈 벤치마킹 · 키워드 20</span>
+    <span class="badge on">🔥 스타일 DNA · 프리셋 3</span>
     <span class="badge">모바일·PC 공용</span>
   </div>
 </header>
@@ -518,13 +589,16 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
       <span aria-hidden="true">🎬</span><span class="t-lg">대본 · 프롬프트 작업실</span><span class="t-sm">대본</span>
     </button>
     <button class="tab" id="tab-search" role="tab" aria-controls="panel-search" aria-selected="false" tabindex="-1" type="button">
-      <span aria-hidden="true">🔍</span><span class="t-lg">실시간 유튜브 소재 검색</span><span class="t-sm">소재 검색</span>
+      <span aria-hidden="true">🔍</span><span class="t-lg">실시간 유튜브 소재 검색</span><span class="t-sm">소재</span>
     </button>
     <button class="tab" id="tab-track" role="tab" aria-controls="panel-track" aria-selected="false" tabindex="-1" type="button">
-      <span aria-hidden="true">📊</span><span class="t-lg">업로드 기록 · 조회수 체크</span><span class="t-sm">기록 체크</span>
+      <span aria-hidden="true">📊</span><span class="t-lg">업로드 기록 · 조회수 체크</span><span class="t-sm">기록</span>
     </button>
     <button class="tab" id="tab-xhs" role="tab" aria-controls="panel-xhs" aria-selected="false" tabindex="-1" type="button">
-      <span aria-hidden="true">📕</span><span class="t-lg">샤오홍슈 벤치마킹</span><span class="t-sm">벤치마킹</span>
+      <span aria-hidden="true">📕</span><span class="t-lg">샤오홍슈 벤치마킹</span><span class="t-sm">벤치</span>
+    </button>
+    <button class="tab" id="tab-dna" role="tab" aria-controls="panel-dna" aria-selected="false" tabindex="-1" type="button">
+      <span aria-hidden="true">🔥</span><span class="t-lg">스타일 DNA · 프롬프트</span><span class="t-sm">DNA</span>
     </button>
   </div>
 </nav>
@@ -1373,10 +1447,155 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
 </details>
 
 </div><!-- /panel-xhs -->
+<div class="panel" id="panel-dna" role="tabpanel" aria-labelledby="tab-dna" hidden>
+
+<div class="warnbox">
+  <b>viral.gg에서 확인한 "왜 터지는지"만 그린룸에 옮겼습니다.</b><br>
+  남의 영상을 가져오는 도구가 아닙니다. <b>구조(DNA)만 골라</b> 내 주제에 맞는 제작 프롬프트를 만듭니다. 스타일 3개 중 하나를 고르면 → DNA·구조가 바뀌고 → 주제만 넣으면 <b>클로드·지피티용 완성 프롬프트</b>가 바로 나옵니다. 영상은 그 프롬프트로 직접 만듭니다.
+</div>
+
+<!-- ① 스타일 프리셋 -->
+<section class="card">
+  <div class="step">
+    <div class="num">①</div>
+    <div>
+      <h2>스타일 고르기</h2>
+      <p class="hint">셋 중 <b>하나만</b> 고르세요. 고른 스타일에 맞춰 DNA 카드·구조·프롬프트가 전부 바뀝니다.</p>
+    </div>
+  </div>
+  <div class="dna-picks" id="dnaPicks" role="group" aria-label="스타일 프리셋"></div>
+</section>
+
+<!-- ② 스타일 DNA -->
+<section class="card">
+  <div class="step">
+    <div class="num">②</div>
+    <div>
+      <h2>스타일 DNA<span class="dna-badge" id="dnaName">캐릭터 포즈 교체형</span></h2>
+      <p class="hint">터지는 이유를 <b>숫자와 위치</b>로만 적었습니다. 아래 ④ 프롬프트에 그대로 들어갑니다.</p>
+    </div>
+  </div>
+  <div class="dna-dna" id="dnaDna"></div>
+  <h3 class="dna-h3" id="dnaTlTitle">1분 구조</h3>
+  <ol class="dna-tl" id="dnaTl"></ol>
+</section>
+
+<!-- ③ 베끼지 말 것 -->
+<section class="card">
+  <div class="step">
+    <div class="num">③</div>
+    <div>
+      <h2>베끼지 말 것 체크</h2>
+      <p class="hint">올리기 전에 <b>직접</b> 눌러 확인하세요. 체크한 항목은 ④ 프롬프트의 <b>[베끼지 말 것]</b>에 그대로 들어갑니다.</p>
+    </div>
+  </div>
+  <div class="dna-checks" id="dnaChecks"></div>
+  <div class="dna-count">
+    <b id="dnaCountTxt">0 / 6</b>
+    <span class="dna-meter" aria-hidden="true"><i id="dnaMeter" style="width:0%"></i></span>
+    <span id="dnaCountMsg">확인한 항목만 표시됩니다</span>
+  </div>
+</section>
+
+<!-- ④ 프롬프트 생성기 -->
+<section class="card">
+  <div class="step">
+    <div class="num">④</div>
+    <div>
+      <h2>주제 → 완성 프롬프트</h2>
+      <p class="hint">주제만 넣으면 <b>초 단위 대본 표 · 샷 리스트 · 자막·세이프존 지침</b>까지 요구하는 프롬프트가 나옵니다. 어사이드(클로드)·지피티에 그대로 붙여넣으세요.</p>
+    </div>
+  </div>
+
+  <div class="dna-form">
+    <div class="field">
+      <label class="lab" for="dnaTopic">내 주제 <span>(한 줄이면 충분합니다)</span></label>
+      <input type="text" id="dnaTopic" placeholder="예: 보일러 외출모드 / 콜라+치약" autocomplete="off">
+      <div class="dna-quick" id="dnaTopicQuick" aria-label="주제 예시"></div>
+    </div>
+    <div class="field">
+      <label class="lab" for="dnaChannel">채널 이름</label>
+      <input type="text" id="dnaChannel" placeholder="예: 아이템24" autocomplete="off">
+      <div class="dna-quick" id="dnaChannelQuick" aria-label="채널 예시"></div>
+    </div>
+    <div class="field">
+      <label class="lab" for="dnaTone">말투</label>
+      <select id="dnaTone">
+        <option value="친근한 반말체(~더라고요, ~해요)">친근한 반말체 (~더라고요, ~해요)</option>
+        <option value="정보형 존댓말(~입니다, ~하세요)">정보형 존댓말 (~입니다, ~하세요)</option>
+        <option value="짧고 자극적인 단문">짧고 자극적인 단문 (훅·반전형)</option>
+        <option value="유머·딴지 섞인 말투">유머·딴지 섞인 말투</option>
+        <option value="설명 최소·소리 중심(ASMR)">설명 최소 · 소리 중심 (ASMR)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="lab" for="dnaMemo">추가 정보 <span>(선택 · 제품명·숫자·직접 해 본 결과)</span></label>
+      <textarea id="dnaMemo" rows="2" placeholder="예: 3년 쓴 가스보일러, 외출모드 켜면 1시간에 1,200원 아꼈다는 계량기 사진 있음"></textarea>
+    </div>
+    <div class="act-row">
+      <button class="btn primary" id="dnaBuild" type="button">⚡ 프롬프트 생성 · 복사</button>
+      <button class="btn ghost" id="dnaReset" type="button">주제 지우기</button>
+    </div>
+    <p class="dna-live" id="dnaLive">입력하는 대로 <b>실시간</b>으로 프롬프트가 바뀝니다.</p>
+  </div>
+
+  <div class="oc-out" id="dnaOut" hidden>
+    <div class="oc-block">
+      <div class="oc-head">
+        <span class="nm">완성 프롬프트</span><span class="tip" id="dnaMeta"></span><span class="sp"></span>
+        <button class="btn ghost sm" id="dnaCopy" type="button">📋 복사</button>
+        <button class="btn ghost sm" id="dnaGpt" type="button">🤖 GPT</button>
+        <button class="btn ghost sm" id="dnaClaude" type="button">🟠 Claude</button>
+        <button class="btn ghost sm" id="dnaTxt" type="button">.txt</button>
+      </div>
+      <pre class="oc-pre" id="dnaPre"></pre>
+    </div>
+  </div>
+  <p class="note">프롬프트는 <b>이 브라우저에서만</b> 만들어집니다(서버 없음). 결과가 길면 클로드·지피티에 붙여 넣고 <b>"표는 코드블록으로 다시 출력해 줘"</b>라고 한 번 더 말하면 깔끔하게 받을 수 있습니다.</p>
+</section>
+
+<!-- ⑤ 참고 -->
+<section class="card">
+  <div class="step">
+    <div class="num">⑤</div>
+    <div>
+      <h2>viral.gg 참고</h2>
+      <p class="hint">이 탭의 DNA는 아래 채널 분석 페이지를 보고 정리했습니다. 다른 채널도 같은 방식으로 볼 수 있습니다.</p>
+    </div>
+  </div>
+  <div class="dna-links">
+    <a class="dna-link" href="https://viral.flowoodz.com/" target="_blank" rel="noopener noreferrer">
+      <span class="ic" aria-hidden="true">🔥</span>
+      <span class="tx"><b>viral.gg 열기</b><small>viral.flowoodz.com · 쇼츠 채널 분석 목록</small></span>
+      <span class="go" aria-hidden="true">↗</span>
+    </a>
+    <a class="dna-link" href="https://viral.flowoodz.com/c/UC-Jp4WHCXhxvWQ5Ab4JibJQ" target="_blank" rel="noopener noreferrer">
+      <span class="ic" aria-hidden="true">📈</span>
+      <span class="tx"><b>벙구 채널 분석 (이번에 본 페이지)</b><small>스타일 DNA · 1분 구조 · 베끼지 말 것</small></span>
+      <span class="go" aria-hidden="true">↗</span>
+    </a>
+  </div>
+  <p class="note">분석 페이지의 문장·프롬프트를 <b>그대로 복사해 쓰지 마세요.</b> 숫자·구조만 참고하고 대본은 내 주제로 새로 씁니다.</p>
+</section>
+
+<details>
+  <summary>이 탭 쓰는 순서 (처음이면 이것만 보세요)</summary>
+  <div class="body">
+    <ol style="margin:0;padding:0 0 0 18px;line-height:1.8">
+      <li>①에서 스타일 하나를 고릅니다(보통 ② 조합 후킹형이 가장 빨리 터집니다).</li>
+      <li>② DNA 카드의 <b>0~1.5초 훅 · 컷 빈도 · 자막 위치</b>만 눈에 익힙니다.</li>
+      <li>④에 주제를 한 줄 넣고 <b>⚡ 프롬프트 생성 · 복사</b>를 누릅니다.</li>
+      <li>어사이드(클로드)·지피티에 붙여넣고 대본·샷 리스트를 받습니다.</li>
+      <li>영상은 직접 만들고, 올리기 전 ③ 체크를 전부 눌러 확인합니다.</li>
+    </ol>
+  </div>
+</details>
+
+</div><!-- /panel-dna -->
 
 <footer class="foot">
   그린룸 스타일 쇼츠 작업실 · 무료 단일 파일 도구<br>
-  자료: 아이템24 비공개 영상 3편 분석(2026-11-17) · 캡컷 15초 쇼츠 반자동 가이드(2026-11-15)
+  자료: 아이템24 비공개 영상 3편 분석(2026-11-17) · 캡컷 15초 쇼츠 반자동 가이드(2026-11-15) · viral.gg 채널 분석(2026-11-22 확인)
 </footer>
 </div>
 
@@ -2535,7 +2754,7 @@ Array.prototype.forEach.call(document.querySelectorAll('.mini tr[data-fmt]'), fu
 })();
 
 /* ═══════════════════ 탭 전환 ═══════════════════ */
-var TAB_KEYS = ['script','search','track','xhs'];
+var TAB_KEYS = ['script','search','track','xhs','dna'];
 function switchTab(name, silent){
   if(TAB_KEYS.indexOf(name) < 0) name = 'script';
   document.body.setAttribute('data-tab', name);
@@ -3664,6 +3883,387 @@ function xhsSend(where){
   el('xhsTxt').addEventListener('click', function(){
     if(!lastXhs && !xhsBuild(true)) return;
     if(saveFile('xhs_benchmark_' + todaySeoul() + '.txt', lastXhs, 'text/plain;charset=utf-8')) toast('.txt 파일로 저장했습니다');
+    else toast('저장이 막혔습니다 — 복사 버튼을 쓰세요');
+  });
+})();
+
+/* ═══════════════════ 탭5 · 스타일 DNA · 프롬프트 ═══════════════════ */
+var LS_DNA = 'greenroom_dna_v1';
+var DNA_ORDER = ['char','combo','long'];
+
+var DNA_PRESETS = {
+  char: {
+    em:'🧸',
+    name:'캐릭터 포즈 교체형',
+    tag:'고정 캐릭터 · 표정만 교체',
+    desc:'3D 클레이 캐릭터 한 명이 같은 자리에 서서, 단계마다 표정·포즈만 바꿔 설명합니다. 벙구·다람쥐 스타일.',
+    length:'세로 9:16 (1080×1920) · 30~40초 · 분당 22~26컷',
+    tlTitle:'1분 구조 (35~38초)',
+    role:'고정 캐릭터가 단계마다 표정·포즈만 바꾸며 설명하는 「캐릭터 포즈 교체형」 쇼츠 전문 PD다. 시청자는 캐릭터를 보면서 정보를 듣고, 바뀌는 그림으로 단계를 따라간다.',
+    dna:[
+      { em:'⚡', lb:'0~1.5초 훅', vl:'제목 카드 + 캐릭터가 제목을 그대로 읽기',
+        tx:'아래 화면에 기묘하거나 궁금한 그림 한 장, 그 위에 흰 둥근 박스 제목 카드(두 줄, 왼쪽에 캐릭터 얼굴 아이콘). 캐릭터가 제목을 그대로 읽고, 1.5초에 맞춰 진행 바가 꽉 찹니다. 첫 프레임에 "무엇을 볼지"가 보여야 스크롤이 멈춥니다.' },
+      { em:'✂️', lb:'컷 빈도', vl:'분당 22~26컷 · 2~3초마다 교체',
+        tx:'카메라는 정면 고정, 배경도 그대로. 바뀌는 건 캐릭터의 표정·포즈·손에 든 소품과 아래 그림 한 장뿐입니다. 단계가 갈수록 숫자나 상황이 커져야 끝까지 남습니다.' },
+      { em:'💬', lb:'자막', vl:'흰 굵은 고딕 + 검은 박스 · 한 줄 8~12자',
+        tx:'위치는 화면 위 1/3(캐릭터 얼굴 아래) 가운데. 말소리와 동시에 통째로 교체하고, 마지막 펀치라인 한 줄만 빨간 글씨로 바꿉니다. 제목 카드는 흰 바탕에 검은 두 줄.' },
+      { em:'🔊', lb:'사운드', vl:'내레이션 끊김 없이 + 딴지 뒤에만 효과음',
+        tx:'캐릭터 육성이 처음부터 끝까지 이어집니다(0.3초 이상 무음 금지). 웃음·비명 효과음은 단계 사이 딴지 직후 한 번씩만. 끝은 한 줄 감탄으로 닫습니다.' }
+    ],
+    tl:[
+      { t:'0~1.5초', b:'제목 카드 + 기묘한 그림', s:'캐릭터가 제목을 읽고 진행 바가 찬다. 이 1.5초가 조회수를 가른다.' },
+      { t:'1.5~4초', b:'첫 단계 시작', s:'자막 한 줄과 함께 아래 그림이 첫 장면으로 바뀐다.' },
+      { t:'4~15초', b:'단계 2~3 · 그림 교체', s:'2~3초마다 같은 캐릭터의 표정만 바뀐 새 장면. 숫자가 조금씩 커진다.' },
+      { t:'15~25초', b:'딴지 + 웃음', s:'캐릭터가 "왜 이렇게 약해?" 한 마디. 효과음은 이 지점에만.' },
+      { t:'25~33초', b:'가장 황당한 마지막 단계', s:'최대 숫자·계산서 같은 반전은 반드시 25초 이후에 둔다.' },
+      { t:'33~38초', b:'펀치라인 컷', s:'한 줄 펀치라인 + 의뭉스럽게 웃는 얼굴로 끝.' }
+    ],
+    guard:[
+      '그 채널의 얼굴이 되는 요소(고양이 귀 헤드셋 진행자, 대머리 얼굴 로고 등)를 그대로 쓰지 않는다.',
+      "'알고계셨나요 N편' 같은 시리즈 이름과 제목 끝 'ㅋㅋㅋㅋ'·해골 이모지 습관을 따라 하지 않는다."
+    ]
+  },
+  combo: {
+    em:'🥤',
+    name:'생활꿀팁 · 조합 후킹형',
+    tag:'0~1.5초 기묘한 조합',
+    desc:'콜라+치약처럼 "왜 같이 쓰지?" 싶은 조합을 1.5초에 던지고, 실제로 해 보는 1.0~1.5초 컷 4~5개로 결과를 보여 줍니다.',
+    length:'세로 9:16 (1080×1920) · 7~12초 · 하드컷 1.0~1.5초',
+    tlTitle:'10초 구조 (7~12초)',
+    role:'기묘한 조합을 1.5초 안에 던지고, 실제로 해 보는 짧은 컷 4~5개로 결과를 보여 주는 「생활꿀팁·조합 후킹형」 숏폼 PD다.',
+    dna:[
+      { em:'⚡', lb:'0~1.5초 훅', vl:'두 재료를 한 화면에 · 결과를 먼저 0.5초',
+        tx:'콜라와 치약을 같이 든 손을 카메라 앞으로. 설명 없이 반짝이는 결과 장면을 0.3~0.5초 먼저 보여 주면 "어떻게?"가 남습니다. 첫 프레임에 두 물건이 모두 보여야 합니다.' },
+      { em:'✂️', lb:'컷 빈도', vl:'1.0~1.5초 하드컷 × 4~5개',
+        tx:'한 동작 = 한 컷. 붓기 → 문지르기 → 헹구기 → 결과처럼 동작 단위로 끊고, 컷 사이 빈 프레임 없이 바로 붙입니다. 손과 재료만 보이면 충분하고 얼굴·배경은 넣지 않습니다.' },
+      { em:'💬', lb:'자막', vl:'결론 먼저 · 한 줄 10자 안쪽',
+        tx:'화면 아래 1/4의 위쪽(맨 아래 20%는 쇼츠 UI가 가림). 흰 글자 + 검정 외곽선 3px, 숫자·재료 이름만 노란색으로 강조. 자막은 소리 없이도 이해돼야 합니다.' },
+      { em:'💌', lb:'댓글 유도', vl:'고정댓글 1줄 + DM 키워드',
+        tx:'마지막 자막은 "더 알려면 댓글에 「꿀팁」"처럼 한 단어만. 영상 안에서 링크·연락처·판매처를 말하지 않습니다(정책·신고 위험). 유도는 고정댓글·DM으로만.' },
+      { em:'🔊', lb:'사운드', vl:'원음(ASMR) 살리고 BGM은 -18dB',
+        tx:'물 붓는 소리·문지르는 소리를 줄이지 않습니다. 효과음은 컷마다 하나만, 첫 0.3초는 무음도 좋습니다. 내레이션은 넣지 않거나 마지막 한 문장만.' }
+    ],
+    tl:[
+      { t:'0~1.5초', b:'조합 훅', s:'두 재료를 한 화면에. 자막은 "이거 같이 쓰면?" 한 줄.' },
+      { t:'1.5~3초', b:'결과 먼저(반전)', s:'반짝이는 결과를 먼저 보여 줘서 이유를 궁금하게 만든다.' },
+      { t:'3~7.5초', b:'동작 컷 3~4개', s:'각 1.0~1.5초. 붓기·문지르기·헹구기를 하드컷으로.' },
+      { t:'7.5~9초', b:'결과 클로즈업', s:'비포/애프터를 같은 각도로. 달라진 것만 크게.' },
+      { t:'9~10.5초', b:'댓글 유도', s:'"더 알려면 댓글에 「꿀팁」" 한 줄. 고정댓글과 같은 단어.' }
+    ],
+    guard:[
+      '샤오홍슈·틱톡에서 받은 영상을 잘라 쓰지 않는다. 같은 조합이어도 내가 직접 찍는다.',
+      '남의 자막 문장·말버릇을 그대로 옮기지 않는다.',
+      '세제·약품을 섞는 조합은 실제로 해 보고, 위험한 혼합(락스+산)은 다루지 않는다.'
+    ]
+  },
+  long: {
+    em:'📺',
+    name:'정보성 롱폼 + 연계 쇼츠',
+    tag:'16:9 4분 + 15초',
+    desc:'16:9 4분 롱폼 하나를 만들고, 구석의 캐릭터가 리액션하며 인포그래픽이 움직입니다. 같은 소재로 15초 쇼츠를 뽑아 롱폼으로 보냅니다.',
+    length:'16:9 (1920×1080) · 4분(240초) + 연계 쇼츠 15초 1편',
+    tlTitle:'4분 구조 (240초)',
+    role:'16:9 4분 정보성 롱폼을 만들고, 같은 소재를 15초 쇼츠로 다시 잘라 유입을 보내는 「정보성 롱폼 + 연계 쇼츠」 PD다.',
+    dna:[
+      { em:'⚡', lb:'첫 15초', vl:'손해를 숫자로 + 목차 3줄',
+        tx:'롱폼은 이탈이 곧 종료입니다. "이거 한 달에 4만 원 새는 겁니다"처럼 손해·이득을 숫자로 먼저 던지고, 무엇을 다룰지 3줄로 예고합니다.' },
+      { em:'✂️', lb:'컷 · 모션', vl:'3~5초마다 화면 변화 · 인포그래픽 모션',
+        tx:'말만 하는 구간을 5초 넘기지 않습니다. 숫자는 카운트업, 비교는 막대·원 그래프가 자라나는 모션. 캐릭터는 구석에 작게 두고 고개 끄덕·놀람만 시킵니다.' },
+      { em:'💬', lb:'자막 · 세이프존', vl:'아래 12% 위 · 우하단 구독 UI 피하기',
+        tx:'한 줄 14~16자, 좌우 여백 8% 이상. 16:9에서는 오른쪽 아래 구독·추천 UI와 왼쪽 위 채널 아이콘을 피합니다. 쇼츠로 잘라 쓸 구간은 세로 중앙 60% 안에 핵심 글자·얼굴을 넣습니다.' },
+      { em:'🔊', lb:'사운드', vl:'내레이션 1톤 · 1분에 320~360자',
+        tx:'BGM은 -20dB로 깔고, 챕터가 바뀔 때 전환음 1개. 정보형은 음악보다 목소리 속도가 유지율을 만듭니다. 클릭베이트 표현("충격", "역대급")은 쓰지 않습니다.' },
+      { em:'🔗', lb:'연계 쇼츠', vl:'가장 센 한 챕터만 15초로',
+        tx:'보통 2번째 단계가 가장 셉니다. 그 한 단계를 15초 쇼츠로 다시 만들고, 쇼츠 자막·설명란에 "전체는 영상에서" 한 줄로 롱폼을 가리킵니다.' }
+    ],
+    tl:[
+      { t:'0~15초', b:'훅 + 목차', s:'숫자로 손해를 말하고 3줄 목차로 예고. 15초 안에 끝낸다.' },
+      { t:'15~40초', b:'문제', s:'왜 새는지·왜 손해인지. 숫자와 상황 한 가지로만.' },
+      { t:'40~90초', b:'1단계', s:'결론 → 근거(숫자) → 방법 순서. 5초마다 화면 변화.' },
+      { t:'90~140초', b:'2단계 (쇼츠로 뽑을 구간)', s:'가장 센 내용. 이 50초를 15초로 다시 자른다.' },
+      { t:'140~190초', b:'3단계', s:'응용·예외. 실패하는 경우를 여기서 미리 말한다.' },
+      { t:'190~215초', b:'검증 · 주의', s:'안 되는 조건, 확인한 출처와 연도.' },
+      { t:'215~240초', b:'정리 + CTA', s:'3줄 정리, 다음 영상 예고, 쇼츠 언급.' }
+    ],
+    guard:[
+      '다른 채널의 대본·인포그래픽 구성·썸네일 문구를 그대로 옮기지 않는다.',
+      '출처 없는 수치는 [확인 필요]로 남기고, 확인한 출처(기관·연도)를 설명란에 적는다.',
+      '효능·절약액을 단정하지 않는다("최대 30% 절약"은 근거가 있을 때만).'
+    ]
+  }
+};
+
+var DNA_CHECKS = [
+  '타인 캐릭터·진행자 얼굴(고양이 귀 헤드셋, 대머리 로고 등)을 그대로 쓰지 않았다.',
+  '남의 대본·자막을 문장 그대로 옮기지 않았다. 구조만 참고했다.',
+  '한 원본 영상에서 연속 2초를 넘겨 잘라 쓰지 않았다.',
+  '시리즈 이름·말버릇·이모지 표기 습관을 그대로 가져오지 않았다.',
+  '실제로 해 보지 않은 효능·수치를 확인 없이 말하지 않았다.',
+  '광고·제휴가 있으면 대가성 고지를 넣었다.'
+];
+
+var DNA_TOPIC_IDEAS = ['보일러 외출모드', '콜라+치약', '겨울 전기요금', '현관문 소음', '세탁기 곰팡이'];
+var DNA_CHANNEL_IDEAS = ['아이템24', '생활픽'];
+
+var dnaState = { preset:'char', topic:'', channel:'아이템24', tone:'친근한 반말체(~더라고요, ~해요)', memo:'', done:{} };
+var lastDna = '';
+
+function dnaSave(){
+  try{ localStorage.setItem(LS_DNA, JSON.stringify(dnaState)); }catch(e){}
+}
+function dnaLoad(){
+  try{
+    var raw = localStorage.getItem(LS_DNA);
+    if(!raw) return;
+    var d = JSON.parse(raw) || {};
+    if(DNA_PRESETS[d.preset]) dnaState.preset = d.preset;
+    if(typeof d.topic === 'string') dnaState.topic = d.topic;
+    if(typeof d.channel === 'string') dnaState.channel = d.channel;
+    if(typeof d.tone === 'string' && d.tone) dnaState.tone = d.tone;
+    if(typeof d.memo === 'string') dnaState.memo = d.memo;
+    if(d.done && typeof d.done === 'object') dnaState.done = d.done;
+  }catch(e){}
+}
+
+function renderDnaPicks(){
+  var box = el('dnaPicks');
+  if(!box) return;
+  box.innerHTML = '';
+  DNA_ORDER.forEach(function(k){
+    var p = DNA_PRESETS[k];
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'dna-pick';
+    b.setAttribute('data-preset', k);
+    b.setAttribute('aria-pressed', dnaState.preset === k ? 'true' : 'false');
+    b.innerHTML = '<span class="ok">선택됨</span>' +
+      '<div class="top"><span class="em" aria-hidden="true">' + p.em + '</span><span class="nm">' + esc(p.name) + '</span></div>' +
+      '<span class="tg">' + esc(p.tag) + '</span>' +
+      '<p class="ds">' + esc(p.desc) + '</p>';
+    b.addEventListener('click', function(){
+      dnaState.preset = k; dnaSave(); renderDnaPicks(); renderDna(); dnaRefresh(true);
+    });
+    box.appendChild(b);
+  });
+}
+
+function renderDna(){
+  var p = DNA_PRESETS[dnaState.preset] || DNA_PRESETS.char;
+  var nm = el('dnaName'); if(nm) nm.textContent = p.name;
+  var box = el('dnaDna');
+  if(box){
+    box.innerHTML = '';
+    p.dna.forEach(function(it){
+      var d = document.createElement('div');
+      d.className = 'dna-item';
+      d.innerHTML = '<p class="h"><span class="lb">' + it.em + ' ' + esc(it.lb) + '</span><span class="vl">' + esc(it.vl) + '</span></p>' +
+        '<p>' + esc(it.tx) + '</p>';
+      box.appendChild(d);
+    });
+  }
+  var tt = el('dnaTlTitle'); if(tt) tt.textContent = p.tlTitle;
+  var tl = el('dnaTl');
+  if(tl){
+    tl.innerHTML = '';
+    p.tl.forEach(function(it){
+      var li = document.createElement('li');
+      li.innerHTML = '<span class="t">' + esc(it.t) + '</span><span><b>' + esc(it.b) + '</b><small>' + esc(it.s) + '</small></span>';
+      tl.appendChild(li);
+    });
+  }
+}
+
+function renderDnaChecks(){
+  var box = el('dnaChecks');
+  if(!box) return;
+  box.innerHTML = '';
+  DNA_CHECKS.forEach(function(txt, i){
+    var on = !!dnaState.done[i];
+    var lb = document.createElement('label');
+    lb.className = 'dna-check' + (on ? ' on' : '');
+    var cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.checked = on;
+    cb.setAttribute('aria-label', txt);
+    cb.addEventListener('change', function(){
+      if(cb.checked) dnaState.done[i] = true; else delete dnaState.done[i];
+      lb.classList.toggle('on', cb.checked);
+      dnaSave(); dnaCount(); dnaRefresh(false);
+    });
+    var sp = document.createElement('span'); sp.textContent = txt;
+    lb.appendChild(cb); lb.appendChild(sp);
+    box.appendChild(lb);
+  });
+  dnaCount();
+}
+function dnaCount(){
+  var n = 0;
+  DNA_CHECKS.forEach(function(_, i){ if(dnaState.done[i]) n++; });
+  var a = el('dnaCountTxt'), m = el('dnaMeter'), msg = el('dnaCountMsg');
+  if(a) a.textContent = n + ' / ' + DNA_CHECKS.length;
+  if(m) m.style.width = Math.round(n / DNA_CHECKS.length * 100) + '%';
+  if(msg) msg.textContent = n === DNA_CHECKS.length ? '전부 확인됨 — 올려도 됩니다' : (n ? (DNA_CHECKS.length - n) + '개 남았습니다' : '확인한 항목만 표시됩니다');
+}
+
+function dnaPrompt(){
+  var p = DNA_PRESETS[dnaState.preset] || DNA_PRESETS.char;
+  var topic = (dnaState.topic || '').trim() || '{내 주제}';
+  var channel = (dnaState.channel || '').trim() || '내 채널';
+  var L = [];
+  L.push('[역할]');
+  L.push(p.role + ' 말투는 ' + dnaState.tone + '로 쓰고, 채널은 ' + channel + '이다.');
+  L.push('');
+  L.push('[내 주제]');
+  L.push(topic);
+  L.push('');
+  if((dnaState.memo || '').trim()){
+    L.push('[추가 정보 — 사실로만 쓴다]');
+    L.push(dnaState.memo.trim());
+    L.push('');
+  }
+  L.push('[길이·규격]');
+  L.push(p.length);
+  L.push('');
+  L.push('[스타일 DNA]');
+  p.dna.forEach(function(it){ L.push('- ' + it.lb + ': ' + it.vl + '. ' + it.tx); });
+  L.push('');
+  L.push('[필수 구조]');
+  p.tl.forEach(function(it){ L.push(it.t + ' ' + it.b + ' — ' + it.s); });
+  L.push('');
+  L.push('[자막·세이프존]');
+  L.push('- 자막은 말소리와 동시에 통째로 교체하고, 한 화면에 두 줄을 넘기지 않는다.');
+  L.push('- 위치: 쇼츠(9:16)는 화면 위 1/3 가운데 또는 아래 1/4의 위쪽. 맨 아래 20%(설명·UI)와 오른쪽 15%(좋아요·댓글)는 비운다.');
+  L.push('- 롱폼(16:9)은 아래 12% 위, 좌우 여백 8% 이상. 오른쪽 아래 구독 UI와 왼쪽 위 채널 아이콘을 피한다. 롱폼에서 쇼츠로 잘라 쓸 구간은 세로 중앙 60% 안에 핵심 글자와 얼굴을 넣는다.');
+  L.push('- 글자는 흰색 굵은 고딕 + 검정 외곽선. 강조(숫자·결론)만 노란색 또는 마지막 한 줄만 빨간색.');
+  L.push('');
+  L.push('[샷 리스트]');
+  L.push('- 컷마다 ①화면 ②표정·포즈(또는 손 동작) ③자막 ④길이(초)를 표로 적는다.');
+  L.push('- 각 컷에 이미지 생성용 영어 프롬프트 1줄을 붙인다. 캐릭터가 나오면 "same character, same outfit, same background, fixed camera"를 매 컷 반복해 얼굴이 바뀌지 않게 한다.');
+  L.push('- 실제 촬영이 필요한 컷(제품·계량기·현장)은 따로 표시해 촬영 리스트로 뺀다.');
+  L.push('');
+  L.push('[베끼지 말 것]');
+  p.guard.forEach(function(g){ L.push('- ' + g); });
+  DNA_CHECKS.forEach(function(c, i){ if(dnaState.done[i]) L.push('- (확인함) ' + c); });
+  L.push('- 원본 영상·대본·자막을 그대로 옮기지 말고, 이 주제에 맞는 오리지널로 새로 만든다.');
+  L.push('');
+  L.push('[출력 형식]');
+  L.push('1) 제목 후보 3개 (각 25자 안쪽, 낚시성 단어 금지)');
+  L.push('2) 첫 1.5초 훅 한 줄 + 그 순간 화면에 보이는 것');
+  L.push('3) 초 단위 대본 표: 시간 | 화면 | 대사·내레이션 | 화면 자막');
+  L.push('4) 샷 리스트: 컷 번호 | 화면 | 이미지 생성용 영어 프롬프트 | 길이(초)');
+  L.push('5) 화면 자막 전체 목록 (등장 초 포함)');
+  L.push('6) 고정댓글 1줄 · 설명란(해시태그 5개 포함)');
+  L.push('7) 썸네일 문구 2안');
+  L.push('');
+  L.push('[작성 원칙]');
+  L.push('- 확인되지 않은 수치·가격·효능은 [확인 필요]로 남기고 지어내지 않는다.');
+  L.push('- 지정한 초 안에서 끝낸다. 넘칠 것 같으면 단계를 줄인다.');
+  L.push('- 표가 길어져도 생략하지 말고 끝까지 쓴다.');
+  return L.join('\n');
+}
+
+function dnaBuild(needInput){
+  if(needInput !== false && !(dnaState.topic || '').trim()){
+    toast('주제를 먼저 넣어 주세요');
+    if(el('dnaTopic')) el('dnaTopic').focus();
+    return false;
+  }
+  lastDna = dnaPrompt();
+  var pre = el('dnaPre'), out = el('dnaOut');
+  if(pre) pre.textContent = lastDna;
+  if(out) out.removeAttribute('hidden');
+  var p = DNA_PRESETS[dnaState.preset] || DNA_PRESETS.char;
+  if(el('dnaMeta')) el('dnaMeta').textContent = p.name + ' · ' + lastDna.length.toLocaleString('ko-KR') + '자';
+  return true;
+}
+function dnaRefresh(showToast){
+  if(el('dnaOut') && !el('dnaOut').hasAttribute('hidden')) dnaBuild(false);
+  var live = el('dnaLive');
+  if(live && (dnaState.topic || '').trim()) live.classList.add('on');
+}
+function dnaSend(where){
+  if(!lastDna){ if(!dnaBuild(false)) return; }
+  var base = where === 'gpt' ? 'https://chatgpt.com/' : 'https://claude.ai/new';
+  var target = lastDna.length <= 1500 ? base + '?q=' + encodeURIComponent(lastDna) : base;
+  try{
+    var a = document.createElement('a');
+    a.href = target; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.style.display = 'none';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ if(a.parentNode) a.parentNode.removeChild(a); }, 1500);
+  }catch(e){ toast('창을 열지 못했습니다 — 프롬프트는 복사됩니다'); }
+  copyText(lastDna).then(function(ok){
+    toast(ok ? '복사 완료! 열린 창에 붙여넣기 하세요' : '창을 열었습니다 — 복사 버튼을 눌러 주세요');
+  });
+}
+function dnaQuick(boxId, list, onPick){
+  var box = el(boxId);
+  if(!box) return;
+  box.innerHTML = '';
+  list.forEach(function(v){
+    var b = document.createElement('button');
+    b.type = 'button'; b.textContent = v;
+    b.addEventListener('click', function(){ onPick(v); });
+    box.appendChild(b);
+  });
+}
+(function(){
+  if(!el('dnaTopic')) return;
+  dnaLoad();
+  renderDnaPicks();
+  renderDna();
+  renderDnaChecks();
+
+  var topic = el('dnaTopic'), channel = el('dnaChannel'), tone = el('dnaTone'), memo = el('dnaMemo');
+  if(topic) topic.value = dnaState.topic;
+  if(channel) channel.value = dnaState.channel;
+  if(memo) memo.value = dnaState.memo;
+  if(tone){
+    var ok = false;
+    Array.prototype.forEach.call(tone.options, function(o){ if(o.value === dnaState.tone) ok = true; });
+    tone.value = ok ? dnaState.tone : tone.options[0].value;
+    dnaState.tone = tone.value;
+  }
+  if((dnaState.topic || '').trim() && el('dnaLive')) el('dnaLive').classList.add('on');
+
+  if(topic) topic.addEventListener('input', function(){ dnaState.topic = topic.value; dnaSave(); dnaRefresh(false); });
+  if(channel) channel.addEventListener('input', function(){ dnaState.channel = channel.value; dnaSave(); dnaRefresh(false); });
+  if(memo) memo.addEventListener('input', function(){ dnaState.memo = memo.value; dnaSave(); dnaRefresh(false); });
+  if(tone) tone.addEventListener('change', function(){ dnaState.tone = tone.value; dnaSave(); dnaRefresh(false); });
+
+  dnaQuick('dnaTopicQuick', DNA_TOPIC_IDEAS, function(v){
+    if(!topic) return;
+    topic.value = v; dnaState.topic = v; dnaSave(); dnaRefresh(false); topic.focus();
+  });
+  dnaQuick('dnaChannelQuick', DNA_CHANNEL_IDEAS, function(v){
+    if(!channel) return;
+    channel.value = v; dnaState.channel = v; dnaSave(); dnaRefresh(false);
+  });
+
+  el('dnaBuild').addEventListener('click', function(){
+    if(!dnaBuild(true)) return;
+    copyText(lastDna).then(function(ok){
+      toast(ok ? '복사됨! — 어사이드·지피티에 붙여넣으세요' : '프롬프트를 만들었습니다 — 복사 버튼을 눌러 주세요');
+    });
+    if(el('dnaOut')) el('dnaOut').scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+  el('dnaReset').addEventListener('click', function(){
+    if(topic){ topic.value = ''; dnaState.topic = ''; }
+    if(memo){ memo.value = ''; dnaState.memo = ''; }
+    dnaSave(); dnaRefresh(false);
+    if(el('dnaOut')) el('dnaOut').setAttribute('hidden','');
+    if(el('dnaLive')) el('dnaLive').classList.remove('on');
+    toast('주제를 지웠습니다');
+    if(topic) topic.focus();
+  });
+  el('dnaCopy').addEventListener('click', function(){
+    if(!lastDna && !dnaBuild(true)) return;
+    copyText(lastDna).then(function(ok){
+      toast(ok ? '복사됨! — 어사이드·지피티에 붙여넣으세요' : '자동 복사가 막혔습니다 — 길게 눌러 복사하세요');
+    });
+  });
+  el('dnaGpt').addEventListener('click', function(){ dnaSend('gpt'); });
+  el('dnaClaude').addEventListener('click', function(){ dnaSend('claude'); });
+  el('dnaTxt').addEventListener('click', function(){
+    if(!lastDna && !dnaBuild(true)) return;
+    if(saveFile('style_dna_' + todaySeoul() + '.txt', lastDna, 'text/plain;charset=utf-8')) toast('.txt 파일로 저장했습니다');
     else toast('저장이 막혔습니다 — 복사 버튼을 쓰세요');
   });
 })();
