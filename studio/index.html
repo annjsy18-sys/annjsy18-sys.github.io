@@ -3530,12 +3530,13 @@ function renderXhsMemos(){
     var acts = document.createElement('div'); acts.className = 'ra';
     var load = document.createElement('button'); load.type = 'button'; load.className = 'btn ghost'; load.textContent = '불러오기';
     load.addEventListener('click', function(){
+      var KEYMAP = { xhsTitle:'title', xhsHook:'hook', xhsCuts:'cuts', xhsPoint:'point', xhsKw:'kw' };
       xhsFields.forEach(function(id){
         var n = el(id);
         if(!n) return;
-        if(id === 'xhsTitle') n.value = rec.title === '(제목 없음)' ? '' : (rec.title || '');
-        else if(id === 'xhsKw') n.value = rec.kw || '';
-        else n.value = rec[id] || '';
+        var v = rec[KEYMAP[id]] || '';
+        if(id === 'xhsTitle' && v === '(제목 없음)') v = '';
+        n.value = v;
       });
       lastXhs = '';
       if(el('xhsOut')) el('xhsOut').setAttribute('hidden','');
