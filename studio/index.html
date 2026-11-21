@@ -461,7 +461,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
 .xhs-link .ic{flex:0 0 auto;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:18px;background:#fff1f2;border:1px solid #fecdd3;line-height:1}
 .xhs-link .tx{flex:1;min-width:0}
 .xhs-link .tx b{display:block;font-size:14.5px;font-weight:800;line-height:1.4;color:var(--txt)}
-.xhs-link .tx small{display:block;margin-top:1px;font-size:11.5px;color:var(--muted);line-height:1.5;word-break:break-all}
+.xhs-link .tx small{display:block;margin-top:1px;font-size:11.5px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere;word-break:normal}
 .xhs-link .go{flex:0 0 auto;color:#94a3b8;font-size:15px;font-weight:800;line-height:1}
 .xhs-form .field{margin:0 0 12px}
 .xhs-form .field:last-child{margin-bottom:0}
@@ -479,6 +479,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
 .xhs-rec .ra{display:flex;gap:6px;justify-content:flex-end;margin-top:8px}
 .xhs-rec .ra .btn{min-height:36px;padding:7px 11px;font-size:12.5px;border-radius:9px}
 .xhs-rec .ra .btn.del{color:var(--danger);border-color:#fca5a5;background:#fef2f2}
+#panel-xhs .note,#panel-xhs .hint,#panel-xhs label.lab,#panel-xhs .xhs-tip,#panel-xhs .warnbox{word-break:keep-all}
 /* 탭이 4개가 되어 좁은 화면에서 글자·여백을 줄인다 */
 @media(max-width:719px){
   .tab{font-size:12.5px;padding:10px 4px;gap:3px}
