@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f8fafc">
-<meta name="description" content="포맷·소재·규격·국가를 고르면 지피티·클로드에 바로 붙여넣는 쇼츠 제작 지침서(6개국 다중 출력)를 만들어 주는 무료 작업실. 조심 포맷은 원본 재사용 없는 각색 규칙이 자동 포함됩니다.">
+<meta name="description" content="포맷·소재·규격·국가를 고르면 지피티·클로드에 바로 붙여넣는 쇼츠 제작 지침서(6개국 다중 출력)를 만들어 주는 무료 작업실. 원클릭 프리셋 4종, 3채널 문구·해시태그, 인기 영상·훅 분석, Pixabay 무료 소재, 참고 링크함까지 한 파일에 담았습니다.">
 <title>그린룸 스타일 쇼츠 작업실 (무료)</title>
 <style>
 :root{
@@ -558,6 +558,116 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
   .tab{font-size:11px;padding:9px 2px;gap:2px}
   .tab>span[aria-hidden="true"]{font-size:12.5px}
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   2026-11-23 추가 — ① 원클릭 프리셋 ② 3채널 문구 ③ 인기 영상 분석 ④ Pixabay 소재
+   ═══════════════════════════════════════════════════════════════ */
+/* 탭이 9개 — 모바일은 가로 스크롤, PC는 줄바꿈 */
+.tabbar .in{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;justify-content:flex-start;scroll-behavior:smooth}
+.tabbar .in::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:10px 12px}
+@media(min-width:720px){.tabbar .in{flex-wrap:wrap;justify-content:center;overflow-x:visible}}
+
+/* 공통: 구분 세그먼트 */
+.seg{display:inline-flex;background:#eef2f7;border:1px solid #dbe3ea;border-radius:11px;padding:3px;gap:3px;max-width:100%}
+.seg button{appearance:none;font:inherit;cursor:pointer;border:0;background:transparent;color:#475569;border-radius:9px;padding:9px 14px;font-size:13.5px;font-weight:800;min-height:40px;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:#fff;color:var(--accent);box-shadow:0 1px 3px rgba(15,23,42,.14)}
+
+/* ── ① 프리셋 카드 ── */
+.ps-grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:620px){.ps-grid{grid-template-columns:1fr 1fr}}
+.ps{
+  appearance:none;font:inherit;text-align:left;cursor:pointer;color:var(--txt);width:100%;min-width:0;
+  background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:14px 13px;
+  display:grid;grid-template-columns:30px minmax(0,1fr);gap:2px 10px;align-items:start;
+  transition:border-color .12s,background .12s,box-shadow .12s;
+}
+.ps:hover{border-color:var(--line2);box-shadow:0 2px 8px rgba(15,23,42,.07)}
+.ps[aria-pressed="true"]{background:var(--accent-bg);border-color:var(--accent-line);box-shadow:0 0 0 2px rgba(5,150,105,.18)}
+.ps .ic{grid-row:1 / span 3;font-size:22px;line-height:1.15}
+.ps b{font-size:15px;font-weight:800;line-height:1.45;letter-spacing:-.2px;word-break:keep-all}
+.ps .mt{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+.ps .mt i{font-style:normal;font-size:11.5px;font-weight:700;color:#334155;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6px;white-space:nowrap}
+.ps[aria-pressed="true"] .mt i{color:var(--accent);background:#fff;border-color:var(--soft)}
+.ps .ds{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:5px;word-break:keep-all}
+.ps[aria-pressed="true"] .ds{color:var(--txt2)}
+@media(max-width:560px){.ps b{font-size:14.5px}.ps .ds{font-size:12px}}
+
+/* ── ② 3채널 문구 결과 ── */
+.gen-wrap{display:flex;flex-direction:column;gap:12px}
+.gen{border:1px solid #dbe3ea;border-radius:14px;background:#fff;overflow:hidden;min-width:0}
+.gen>header{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#f8fafc;border-bottom:1px solid #e8eef4;flex-wrap:wrap}
+.gen>header .tt{font-size:14px;font-weight:800;color:var(--txt);flex:1 1 auto;min-width:0}
+.gen>header .plat{font-size:11.5px;font-weight:800;color:var(--accent);background:var(--accent-bg);border:1px solid var(--soft);border-radius:6px;padding:1px 7px;white-space:nowrap}
+.gen>header .btn{flex:0 0 auto}
+.gen .bd{padding:11px 12px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.gen .lbl{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11.5px;font-weight:800;color:#64748b;letter-spacing:.2px;margin:0 0 4px}
+.gen .lbl .mini-copy{appearance:none;font:inherit;cursor:pointer;border:1px solid #cbd5e1;background:#fff;color:#334155;border-radius:7px;padding:3px 8px;font-size:11.5px;font-weight:700;min-height:28px}
+.gen .lbl .mini-copy:hover{background:#f1f5f9}
+.gen .val{margin:0;font-size:13.5px;line-height:1.72;color:#0f172a;white-space:pre-wrap;word-break:break-word;background:#f8fafc;border:1px solid #e8eef4;border-radius:10px;padding:10px 11px}
+.gen .val.hl{background:var(--accent-bg);border-color:#bbf7d0}
+.gen .warnline{margin:0;font-size:12px;color:#b45309;background:#fffbeb;border:1px solid #fcd34d;border-radius:9px;padding:7px 9px;line-height:1.6}
+.c3-tags{display:flex;flex-wrap:wrap;gap:5px}
+.c3-tag{font-size:12px;font-weight:700;color:#0f5132;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:999px;padding:2px 8px}
+
+/* ── ③ 인기 영상 분석 ── */
+.an-sum{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 12px}
+@media(min-width:560px){.an-sum{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.an-k{border:1px solid #dbe3ea;border-radius:12px;padding:10px 11px;background:#fff;min-width:0}
+.an-k .k{font-size:11.5px;font-weight:700;color:#64748b;line-height:1.4}
+.an-k .v{font-size:17px;font-weight:800;color:#0f172a;line-height:1.3;margin-top:2px;word-break:break-all}
+.an-k .v small{font-size:11.5px;font-weight:700;color:#475569}
+.an-dist{border:1px solid #dbe3ea;border-radius:12px;background:#fff;padding:11px 12px;margin:0 0 12px}
+.an-dist h3{margin:0 0 8px;font-size:13.5px;font-weight:800;color:var(--txt)}
+.an-bar{display:grid;grid-template-columns:104px minmax(0,1fr) auto;gap:8px;align-items:center;margin:0 0 6px;font-size:12.5px}
+.an-bar:last-child{margin-bottom:0}
+.an-bar .nm{font-weight:700;color:#334155;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.an-bar .tr{height:9px;border-radius:999px;background:#eef2f7;overflow:hidden}
+.an-bar .tr span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#34d399,#059669)}
+.an-bar .vl{color:#475569;font-size:12px;white-space:nowrap}
+.hooktag{display:inline-block;font-size:11px;font-weight:800;border-radius:6px;padding:1px 6px;white-space:nowrap;border:1px solid}
+.hooktag.h1{color:#9a3412;background:#fff7ed;border-color:#fdba74}
+.hooktag.h2{color:#1e40af;background:#eff6ff;border-color:#93c5fd}
+.hooktag.h3{color:#7c2d12;background:#fef2f2;border-color:#fca5a5}
+.hooktag.h4{color:#065f46;background:#ecfdf5;border-color:#6ee7b7}
+.hooktag.h5{color:#475569;background:#f8fafc;border-color:#cbd5e1}
+.an-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:2px 0 0}
+.an-stats>div{min-width:0;border:1px solid #eef2f7;border-radius:9px;padding:5px 6px;background:#f8fafc}
+.an-stats .k{display:block;font-size:10.5px;font-weight:700;color:#64748b;line-height:1.3}
+.an-stats b{display:block;font-size:12.5px;font-weight:800;color:#0f172a;line-height:1.35;word-break:break-all}
+.an-stats b.hot{color:#b91c1c}
+@media(max-width:420px){.an-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.an-box{border:1px solid #dbe3ea;border-radius:12px;background:#fff;padding:12px;margin:0 0 10px;min-width:0}
+.an-box h3{margin:0 0 6px;font-size:13.5px;font-weight:800;color:var(--txt);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.an-box ul{margin:0;padding:0 0 0 18px;font-size:13px;line-height:1.7;color:var(--txt2)}
+.an-box ul li{margin:0 0 3px}
+.an-rm{border:1px solid #a7f3d0;background:#f7fefb;border-radius:12px;padding:11px 12px;margin:0 0 9px}
+.an-rm .t{font-size:14px;font-weight:800;color:var(--txt);line-height:1.5;word-break:keep-all}
+.an-rm .t em{font-style:normal;color:var(--accent)}
+.an-rm .h{font-size:12.5px;color:#1e293b;margin-top:5px;line-height:1.65;white-space:pre-wrap}
+.an-rm .why{font-size:11.5px;color:#64748b;margin-top:4px}
+
+/* ── ④ Pixabay 소재 ── */
+.pb-keyrow{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 4px}
+.pb-keyrow input{flex:1 1 200px;min-width:0}
+.pb-keyrow .btn{flex:0 0 auto}
+.pb-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.pb-chip{appearance:none;font:inherit;cursor:pointer;font-size:12.5px;font-weight:700;color:#334155;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 11px;min-height:36px}
+.pb-chip:hover{border-color:var(--accent-line);color:var(--accent);background:var(--accent-bg)}
+.pb-chip small{color:#64748b;font-weight:600;font-size:11.5px}
+.pb-badge{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:800;color:#065f46;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.pb-type{position:absolute;left:6px;top:6px;background:rgba(255,255,255,.94);color:#0f172a;font-size:11px;font-weight:800;padding:1px 7px;border-radius:5px}
+.pb-sizes{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+.pb-sizes a,.pb-sizes button{appearance:none;font:inherit;cursor:pointer;font-size:11.5px;font-weight:700;color:#334155;background:#f8fafc;border:1px solid #cbd5e1;border-radius:7px;padding:4px 8px;min-height:30px;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.pb-sizes a:hover,.pb-sizes button:hover{background:#ecfdf5;border-color:var(--soft);color:var(--accent)}
+.pb-tagline{font-size:11.5px;color:#64748b;word-break:break-word}
+.pb-list{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:580px){.pb-list{grid-template-columns:1fr 1fr}}
+.pb-list .px-thumb{aspect-ratio:4/3}
+.pb-list .px-thumb img{object-fit:cover}
+.pb-note{border:1px solid #dbe3ea;border-radius:12px;background:#f8fafc;padding:11px 12px;font-size:12.5px;color:#475569;line-height:1.7;margin:12px 0 0}
+.pb-note b{color:var(--txt2)}
+
 </style>
 </head>
 <body data-tab="script">
@@ -579,6 +689,11 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
     <span class="badge">직촬 카메라 무빙 35종</span>
     <span class="badge on">샤오홍슈 벤치마킹 · 키워드 20</span>
     <span class="badge on">🔥 스타일 DNA · 프리셋 3</span>
+    <span class="badge on">⚡ 원클릭 프리셋 4</span>
+    <span class="badge on">✍️ 3채널 문구</span>
+    <span class="badge on">📊 인기 영상 분석</span>
+    <span class="badge on">📥 Pixabay 무료 소재</span>
+    <span class="badge on">🔗 참고 링크함</span>
     <span class="badge">모바일·PC 공용</span>
   </div>
 </header>
@@ -591,8 +706,23 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
     <button class="tab" id="tab-search" role="tab" aria-controls="panel-search" aria-selected="false" tabindex="-1" type="button">
       <span aria-hidden="true">🔍</span><span class="t-lg" title="실시간 유튜브 소재 검색">유튜브 소재 검색</span><span class="t-sm">소재</span>
     </button>
+    <button class="tab" id="tab-preset" role="tab" aria-controls="panel-preset" aria-selected="false" tabindex="-1" type="button">
+      <span aria-hidden="true">⚡</span><span class="t-lg" title="원클릭 템플릿 프리셋">원클릭 프리셋</span><span class="t-sm">프리셋</span>
+    </button>
+    <button class="tab" id="tab-copy3" role="tab" aria-controls="panel-copy3" aria-selected="false" tabindex="-1" type="button">
+      <span aria-hidden="true">✍️</span><span class="t-lg" title="3채널 문구·해시태그">3채널 문구</span><span class="t-sm">문구</span>
+    </button>
+    <button class="tab" id="tab-analyze" role="tab" aria-controls="panel-analyze" aria-selected="false" tabindex="-1" type="button">
+      <span aria-hidden="true">📊</span><span class="t-lg" title="인기 영상 분석 · 훅 분석">인기 영상 분석</span><span class="t-sm">분석</span>
+    </button>
+    <button class="tab" id="tab-links" role="tab" aria-controls="panel-links" aria-selected="false" tabindex="-1" type="button">
+      <span aria-hidden="true">🔗</span><span class="t-lg" title="참고 링크 저장함">참고 링크함</span><span class="t-sm">링크</span>
+    </button>
+    <button class="tab" id="tab-pixabay" role="tab" aria-controls="panel-pixabay" aria-selected="false" tabindex="-1" type="button">
+      <span aria-hidden="true">📥</span><span class="t-lg" title="Pixabay 무료 소재 다운로더">무료 소재</span><span class="t-sm">소재함</span>
+    </button>
     <button class="tab" id="tab-track" role="tab" aria-controls="panel-track" aria-selected="false" tabindex="-1" type="button">
-      <span aria-hidden="true">📊</span><span class="t-lg" title="업로드 기록 · 조회수 체크">업로드 기록</span><span class="t-sm">기록</span>
+      <span aria-hidden="true">📈</span><span class="t-lg" title="업로드 기록 · 조회수 체크">업로드 기록</span><span class="t-sm">기록</span>
     </button>
     <button class="tab" id="tab-xhs" role="tab" aria-controls="panel-xhs" aria-selected="false" tabindex="-1" type="button">
       <span aria-hidden="true">📕</span><span class="t-lg" title="샤오홍슈 벤치마킹">샤오홍슈 벤치마킹</span><span class="t-sm">벤치</span>
@@ -1592,6 +1722,430 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
 </details>
 
 </div><!-- /panel-dna -->
+
+<div class="panel" id="panel-preset" role="tabpanel" aria-labelledby="tab-preset" hidden>
+
+<div class="warnbox">
+  <b>CLAUDE.md 8차(2026-11-23) 규칙을 그대로 넣은 프리셋 4종.</b><br>
+  카드를 하나 고르고 <b>주제·상품명 한 줄</b>만 넣으면, PC 어사이드(코덱스)에 붙여넣을 <b>완성형 실행 명령</b>이 나옵니다. 채널 규칙·파일 경로·검수·보고 형식까지 한 번에 들어갑니다.
+</div>
+
+<section class="card">
+  <div class="step">
+    <div class="num">①</div>
+    <div>
+      <h2>프리셋 고르기</h2>
+      <p class="hint">만들 영상 종류를 <b>하나만</b> 고르세요. 고른 카드에 맞춰 음성·엔딩 카드·저장 폴더가 바뀝니다.</p>
+    </div>
+  </div>
+  <div class="ps-grid" id="psGrid" role="group" aria-label="프리셋 4종"></div>
+</section>
+
+<section class="card">
+  <div class="step">
+    <div class="num">②</div>
+    <div>
+      <h2>주제만 한 줄</h2>
+      <p class="hint" id="psHint">주제나 상품명만 넣으면 아래 프롬프트가 <b>바로</b> 완성됩니다.</p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="lab" for="psTopic">주제 / 상품명 <span>(1줄)</span></label>
+    <input type="text" id="psTopic" placeholder="예: 무선 보풀제거기" autocomplete="off" spellcheck="false">
+    <div class="chips" id="psQuick" style="margin-top:8px"></div>
+  </div>
+
+  <div class="field" id="psExtraWrap">
+    <label class="lab" for="psExtra" id="psExtraLab">추가 정보 <span>(선택)</span></label>
+    <input type="text" id="psExtra" placeholder="" autocomplete="off" spellcheck="false">
+  </div>
+
+  <div class="field">
+    <label class="lab" for="psMemo">추가 요청 <span>(선택 · 강조할 점, 피할 점)</span></label>
+    <textarea id="psMemo" rows="2" placeholder="예: 1만 원대 가성비 강조 / 가격은 확인된 값만 쓰기"></textarea>
+  </div>
+</section>
+
+<section class="card">
+  <div class="step">
+    <div class="num">③</div>
+    <div>
+      <h2>완성 프롬프트</h2>
+      <p class="hint" id="psMeta">①에서 카드를 고르고 ②에 주제를 넣으면 여기에 뜹니다.</p>
+    </div>
+  </div>
+  <div class="prompt-head">
+    <span class="t" id="psTitle">—</span>
+    <span class="c" id="psCount"></span>
+  </div>
+  <pre class="prompt" id="psOut">①에서 카드를 고르세요.</pre>
+  <div class="act-row">
+    <button class="btn primary" id="psCopy" type="button">📋 프롬프트 복사</button>
+    <button class="btn ghost" id="psTxt" type="button">⬇ .txt로 저장</button>
+  </div>
+  <p class="note">복사한 뒤 <b>PC 어사이드</b>(CLAUDE.md가 있는 작업 폴더)에 그대로 붙여넣으면 됩니다. 렌더·검수는 PC에서 돌아갑니다.</p>
+</section>
+
+</div><!-- /panel-preset -->
+
+<div class="panel" id="panel-copy3" role="tabpanel" aria-labelledby="tab-copy3" hidden>
+
+<div class="warnbox">
+  <b>한 번 넣으면 유튜브 · 인스타 · 네이버 클립 문구가 한 세트로 나옵니다.</b><br>
+  같은 영상을 3곳에 올려도 <b>문구는 플랫폼마다 다르게</b> 씁니다(CLAUDE.md 8차 1-6 · 2-7). 숫자 자리 <b>○○</b>는 확인된 값으로 바꿔 주세요 — 근거 없는 숫자는 넣지 않습니다.
+</div>
+
+<section class="card">
+  <div class="step">
+    <div class="num">①</div>
+    <div>
+      <h2>무엇을 올릴까요</h2>
+      <p class="hint">주제·상품명은 <b>필수</b>, 나머지는 아는 만큼만 넣으세요.</p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="lab" for="c3Topic">주제 / 상품명 <span>(필수)</span></label>
+    <input type="text" id="c3Topic" placeholder="예: 무선 보풀제거기" autocomplete="off" spellcheck="false">
+    <div class="chips" id="c3Quick" style="margin-top:8px"></div>
+  </div>
+
+  <div class="field two">
+    <div>
+      <label class="lab" for="c3Channel">유튜브 채널 <span>(제목 규칙이 다릅니다)</span></label>
+      <select id="c3Channel">
+        <option value="item24" selected>아이템24 (쇼핑 · 쿠팡)</option>
+        <option value="pungyo">풍요영상 (정보 · 링크 없음)</option>
+      </select>
+    </div>
+    <div>
+      <label class="lab" for="c3Cta">인스타 댓글 키워드 <span>(매니챗 자동 DM)</span></label>
+      <input type="text" id="c3Cta" placeholder="비우면 상품명에서 자동" autocomplete="off" spellcheck="false">
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="lab" for="c3Kw">키워드 <span>(선택 · 쉼표로 구분)</span></label>
+    <input type="text" id="c3Kw" placeholder="예: 보풀, 니트 관리, 겨울 옷" autocomplete="off" spellcheck="false">
+  </div>
+
+  <div class="field">
+    <label class="lab" for="c3Link">쿠팡 상품 링크 <span>(선택 · 상품 상세 /vp/products/)</span></label>
+    <input type="url" id="c3Link" placeholder="https://www.coupang.com/vp/products/..." autocomplete="off" spellcheck="false">
+  </div>
+
+  <div class="px-searchbtn">
+    <button class="btn primary" id="c3Go" type="button">✍️ 3채널 문구 만들기</button>
+  </div>
+  <p class="note" id="c3Note">검색 결과 링크(<code>/np/search</code>)는 넣지 않습니다. 상품 상세 링크만 씁니다.</p>
+</section>
+
+<section class="card">
+  <div class="step">
+    <div class="num">②</div>
+    <div>
+      <h2>3채널 세트</h2>
+      <p class="hint">칸마다 <b>복사</b> 버튼이 있습니다. 필요한 것만 골라 쓰세요.</p>
+    </div>
+  </div>
+  <div class="gen-wrap" id="c3Out">
+    <p class="empty" id="c3Empty">아직 만들기 전입니다. ①에 상품명을 넣고 <b>3채널 문구 만들기</b>를 누르세요.</p>
+  </div>
+  <div class="act-row">
+    <button class="btn primary" id="c3All" type="button">📋 3채널 전체 복사</button>
+    <button class="btn ghost" id="c3Prompt" type="button">🤖 AI 다듬기 프롬프트</button>
+  </div>
+  <p class="note">이 도구는 <b>규칙 기반 초안</b>입니다. 숫자·후기 표현은 확인된 것만 남기고, 필요하면 <b>AI 다듬기 프롬프트</b>로 지피티·클로드에서 한 번 더 다듬으세요.</p>
+</section>
+
+</div><!-- /panel-copy3 -->
+
+<div class="panel" id="panel-analyze" role="tabpanel" aria-labelledby="tab-analyze" hidden>
+
+<div class="warnbox">
+  <b>① API 키가 있으면 → 실제 인기 영상 지표를 분석합니다.</b> ② 키가 없어도 → 제목·대본을 붙여넣어 <b>훅 분석 + 리메이크</b>가 바로 됩니다.<br>
+  분석 기준: 조회수 · 좋아요 · 댓글 · <b>참여율</b>((좋아요+댓글)÷조회수) · <b>제목 훅 유형</b>. 인기 영상은 <b>구조만</b> 참고하고 문장은 새로 씁니다.
+</div>
+
+<section class="card">
+  <div class="step">
+    <div class="num">🔑</div>
+    <div>
+      <h2>내 YouTube API 키</h2>
+      <p class="hint">탭 2 <b>유튜브 소재 검색</b>과 <b>같은 키</b>를 씁니다. 한 번 저장하면 여기서도 자동으로 씁니다.</p>
+    </div>
+  </div>
+  <p class="note" id="anKeyStatus" style="margin-top:0"></p>
+  <details class="yt-key" id="anKeyBox">
+    <summary>키 입력 · 변경</summary>
+    <div class="body">
+      <div class="pb-keyrow">
+        <input type="password" id="anKeyInput" placeholder="여기에 API 키 붙여넣기" autocomplete="off" spellcheck="false" aria-label="YouTube API 키">
+        <button class="btn primary sm" id="anKeySave" type="button">저장</button>
+        <button class="btn ghost sm" id="anKeyClear" type="button">지우기</button>
+      </div>
+      <p class="note"><b>키는 이 기기 브라우저에만</b> 저장되며 GitHub·서버로 가지 않습니다(YouTube API 주소로만 전송).</p>
+    </div>
+  </details>
+</section>
+
+<section class="card">
+  <div class="step">
+    <div class="num">①</div>
+    <div>
+      <h2>인기 영상 찾기</h2>
+      <p class="hint">한국(KR)에서 <b>조회수 순</b>으로 가져와, 조회수·참여율·훅 유형을 카드로 정리합니다.</p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="lab" for="anQ">키워드</label>
+    <input type="text" id="anQ" placeholder="예: 겨울 난방비, 보풀제거기, 생활꿀팁" autocomplete="off">
+    <div class="chips" id="anQuick" style="margin-top:8px"></div>
+  </div>
+
+  <div class="px-form">
+    <div>
+      <label class="lab" for="anForm">형식</label>
+      <select id="anForm">
+        <option value="shorts" selected>쇼츠 (1분 미만)</option>
+        <option value="long">롱폼</option>
+        <option value="any">전체</option>
+      </select>
+    </div>
+    <div>
+      <label class="lab" for="anPeriod">기간</label>
+      <select id="anPeriod">
+        <option value="7">최근 7일</option>
+        <option value="30" selected>최근 30일</option>
+        <option value="90">최근 90일</option>
+        <option value="365">최근 1년</option>
+      </select>
+    </div>
+    <div class="full">
+      <label class="lab" for="anSort">정렬</label>
+      <select id="anSort">
+        <option value="views" selected>조회수 높은 순</option>
+        <option value="eng">참여율 높은 순</option>
+        <option value="vpd">하루 평균 조회수 높은 순</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="px-searchbtn">
+    <button class="btn primary" id="anGo" type="button">📊 인기 영상 분석</button>
+  </div>
+  <p class="note" id="anNote"></p>
+</section>
+
+<section class="card">
+  <div class="step">
+    <div class="num">②</div>
+    <div>
+      <h2>분석 결과</h2>
+      <p class="hint">훅 유형별로 <b>평균 조회수·평균 참여율</b>을 비교하면, 이 키워드에서 어떤 제목이 먹히는지 보입니다.</p>
+    </div>
+  </div>
+  <div id="anBusy" class="px-busy" hidden><span class="spin"></span> 유튜브에서 가져오는 중…</div>
+  <div id="anSum" class="an-sum" hidden></div>
+  <div id="anDist" class="an-dist" hidden></div>
+  <div id="anList" class="px-list"></div>
+  <p class="note" id="anEmpty">아직 분석 전입니다. 키워드를 넣고 <b>인기 영상 분석</b>을 누르세요.</p>
+</section>
+
+<section class="card" id="anHookCard">
+  <div class="step">
+    <div class="num">③</div>
+    <div>
+      <h2>제목·대본 훅 분석기 <span style="font-size:11.5px;font-weight:700;color:var(--accent);background:var(--accent-bg);border:1px solid var(--soft);border-radius:6px;padding:1px 7px;margin-left:4px">API 키 없이</span></h2>
+      <p class="hint">벤치마킹할 영상의 <b>제목·대본·설명</b>을 붙여넣으면 ① 훅 공식 ② 강점·아쉬운 점 ③ 우리 채널용 <b>리메이크 제목·첫 1.5초 훅</b>을 만듭니다.</p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="lab" for="hkText">참고 제목 / 대본 / 설명</label>
+    <textarea id="hkText" rows="5" placeholder="예) 겨울에 보일러 외출모드 잘못 누르면 관리비 3만 원 더 나갑니다. 대부분 외출 대신 '실내'로 두는데…"></textarea>
+  </div>
+
+  <div class="field two">
+    <div>
+      <label class="lab" for="hkTopic">주제 / 상품명 <span>(비우면 자동 추출)</span></label>
+      <input type="text" id="hkTopic" placeholder="예: 보일러 외출모드" autocomplete="off" spellcheck="false">
+    </div>
+    <div>
+      <label class="lab" for="hkChannel">바꿀 채널</label>
+      <select id="hkChannel">
+        <option value="item24" selected>아이템24 (쇼핑 · 쿠팡)</option>
+        <option value="pungyo">풍요영상 (정보 · 숫자+손실회피)</option>
+        <option value="gamsung">감성노을 (음악 · 감성)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="px-searchbtn">
+    <button class="btn primary" id="hkGo" type="button">🔎 훅 분석하기</button>
+  </div>
+  <div id="hkOut"></div>
+  <div class="act-row" id="hkActs" hidden>
+    <button class="btn primary" id="hkCopy" type="button">📋 리메이크 세트 복사</button>
+    <button class="btn ghost" id="hkPrompt" type="button">🤖 어사이드용 프롬프트</button>
+  </div>
+  <p class="note" id="hkNote">분석은 제목·문장 패턴만 봅니다. 남의 대본을 그대로 쓰지 않고 <b>구조만</b> 참고합니다.</p>
+</section>
+
+</div><!-- /panel-analyze -->
+
+<div class="panel" id="panel-pixabay" role="tabpanel" aria-labelledby="tab-pixabay" hidden>
+
+<div class="warnbox">
+  <b>Pixabay 공식 API로 무료 소재를 바로 찾습니다(서버 0원).</b><br>
+  <span class="pb-badge">상업용 무료</span> <span class="pb-badge">저작자 표시 불필요</span> — 영상 배경·사진 소스로 쓰고, 원본을 그대로 다시 파는 것은 안 됩니다.
+</div>
+
+<section class="card">
+  <div class="step">
+    <div class="num">🔑</div>
+    <div>
+      <h2>내 Pixabay API 키</h2>
+      <p class="hint">한 번만 저장하면 다음부터 자동입니다. <b>키는 이 기기 브라우저에만</b> 남습니다(코드·GitHub에 넣지 않습니다).</p>
+    </div>
+  </div>
+  <details id="pbKeyBox">
+    <summary>키 입력 · 변경</summary>
+    <div class="body">
+      <div class="pb-keyrow">
+        <input type="password" id="pbKeyInput" placeholder="여기에 Pixabay API 키 붙여넣기" autocomplete="off" spellcheck="false" aria-label="Pixabay API 키">
+        <button class="btn primary sm" id="pbKeySave" type="button">저장</button>
+        <button class="btn ghost sm" id="pbKeyClear" type="button">지우기</button>
+      </div>
+      <p class="note" id="pbKeyStatus" style="margin-top:6px"></p>
+      <p class="note">키 발급: <a href="https://pixabay.com/api/docs/" target="_blank" rel="noopener">pixabay.com/api/docs</a> → 로그인 → <b>Your API key</b> 복사. 무료이고 카드 등록이 필요 없습니다. (1시간에 100회)</p>
+    </div>
+  </details>
+</section>
+
+<section class="card">
+  <div class="step">
+    <div class="num">①</div>
+    <div>
+      <h2>무엇을 찾을까요</h2>
+      <p class="hint">한국어로 넣어도 <b>영어 검색어로 바꿔</b> 찾습니다. 아래 추천 칩을 눌러도 됩니다.</p>
+    </div>
+  </div>
+
+  <div class="field">
+    <span class="lab">종류</span>
+    <div class="seg" id="pbType" role="group" aria-label="소재 종류">
+      <button type="button" data-type="video" aria-pressed="true">🎬 영상</button>
+      <button type="button" data-type="photo" aria-pressed="false">🖼️ 사진</button>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="lab" for="pbQ">검색어 <span>(한국어·영어 모두)</span></label>
+    <input type="text" id="pbQ" placeholder="예: 겨울, 보일러, 주방, night city" autocomplete="off" spellcheck="false">
+    <div class="pb-chips" id="pbChips"></div>
+  </div>
+
+  <div class="field two">
+    <div>
+      <label class="lab" for="pbOrder">정렬</label>
+      <select id="pbOrder">
+        <option value="popular" selected>인기 순</option>
+        <option value="latest">최신 순</option>
+      </select>
+    </div>
+    <div>
+      <label class="lab" for="pbOrient">방향 <span>(영상·사진)</span></label>
+      <select id="pbOrient">
+        <option value="vertical" selected>세로 (9:16 쇼츠용)</option>
+        <option value="horizontal">가로 (롱폼용)</option>
+        <option value="all">전체</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="px-searchbtn">
+    <button class="btn primary" id="pbGo" type="button">📥 무료 소재 검색</button>
+  </div>
+  <p class="note" id="pbNote"></p>
+</section>
+
+<section class="card">
+  <div class="step">
+    <div class="num">②</div>
+    <div>
+      <h2>검색 결과</h2>
+      <p class="hint">해상도·길이를 보고 필요한 크기만 받으세요. 영상은 <b>MP4</b>, 사진은 <b>JPG</b>로 저장됩니다.</p>
+    </div>
+  </div>
+  <div id="pbBusy" class="px-busy" hidden><span class="spin"></span> Pixabay에서 가져오는 중…</div>
+  <div id="pbSum" class="px-sum" hidden></div>
+  <div id="pbList" class="pb-list"></div>
+  <p class="note" id="pbEmpty">아직 검색 전입니다. 키를 저장하고 검색어를 넣어 보세요.</p>
+  <div class="pb-note">
+    <b>쓰는 법</b> — 받은 파일은 <code>output/item24/오늘날짜/shorts_1/</code> 같은 폴더의 소스로 넣고, 한 원본에서 <b>연속 2초를 넘기지 않게</b> 1.0~1.3초 단위로 섞습니다(CLAUDE.md 1-2). 하단에 남은 워터마크·자막은 10~15% 크롭해서 지웁니다.<br>
+    <b>라이선스</b> — Pixabay 콘텐츠 라이선스: 상업적 사용 가능, 저작자 표시 불필요(권장). 단 <b>원본 그대로 재판매·재배포</b>와 상표·인물을 마치 보증처럼 쓰는 것은 금지입니다.
+  </div>
+</section>
+
+</div><!-- /panel-pixabay -->
+
+<div class="panel" id="panel-links" role="tabpanel" aria-labelledby="tab-links" hidden>
+
+<div class="warnbox">
+  <b>벤치마킹할 영상 링크를 한 곳에 모아 둡니다.</b><br>
+  인스타 릴스·유튜브 쇼츠·네이버 클립·샤오홍슈 무엇이든 됩니다. 저장된 링크는 <b>이 브라우저에만</b> 남고, 카드마다 <b>링크 복사 · 열기 · 어사이드 벤치마킹 명령</b>이 붙습니다.
+</div>
+
+<section class="card">
+  <div class="step">
+    <div class="num">①</div>
+    <div>
+      <h2>링크 저장</h2>
+      <p class="hint">주소만 넣고 저장해도 됩니다. <b>메모·태그</b>를 붙여 두면 나중에 찾기 쉽습니다.</p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="lab" for="lkUrl">링크 주소(URL) <span>(필수)</span></label>
+    <input type="url" id="lkUrl" placeholder="https://www.instagram.com/reel/... · https://www.youtube.com/shorts/..." autocomplete="off" spellcheck="false">
+  </div>
+
+  <div class="field">
+    <label class="lab" for="lkMemo">메모 <span>(선택 · 채널·상품·왜 저장했는지)</span></label>
+    <input type="text" id="lkMemo" placeholder="예: 보풀제거기 / 첫 1.5초가 손으로 보풀 털어내는 컷" autocomplete="off">
+  </div>
+
+  <div class="field">
+    <span class="lab">채널 태그 <span>(여러 개 가능)</span></span>
+    <div class="chips" id="lkTagPick"></div>
+  </div>
+
+  <div class="px-searchbtn">
+    <button class="btn primary" id="lkAdd" type="button">🔗 링크 저장</button>
+  </div>
+  <p class="note">같은 주소를 다시 저장하면 <b>메모·태그만</b> 새로 고칩니다. 저장 위치는 이 브라우저(localStorage)이고 GitHub로 전송되지 않습니다.</p>
+</section>
+
+<section class="card">
+  <div class="step">
+    <div class="num">②</div>
+    <div>
+      <h2>저장한 링크 <span id="lkCount" style="font-size:12.5px;font-weight:700;color:var(--muted)"></span></h2>
+      <p class="hint">태그로 걸러 보고, 카드의 <b>🤖 벤치마킹 명령</b>을 복사해 어사이드에 붙여넣으면 대본까지 뽑힙니다.</p>
+    </div>
+  </div>
+  <div class="chips" id="lkFilter" style="margin-bottom:12px"></div>
+  <div class="gen-wrap" id="lkList"></div>
+  <p class="note" id="lkEmpty">아직 저장한 링크가 없습니다. ①에 주소를 넣어 보세요.</p>
+  <div class="act-row">
+    <button class="btn ghost" id="lkAllCopy" type="button">📋 목록 전체 복사</button>
+  </div>
+</section>
+
+</div><!-- /panel-links -->
 
 <footer class="foot">
   그린룸 스타일 쇼츠 작업실 · 무료 단일 파일 도구<br>
@@ -2754,7 +3308,7 @@ Array.prototype.forEach.call(document.querySelectorAll('.mini tr[data-fmt]'), fu
 })();
 
 /* ═══════════════════ 탭 전환 ═══════════════════ */
-var TAB_KEYS = ['script','search','track','xhs','dna'];
+var TAB_KEYS = ['script','search','preset','copy3','analyze','links','pixabay','track','xhs','dna'];
 function switchTab(name, silent){
   if(TAB_KEYS.indexOf(name) < 0) name = 'script';
   document.body.setAttribute('data-tab', name);
@@ -2766,7 +3320,11 @@ function switchTab(name, silent){
   var bar = document.querySelector('.bar');
   if(bar){ if(name === 'script'){ bar.classList.remove('tabhide'); } else { bar.classList.add('tabhide'); } }
   try{ history.replaceState(null, '', '#' + name); }catch(e){}
-  if(!silent){ window.scrollTo(0, 0); }
+  if(!silent){
+    window.scrollTo(0, 0);
+    var act = el('tab-' + name);
+    if(act && act.scrollIntoView){ try{ act.scrollIntoView({ block:'nearest', inline:'center' }); }catch(e){ act.scrollIntoView(false); } }
+  }
 }
 TAB_KEYS.forEach(function(k){
   var b = el('tab-' + k);
@@ -4265,6 +4823,1547 @@ function dnaQuick(boxId, list, onPick){
     if(!lastDna && !dnaBuild(true)) return;
     if(saveFile('style_dna_' + todaySeoul() + '.txt', lastDna, 'text/plain;charset=utf-8')) toast('.txt 파일로 저장했습니다');
     else toast('저장이 막혔습니다 — 복사 버튼을 쓰세요');
+  });
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   2026-11-23 신규 5기능 — ① 프리셋 ② 3채널 문구 ③ 인기 분석
+   ④ Pixabay 소재 ⑤ 참고 링크함
+   ═══════════════════════════════════════════════════════════════ */
+var LS_PRESET = 'greenroom_preset_v1';
+
+function saveBlob(name, blob){
+  try{
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = name; a.rel = 'noopener';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ try{ URL.revokeObjectURL(url); if(a.parentNode) a.parentNode.removeChild(a); }catch(e){} }, 1500);
+    return true;
+  }catch(e){ return false; }
+}
+function tidyList(str){
+  return String(str || '').split(/[,\n]/).map(function(s){ return s.trim(); }).filter(function(s, i, a){ return s && a.indexOf(s) === i; });
+}
+
+/* ───────── ① 원클릭 템플릿 프리셋 ───────── */
+var PS_ORDER = ['item24','bundle','pungyo','gamsung'];
+var PS = {
+  item24: {
+    em:'🛍️',
+    name:'아이템24 쇼핑 쇼츠',
+    tags:['Edge-TTS 여성','9:16 · 15초','유튜브 쇼츠'],
+    ds:'겨울 살림템·생활꿀템 쿠팡 쇼츠. 마지막 1.5~2초는 「링크는 고정댓글 확인!」 고정 카드.',
+    quick:['무선 보풀제거기','전기 물주머니','겨울 단열시트','욕실 곰팡이 제거제','가습기 세정제'],
+    extraLab:'쿠팡 상품 링크', extraPh:'https://www.coupang.com/vp/products/... (상품 상세만)',
+    memoPh:'예: 1만 원대 가성비 강조 / 가격은 확인된 값만',
+    build: function(t, link, memo){
+      var T = t || '{상품명}';
+      var L = link ? '- 상품 링크(이 주소 사용): ' + link
+        : '- 상품 링크: 내가 상품 상세 링크를 줄 때까지 링크 칸은 비워 두고, 대본·자막·소스·문구를 먼저 완성합니다.';
+      return [
+        '# 그린룸 프리셋 ① — 아이템24 쇼핑 쇼츠 (15초 · Edge-TTS)',
+        '',
+        '이 작업 폴더의 CLAUDE.md 8차(2026-11-23) 규칙을 기준으로, 아래 한 편을 렌더·검수·비공개 업로드 준비까지 진행해 주세요.',
+        '규칙과 이 요청이 다르면 이 요청을 우선하되, CLAUDE.md 7번(주의 및 피할 사항)은 반드시 지킵니다.',
+        '',
+        '■ 1. 만들 것',
+        '- 채널: 아이템24 (@AIhi24) · 유튜브 쇼츠 · 쿠팡 파트너스',
+        '- 주제/상품: ' + T,
+        L,
+        '- 규격: 9:16 1080×1920 · 30fps · 15초 내외 (자막용·TTS용 대본 두 벌)',
+        '- 저장: output/item24/' + todaySeoul() + '/shorts_1/ → video.mp4, meta.txt, 대본_자막용.txt, 대본_TTS용.txt',
+        '- 같은 폴더에 파일이 이미 있으면 덮어쓰지 말고 _v2로 보존합니다.',
+        '',
+        '■ 2. 대본 — 링밥식 15초 4문장',
+        '1) 0~1.5초 훅: 숫자·손실 회피 한 줄 (설명형 금지)  예: "이거 안 쓰면 전기요금 ○○원 더"',
+        '2) 문제·실험 장면: 어디서 어떻게 불편한지 5~6초',
+        '3) 반전·결과: 바꾸기 전/후를 한 컷으로 3~4초',
+        '4) 댓글 유도: 마지막 카드와 붙는 한 문장',
+        '- 확인된 수치가 없으면 ○○로 비워 두고, 추정값을 사실처럼 쓰지 않습니다.',
+        '- "절대"라는 단어는 대본·자막 어디에도 쓰지 않습니다(0건).',
+        '- 직접 써보지 않은 제품을 "제가 써봤는데"로 쓰지 않습니다. 구조만 참고하고 문장은 새로 씁니다.',
+        '- 화면 자막은 숫자 그대로 / TTS 대본은 한글 발음(1-9). 생성 전  grep -n "[0-9]" 대본_TTS용.txt  로 0건 확인.',
+        '',
+        '■ 3. 화면 (1-3 · 1-12)',
+        '- 0.00초 첫 프레임부터 상단 제목 2줄: 1줄 흰색 후킹 / 2줄 노란 #FFE600 키워드, 위에서 18% 아래(세이프존)',
+        '- 0~1.5초는 가장 밝고 움직임 큰 클립(사람·물·불·김·카메라 푸시인). 어두운 배경·정지 사진·로고 인트로 금지',
+        '- 컷 1.0~1.3초, 한 원본 연속 2초 초과 금지, 문장 사이 무음 0.1초 이하',
+        '- 1080×1920 세로 풀스크린(레터박스 0건), 타인 자막·워터마크는 10~15% 크롭해서 제거',
+        '- 소스: Pexels·Pixabay CC0 세로 영상 4~5개 이상(샤오홍슈 등 중국 실사는 이 채널 금지) + 자체 모션그래픽 비교·수치 카드 + 쿠팡 상품 이미지 2배 줌인',
+        '- 좌측 상단에 「광고」 한 단어만 (상호·업체명·문구 덧붙이지 않음)',
+        '- 마지막 1.5~2초 카드: 「링크는 고정댓글 확인!」 — 인사·구독 멘트 넣지 않음',
+        '',
+        '■ 4. 음성·오디오 (1-11 · 1-4)',
+        '- Edge-TTS ko-KR-SunHiNeural, --rate=+15% (1.15~1.2배속). 타입캐스트는 쓰지 않습니다(쇼츠는 Edge-TTS 고정)',
+        '- BGM -20dB, whoosh / pop 효과음, 문장 사이 무음 0.05~0.1초',
+        '',
+        '■ 5. 링크 (2-4)',
+        '- 쿠팡 링크는 상품 상세(/vp/products/...)만. 검색 결과 링크(/np/search) 금지',
+        '- subid=ytshorts 단축 링크로 만들고, curl -sIL 로 리다이렉트·최종 도착 URL을 확인해 보고',
+        '',
+        '■ 6. 업로드 문구 세트 (1-6 · 2-7) — meta.txt에 함께 저장',
+        '- 제목(검색어 포함 40자 안팎) / 설명(첫 2줄에 핵심) / 태그 10~15개 / 고정댓글',
+        '- 대가성 문구는 그대로: "쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."',
+        '- 네이버 클립(@skyblu18) 크로스포스팅용 제목(15~25자)·설명(2~3문장)·해시태그 10~20개도 따로 뽑아 함께 저장 (유튜브 문구 복사 금지)',
+        '',
+        '■ 7. 검수·보고 (1-5 · 8)',
+        '- 렌더 후 0.0초·0.5초·1.5초·마지막 2초 프레임을 뽑아 글자 겹침 0건 / 세이프존 0건 / 오타 0건 / 검은 여백 0건을 수치로 보고',
+        '- CLAUDE.md 8번 보고 형식으로 정리. 업로드는 privacyStatus="private". 공개 전환은 내가 직접 한다',
+        '- 남은 일(공개 전환·클립 업로드)을 마지막에 한 줄로 적어 주세요',
+        memo ? '\n■ 8. 추가 요청\n- ' + memo : '',
+        ''
+      ].join('\n');
+    }
+  },
+  bundle: {
+    em:'📱',
+    name:'인스타·네이버 클립 겸용 쇼핑',
+    tags:['9:16 · 15초','CTA 2줄 카드','@mortalk23 · @skyblu18'],
+    ds:'아이템24 쇼츠와 같은 파일을 인스타 릴스·네이버 클립에도 올리는 겸용본. 마지막 2초는 댓글 키워드 CTA.',
+    quick:['무선 보풀제거기','주방 수납 바구니','샤오홍슈발 미니 가습기','겨울 니트 보풀 관리','현관문 소음 방지'],
+    extraLab:'인스타 댓글 키워드 (매니챗 자동 DM)', extraPh:'예: 보풀 (댓글에 이 단어를 남기면 링크 DM)',
+    memoPh:'예: 첫 1.5초는 보풀 날리는 클로즈업으로',
+    build: function(t, kw, memo){
+      var T = t || '{상품명}';
+      var K = kw || '{키워드}';
+      return [
+        '# 그린룸 프리셋 ② — 인스타 @mortalk23 · 네이버 클립 @skyblu18 겸용 쇼핑 쇼츠',
+        '',
+        'CLAUDE.md 8차(2026-11-23) 3번·2-7 기준으로, 같은 15초 세로 영상 1본을 만들어 유튜브(아이템24)·인스타 릴스·네이버 클립 3곳에 올릴 수 있게 준비해 주세요.',
+        '',
+        '■ 1. 만들 것',
+        '- 상품/주제: ' + T,
+        '- 인스타 댓글 키워드: ' + K + '  (마지막 CTA 카드에 그대로 넣습니다)',
+        '- 규격: 9:16 1080×1920 · 30fps · 15초 내외 · 1본 3곳 겸용',
+        '- 저장: output/item24/' + todaySeoul() + '/shorts_2/ → video.mp4, meta.txt(유튜브·인스타·클립 세트)',
+        '',
+        '■ 2. 소스 — 겸용본이므로 CC0만',
+        '- 이 파일은 아이템24 유튜브에도 올라가므로 샤오홍슈 등 중국 실사 클립은 쓰지 않습니다(계정 삭제 위험).',
+        '- Pexels·Pixabay CC0 세로 영상 4~5개 이상 + 자체 비교 카드 + 상품 이미지 2배 줌인',
+        '- 인스타 전용본을 따로 만들 때만 샤오홍슈 실사를 쓰고, 그때는 하단 10~15% 크롭으로 중국어 자막·블러 바를 지웁니다.',
+        '- 컷 1.0~1.3초, 한 원본 연속 2초 초과 금지, 무음 0.1초 이하',
+        '',
+        '■ 3. 마지막 2초 — 고정 CTA 2줄 카드 (이 채널의 핵심)',
+        '1줄: 댓글에 \'' + K + '\' 남겨주세요!',
+        '2줄: → 링크 바로 전달',
+        '- 매니챗 자동 DM으로 링크가 나가도록 키워드를 정확히 이 단어로 고정합니다.',
+        '- 인사·구독 멘트·링크 주소를 카드에 직접 쓰지 않습니다(2초가 넘어가면 잘라 냅니다).',
+        '',
+        '■ 4. 화면·음성 (1-12 · 1-11)',
+        '- 0.00초부터 상단 제목 2줄(18% 아래) + 가장 밝고 움직이는 첫 클립. 어두운 화면·정지 사진 금지',
+        '- 좌측 상단 「광고」 한 단어만',
+        '- Edge-TTS ko-KR-SunHiNeural --rate=+15%, BGM -20dB, whoosh/pop',
+        '- 대본 숫자는 화면 그대로 / TTS는 한글 발음(1-9). "절대" 0건',
+        '',
+        '■ 5. 문구 3세트 — meta.txt에 함께',
+        '[유튜브(아이템24)] 제목 40자 안팎 / 설명 첫 2줄 핵심 / 태그 10~15 / 고정댓글(링크는 고정댓글 확인!)',
+        '[인스타 @mortalk23] 캡션(첫 줄 훅 → 2~3줄 → 댓글 키워드 유도) / 첫 댓글 고정 문구 / 대가성 문구 / 해시태그 10~15',
+        '[네이버 클립 @skyblu18] 제목 15~25자(숫자+손실 회피) / 설명 첫 줄 핵심 + 2~3문장 / 해시태그 10~20',
+        '- 대가성 문구는 세 곳 모두 그대로: "쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."',
+        '- 같은 문구를 3곳에 복사하지 않습니다(플랫폼마다 다르게).',
+        '',
+        '■ 6. 링크·검수',
+        '- 쿠팡 상품 상세 링크만(/vp/products/...), subid=ytshorts 단축 후 curl -sIL로 도착 URL 확인',
+        '- 렌더 후 0.0/0.5/1.5/마지막 2초 프레임 검수 → 글자 겹침 0건·세이프존 0건·오타 0건·검은 여백 0건',
+        '- 마지막 2초 CTA 2줄이 정확한지 프레임으로 확인해 보고',
+        '- 업로드는 내가 한다(유튜브 비공개·인스타·클립 수동). 파일과 문구 세트만 완성',
+        memo ? '\n■ 7. 추가 요청\n- ' + memo : '',
+        ''
+      ].join('\n');
+    }
+  },
+  pungyo: {
+    em:'📊',
+    name:'풍요영상 정보 썰 쇼츠',
+    tags:['Edge-TTS 남성','숫자+손실회피','저장·공유 엔딩'],
+    ds:'생활비·난방비 정보 쇼츠. 제목은 「숫자 + 손실 회피」, 마지막 1.5초는 저장·공유 문구 고정. 링크·광고 표기 없음.',
+    quick:['보일러 외출모드','겨울 전기요금','수도 동파 예방','제습기 전기세','난방비 절약'],
+    extraLab:'근거 자료 / 출처 (선택)', extraPh:'예: 한국에너지공단 난방비 절약 안내',
+    memoPh:'예: 롱폼 챕터 요약 파생편으로 만들기',
+    build: function(t, src, memo){
+      var T = t || '{주제}';
+      var S = src ? '- 근거 자료: ' + src + ' (여기에 있는 수치만 씁니다)'
+        : '- 근거 자료: 공공기관·제조사 공식 안내(한국에너지공단·서울시·소비자원·국세청 등)에서 확인한 수치만. 확인 안 되면 ○○로 비웁니다';
+      return [
+        '# 그린룸 프리셋 ③ — 풍요영상 정보 썰 쇼츠 (숫자 + 손실 회피)',
+        '',
+        'CLAUDE.md 8차(2026-11-23) 4번·4-5-1 기준으로 정보성 쇼츠 1편을 완성해 주세요. 이 채널은 쿠팡 링크·광고 표기·띠·운세를 넣지 않습니다.',
+        '',
+        '■ 1. 만들 것',
+        '- 채널: 풍요영상 (@fs-tv23) · 유튜브 쇼츠 · 정보성',
+        '- 주제: ' + T,
+        S,
+        '- 규격: 9:16 1080×1920 · 30fps · 15초 내외',
+        '- 저장: output/pungyo/' + todaySeoul() + '/shorts_1/ → video.mp4, meta.txt, 대본 두 벌',
+        '',
+        '■ 2. 제목 — 「숫자 + 손실 회피」 1순위 (4-5-1)',
+        '- 구조: [상황·행동] + [잘못했을 때의 손해] + [숫자]',
+        '  예: "외출모드 잘못 누르면 관리비 ○○원 더" / "이거 하나 안 뽑으면 전기요금 ○○원 더"',
+        '- 설명형 제목(~하는 방법·~소개·~정리)은 쓰지 않습니다.',
+        '- 근거 없는 숫자를 지어 넣지 않습니다. 확인된 수치가 없으면 ○○로 두거나 소재를 바꿉니다.',
+        '- 상단 제목 2줄: 1줄 숫자·손해 / 2줄 핵심 키워드. 화면은 숫자 그대로, TTS는 한글 발음(1-9)',
+        '',
+        '■ 3. 대본·구성 (15초)',
+        '0~1.5초 훅(숫자·손해) → 핵심 1가지(도식·비교 카드) → 왜 그런지 한 줄 → 마지막 1.5초 카드',
+        '- "절대" 0건. 추정을 사실처럼 쓰지 않고, 직접 해보지 않은 일을 후기처럼 쓰지 않습니다.',
+        '- 화면 자막 숫자는 그대로, TTS 대본은 한글 발음으로 풀어 씁니다.',
+        '',
+        '■ 4. 마지막 1.5초 — 매 편 같은 문구로 고정 (4-5 · 6번 표)',
+        '1줄: 나머지 {N}가지는 본 영상에서 확인하세요',
+        '2줄: 저장해 두고 꺼내 보세요 · 가족에게 공유하세요',
+        '- 편마다 새로 만들지 않습니다. 인사·구독 멘트 없음.',
+        '',
+        '■ 5. 화면·음성',
+        '- 0.00초부터 상단 제목 고정(18% 아래) + 가장 밝고 움직이는 첫 클립(1-12)',
+        '- 컷 1.0~1.3초, 무음 0.1초 이하, 세로 풀스크린(검은 여백 0건)',
+        '- 배경: Pixabay·Pexels CC0 영상 + 자체 모션그래픽(숫자 카운팅·온도계·체크리스트)',
+        '- Edge-TTS ko-KR-InJoonNeural --rate=+15% (남성 1.15~1.2배속). 타입캐스트는 롱폼에만',
+        '- BGM -20dB, whoosh/pop',
+        '',
+        '■ 6. 금지 (4-1 · 7번)',
+        '- 쿠팡·외부 상품 링크, 구매 유도 문구, 「광고」 표기 금지',
+        '- 띠·운세·사주 소재 금지. 출처 없는 수치 금지',
+        '',
+        '■ 7. 문구·검수·보고',
+        '- meta.txt: 제목 / 설명(첫 2줄 핵심, 출처 한 줄) / 태그 10~15(#풍요영상 포함) / 고정댓글(저장·공유 문구, 링크 없음)',
+        '- 렌더 후 0.0/0.5/1.5/마지막 2초 프레임 검수 → 겹침 0건·세이프존 0건·오타 0건 수치 보고',
+        '- 업로드는 비공개(private). 롱폼과 관련 동영상으로 연결. 공개 전환은 내가 직접',
+        memo ? '\n■ 8. 추가 요청\n- ' + memo : '',
+        ''
+      ].join('\n');
+    }
+  },
+  gamsung: {
+    em:'🌇',
+    name:'감성노을 플리 (롱폼 + 티저)',
+    tags:['3~4곡 · 9~12분','0.0초 후렴구','하루 1편 공개'],
+    ds:'트로트 발라드 3~4곡 롱폼 + 곡별 티저 쇼츠. 따뜻한 컬러 실사 배경, 전주 없이 후렴구부터.',
+    quick:['겨울밤 퇴근길 가로등','새벽 창가 커피','모닥불 옆 회상','비 오는 오후 드라이브'],
+    extraLab:'무드 / 장면 (티저 배경)', extraPh:'예: 겨울밤 퇴근길 가로등',
+    memoPh:'예: 곡은 Suno Pro healing 폴더 4곡 / vol 02',
+    build: function(t, mood, memo){
+      var T = t || '{플레이리스트 주제}';
+      var M = mood || '{장면}';
+      return [
+        '# 그린룸 프리셋 ④ — 감성노을 플리 (3~4곡 롱폼 + 티저 쇼츠)',
+        '',
+        'CLAUDE.md 8차(2026-11-23) 5번 기준으로 롱폼 1편과 티저 쇼츠를 만들어 주세요. 7차에서 확정된 티저 규칙(따뜻한 컬러·0.0초 후렴구·3단 고정 자막)을 지킵니다.',
+        '',
+        '■ 1. 만들 것',
+        '- 채널: 감성노을 (@감성노을) · 유튜브 롱폼 + 쇼츠 티저',
+        '- 플레이리스트 주제: ' + T,
+        '- 장면·무드(티저 배경): ' + M,
+        '- 롱폼: 16:9 1920×1080 · 30fps · 9~12분 · 트로트 발라드 3~4곡',
+        '- 티저: 9:16 1080×1920 · 15초 · 곡 수만큼(4곡이면 4편)',
+        '',
+        '■ 2. 음원 (5-1 — 가장 중요)',
+        '- Music\\suno_healing 폴더의 상업용 Suno Pro(유료 플랜) 음원만 사용. 기존 가요 폴더(발라드 230곡·최신가요·추억의인기가요) 금지',
+        '- 실존 가수·곡명을 프롬프트·제목·가사·태그 어디에도 넣지 않습니다(스타일 키워드만)',
+        '- 장르는 감성 트로트 발라드(한국어 가사). 로파이·재즈 피아노로 잡지 않습니다',
+        '- 곡마다 생성·다운로드 내역 캡처를 음원_사용기록.txt로 남깁니다',
+        '',
+        '■ 3. 배경 (5-2)',
+        '- 어두운 흑백 톤 금지. 따뜻한 노을·주황빛 가로등·모닥불·창가 빗방울 같은 밝고 포근한 컬러 실사(Pixabay 무료)',
+        '- 곡마다 다른 배경, 같은 배경을 다음 편에 재사용하지 않음',
+        '- 롱폼 배경은 1초 크로스페이드 루프, 곡 사이 3초 크로스페이드 + 곡별 음량 정규화',
+        '- 알아볼 수 있는 사람 얼굴·상표·로고가 나오는 영상은 제외',
+        '',
+        '■ 4. 티저 오디오·자막 (5-3 · 5-4)',
+        '- 0.0초부터 후렴구 보컬 하이라이트(15~20초 구간)가 바로 나오게 컷. 전주·페이드인·무음 금지',
+        '- 상단 25%: 노란색 + 검정 외곽선 제목 2줄, 0.00초부터 끝까지 고정 (예: "퇴근길 막차에서 듣는" / "찐 감성 트로트 4곡")',
+        '- 하단 중앙: 가사 자막 흰색 + 검정 외곽선(한 줄 8~12자, 보컬에 맞춰 넘김)',
+        '- 맨 아래: 「▶ 전체 4곡은 연결 영상에서 들으세요」 처음부터 끝까지 고정',
+        '- 세이프존: 제목 8~25% / 가사 62~72% / 안내 79~81% / 하단 18%는 유튜브 UI 여백',
+        '',
+        '■ 5. 제작 개수·공개 (5-5)',
+        '- 롱폼 1편(4곡)당 티저 4편. 4편은 제목·배경·후킹 문구를 전부 다르게(재사용 판정 회피)',
+        '- 하루 1편만 공개, 오전 11시~오후 6시 사이. 같은 날 2편 이상 공개 금지',
+        '- AI 생성 콘텐츠 체크는 내가 유튜브 화면에서 직접 합니다',
+        '',
+        '■ 6. 실행·저장',
+        '- 실행 예: python build_healing.py --music "$HOME\\Music\\suno_healing" --min-minutes 9 --max-minutes 12 --skip 0 --songs 4 --vol 02 --scene "' + M + '"',
+        '- 결과물: 감성노을_vol{NN}_롱폼.mp4, 감성노을_vol{NN}_쇼츠_1~4.mp4, 설명란_타임스탬프.txt, 음원_사용기록.txt',
+        '- 롱폼·티저 모두 자동 업로드는 private(+publishAt) 예약. 롱폼은 파일만 완성해 두고 내가 주 1~2회 직접 올립니다',
+        '',
+        '■ 7. 보고',
+        '- 배경 색감(곡별 배경명) / 0.0초 후렴구 시작 실측 / 3단 고정 자막 확인 / 티저 n편 배경·문구 전부 다름을 수치로 보고',
+        memo ? '\n■ 8. 추가 요청\n- ' + memo : '',
+        ''
+      ].join('\n');
+    }
+  }
+};
+
+var psState = { key:'item24', topic:'', extra:'', memo:'' };
+
+function psSave(){
+  try{ localStorage.setItem(LS_PRESET, JSON.stringify(psState)); }catch(e){}
+}
+function psLoad(){
+  try{
+    var raw = localStorage.getItem(LS_PRESET);
+    if(!raw) return;
+    var o = JSON.parse(raw);
+    if(!o || typeof o !== 'object') return;
+    if(PS[o.key]) psState.key = o.key;
+    psState.topic = String(o.topic || '');
+    psState.extra = String(o.extra || '');
+    psState.memo = String(o.memo || '');
+  }catch(e){}
+}
+function psCard(k){
+  var p = PS[k];
+  return '<button class="ps" type="button" role="button" data-ps="' + k + '" aria-pressed="false">' +
+    '<span class="ic" aria-hidden="true">' + p.em + '</span>' +
+    '<b>' + esc(p.name) + '</b>' +
+    '<span class="mt">' + p.tags.map(function(t){ return '<i>' + esc(t) + '</i>'; }).join('') + '</span>' +
+    '<span class="ds">' + esc(p.ds) + '</span>' +
+  '</button>';
+}
+function psText(){
+  var p = PS[psState.key];
+  return p.build(psState.topic.trim(), psState.extra.trim(), psState.memo.trim());
+}
+function psRefresh(){
+  var p = PS[psState.key];
+  var card, i;
+  Array.prototype.forEach.call(document.querySelectorAll('#psGrid .ps'), function(b){
+    b.setAttribute('aria-pressed', b.getAttribute('data-ps') === psState.key ? 'true' : 'false');
+  });
+  if(el('psExtraLab')) el('psExtraLab').innerHTML = esc(p.extraLab) + ' <span>(선택)</span>';
+  if(el('psExtra')) el('psExtra').placeholder = p.extraPh || '';
+  if(el('psMemo')) el('psMemo').placeholder = p.memoPh || '';
+  if(el('psHint')) el('psHint').innerHTML = '<b>' + esc(p.name) + '</b> 프리셋입니다. 주제를 한 줄 넣으면 아래 프롬프트가 바로 바뀝니다.';
+  var txt = psText();
+  if(el('psOut')) el('psOut').textContent = txt;
+  if(el('psTitle')) el('psTitle').textContent = p.em + ' ' + p.name;
+  if(el('psCount')) el('psCount').textContent = txt.length.toLocaleString('ko-KR') + '자';
+  if(el('psMeta')) el('psMeta').innerHTML = psState.topic.trim()
+    ? '<b>' + esc(psState.topic.trim()) + '</b> 기준 완성본입니다. 복사해서 어사이드에 붙여넣으세요.'
+    : '주제를 넣으면 <b>{상품명}</b> 자리가 채워집니다. 그대로 복사해도 규칙은 전부 들어 있습니다.';
+}
+function psQuick(id, list, fn){
+  var box = el(id); if(!box) return;
+  box.innerHTML = list.map(function(v){ return '<button class="chip" type="button" data-q="' + esc(v) + '">' + esc(v) + '</button>'; }).join('');
+  box.__fn = fn;
+  if(box.getAttribute('data-bound')) return;
+  box.setAttribute('data-bound','1');
+  box.addEventListener('click', function(e){
+    var b = e.target.closest('[data-q]'); if(!b) return;
+    if(typeof box.__fn === 'function') box.__fn(b.getAttribute('data-q'));
+  });
+}
+function psPickTopic(v){
+  psState.topic = v; if(el('psTopic')) el('psTopic').value = v;
+  psSave(); psRefresh(); if(el('psTopic')) el('psTopic').focus();
+}
+(function(){
+  if(!el('psGrid')) return;
+  psLoad();
+  el('psGrid').innerHTML = PS_ORDER.map(psCard).join('');
+  el('psGrid').addEventListener('click', function(e){
+    var b = e.target.closest('[data-ps]'); if(!b) return;
+    psState.key = b.getAttribute('data-ps');
+    psState.extra = '';
+    if(el('psExtra')) el('psExtra').value = '';
+    psQuick('psQuick', PS[psState.key].quick, psPickTopic);
+    psSave(); psRefresh();
+    toast(PS[psState.key].name + ' 프리셋을 골랐습니다 — 주제를 넣어 주세요');
+  });
+  if(el('psTopic')){
+    el('psTopic').value = psState.topic;
+    el('psTopic').addEventListener('input', function(){ psState.topic = el('psTopic').value; psSave(); psRefresh(); });
+  }
+  if(el('psExtra')){
+    el('psExtra').value = psState.extra;
+    el('psExtra').addEventListener('input', function(){ psState.extra = el('psExtra').value; psSave(); psRefresh(); });
+  }
+  if(el('psMemo')){
+    el('psMemo').value = psState.memo;
+    el('psMemo').addEventListener('input', function(){ psState.memo = el('psMemo').value; psSave(); psRefresh(); });
+  }
+  psQuick('psQuick', PS[psState.key].quick, psPickTopic);
+  if(el('psCopy')) el('psCopy').addEventListener('click', function(){
+    copyText(psText()).then(function(ok){
+      toast(ok ? '프롬프트를 복사했습니다 — 어사이드에 붙여넣으세요' : '자동 복사가 막혔습니다 — 미리보기를 길게 눌러 복사하세요');
+    });
+  });
+  if(el('psTxt')) el('psTxt').addEventListener('click', function(){
+    var nm = '그린룸_프리셋_' + psState.key + '_' + todaySeoul() + '.txt';
+    if(saveFile(nm, psText(), 'text/plain;charset=utf-8')) toast('.txt로 저장했습니다');
+    else toast('저장이 막혔습니다 — 복사 버튼을 쓰세요');
+  });
+  psRefresh();
+})();
+
+/* ───────── ② 3채널 문구 · 해시태그 생성기 ───────── */
+var LS_C3 = 'greenroom_copy3_v1';
+var c3State = { topic:'', channel:'item24', cta:'', kw:'', link:'' };
+var c3Last = null;
+
+var C3_QUICK = ['무선 보풀제거기','전기 물주머니','겨울 단열시트','주방 수납 바구니','가습기 세정제','보일러 외출모드'];
+
+function c3Save(){
+  try{ localStorage.setItem(LS_C3, JSON.stringify(c3State)); }catch(e){}
+}
+function c3Load(){
+  try{
+    var raw = localStorage.getItem(LS_C3);
+    if(!raw) return;
+    var o = JSON.parse(raw);
+    if(!o || typeof o !== 'object') return;
+    c3State.topic = String(o.topic || '');
+    c3State.channel = (o.channel === 'pungyo') ? 'pungyo' : 'item24';
+    c3State.cta = String(o.cta || '');
+    c3State.kw = String(o.kw || '');
+    c3State.link = String(o.link || '');
+  }catch(e){}
+}
+function c3GuessCta(topic){
+  var t = String(topic || '').replace(/\[[^\]]*\]|\([^)]*\)/g, ' ').trim();
+  var junk = /^(무선|미니|휴대용|초소형|대형|가성비|국산|프리미엄|접이식|대용량|1\+1|2개입|세트)$/;
+  var parts = t.split(/\s+/).filter(function(w){ return w && !junk.test(w); });
+  var w = parts.length ? parts[parts.length - 1] : t;
+  w = w.replace(/[^가-힣a-zA-Z0-9]/g, '');
+  return w.slice(0, 10) || '링크';
+}
+function c3KeywordList(){
+  var base = [];
+  String(c3State.kw || '').split(/[,\n]/).forEach(function(s){
+    s = s.trim(); if(s) base.push(s);
+  });
+  return base;
+}
+function c3Tokens(){
+  var t = String(c3State.topic || '');
+  var out = [];
+  t.replace(/[\[\]()]/g, ' ').split(/\s+/).forEach(function(w){
+    w = w.replace(/[^가-힣a-zA-Z0-9]/g, '');
+    if(w.length >= 2) out.push(w);
+  });
+  c3KeywordList().forEach(function(w){
+    w = w.replace(/[^가-힣a-zA-Z0-9]/g, '');
+    if(w.length >= 2) out.push(w);
+  });
+  return out.filter(function(w, i, a){ return a.indexOf(w) === i; });
+}
+function c3TagSet(extra, want){
+  var shop = ['아이템24','살림템','생활꿀팁','쿠팡추천','겨울준비','주부일상','집안일꿀팁','가성비템','리빙템','살림노하우'];
+  var info = ['풍요영상','생활정보','절약꿀팁','전기요금','난방비','살림노하우','정보쇼츠','생활상식','겨울준비','관리비','알뜰살림','절약방법'];
+  var clipBase = ['네이버클립','클립','살림템','생활꿀팁','겨울준비','쿠팡파트너스','리빙','주부일상','살림노하우','집안일','가성비템','홈템','일상꿀팁','주부스타그램','살림스타그램','쿠팡추천','정보공유'];
+  var base = (extra === 'info') ? info : (extra === 'clip' ? clipBase : shop);
+  var toks = c3Tokens();
+  var all = base.concat(toks);
+  var seen = {}, out = [];
+  all.forEach(function(w){
+    if(!w || seen[w]) return;
+    seen[w] = 1; out.push('#' + w);
+  });
+  return out.slice(0, want || 15);
+}
+
+function c3Build(){
+  var rawTopic = String(c3State.topic || '').trim();
+  var T = rawTopic || '{상품명}';
+  var cta = String(c3State.cta || '').trim() || c3GuessCta(rawTopic);
+  var kws = c3KeywordList();
+  var isInfo = String(c3State.channel) === 'pungyo';
+  var link = String(c3State.link || '').trim();
+  var goji = '쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.';
+  var numNote = '○○ 자리는 확인된 숫자로 바꾸고, 근거가 없으면 그 문장을 지우세요.';
+
+  var ytTitle, ytHook1, ytHook2, ytDesc, ytPinned;
+  if(isInfo){
+    ytTitle = [
+      '1) ' + T + ' 잘못하면 ○○원 더 나갑니다',
+      '2) ' + T + ' 이거 안 하면 ○○원 손해',
+      '3) ' + T + ' 하나로 ○○원 덜 내는 법'
+    ].join('\n');
+    ytHook1 = '○○원 더 나가는 이유';
+    ytHook2 = T;
+    ytDesc = [
+      T + ', 대부분 이렇게 두고 손해를 봅니다.',
+      '확인해야 할 건 딱 한 가지입니다 — 어디를 어떻게 두느냐.',
+      '',
+      '0~1.5초에 손해부터 보여 주고, 15초 안에 핵심만 정리했습니다.',
+      '수치는 공공기관·제조사 공식 안내 기준이고, 확인되지 않은 값은 비워 두었습니다.',
+      '',
+      '자세한 계산 예시와 나머지 항목은 본 영상에서 확인하세요.',
+      '저장해 두고 꺼내 보세요 · 가족에게 공유하세요',
+      '',
+      c3TagSet('info', 12).join(' ')
+    ].join('\n');
+    ytPinned = [
+      '나머지 {N}가지는 본 영상에서 확인하세요.',
+      '저장해 두고 꺼내 보세요 · 가족에게 공유하세요.',
+      '(이 채널에는 상품 링크·광고 표기를 넣지 않습니다.)'
+    ].join('\n');
+  } else {
+    ytTitle = [
+      '1) ' + T + ' 이거 하나로 ○○원 덜 냅니다',
+      '2) ' + T + ' 교체 전에 이 3가지만 보세요',
+      '3) ' + T + ' 안 쓰면 겨울에 ○○원 더'
+    ].join('\n');
+    ytHook1 = '이거 안 쓰면 ○○원 더';
+    ytHook2 = T;
+    ytDesc = [
+      T + ' 하나로 겨울 살림이 확 편해집니다.',
+      '어디에 쓰는지, 살 때 뭘 봐야 하는지 15초로 정리했습니다.',
+      '',
+      '· 0~1.5초: 왜 손해인지',
+      '· 중간: 바꾸기 전 / 후',
+      '· 마지막: 링크는 고정댓글 확인!',
+      '',
+      '링크는 고정댓글에 있습니다.',
+      link ? link : '(상품 상세 링크를 여기에 — 검색 결과 링크 /np/search 는 쓰지 않습니다)',
+      '',
+      goji,
+      '',
+      c3TagSet('shop', 12).join(' ')
+    ].join('\n');
+    ytPinned = [
+      T + ' 링크 → ' + (link || '{상품 상세 링크}'),
+      goji
+    ].join('\n');
+  }
+
+  var igCaption = [
+    (isInfo ? '이거 모르고 그냥 두면 ○○원 더 나갑니다.' : T + ' 하나로 겨울 살림이 확 편해져요.'),
+    '',
+    '1) 어디에 쓰는지',
+    '2) 살 때 확인할 것',
+    '3) 안 쓰면 손해인 이유',
+    '',
+    '👉 댓글에 \'' + cta + '\' 남겨주세요!',
+    '링크는 DM으로 바로 보내드려요.',
+    '',
+    isInfo ? '' : goji,
+    '',
+    c3TagSet(isInfo ? 'info' : 'shop', 13).join(' ')
+  ].filter(function(s, i, a){ return !(s === '' && a[i - 1] === ''); }).join('\n');
+
+  var igFirst = isInfo
+    ? [
+        '\'' + cta + '\' 댓글 남겨주시면 정리한 자료 링크를 DM으로 보내드려요 🔗',
+        '(이 계정은 정보성 콘텐츠입니다. 링크는 본 영상 설명란에 있습니다.)'
+      ].join('\n')
+    : [
+        '\'' + cta + '\' 남겨주시면 링크 바로 보내드려요 🔗',
+        '(' + goji + ')'
+      ].join('\n');
+
+  var clipTitle = isInfo
+    ? T + ' 잘못하면 관리비 ○○원 더'
+    : T + ' 안 쓰면 ○○원 더 나가요';
+  var clipDesc = [
+    (isInfo ? T + ' — 손해 보는 이유 한 가지, 15초로 정리했습니다.' : T + ', 15초로 핵심만 정리했습니다.'),
+    '어디에 쓰고 무엇을 확인해야 하는지 짧게 봅니다.',
+    isInfo ? '수치는 공식 안내 기준만 썼습니다.' : '링크는 고정댓글에 있어요.'
+  ].join('\n');
+  var clipTags = c3TagSet('clip', 15).join(' ');
+
+  return {
+    isInfo: isInfo, topic: T, cta: cta, kws: kws, link: link, goji: goji, numNote: numNote,
+    yt: { title: ytTitle, hook: '1줄: ' + ytHook1 + '\n2줄: ' + ytHook2, desc: ytDesc, pinned: ytPinned },
+    ig: { caption: igCaption, first: igFirst },
+    clip: { title: clipTitle, desc: clipDesc, tags: clipTags }
+  };
+}
+
+function c3Field(label, key, text, hl){
+  return '<div>' +
+    '<p class="lbl"><span>' + esc(label) + '</span>' +
+      '<button class="mini-copy" type="button" data-c3copy="' + key + '">복사</button></p>' +
+    '<pre class="val' + (hl ? ' hl' : '') + '">' + esc(text) + '</pre>' +
+  '</div>';
+}
+function c3Render(){
+  var box = el('c3Out'); if(!box) return;
+  var topic = String(c3State.topic || '').trim();
+  if(!topic){
+    c3Last = null;
+    box.innerHTML = '<p class="empty">①에 주제·상품명을 넣고 <b>3채널 문구 만들기</b>를 누르세요.</p>';
+    if(el('c3Empty')) el('c3Empty').setAttribute('hidden','');
+    return;
+  }
+  var g = c3Build();
+  c3Last = {
+    ytTitle: g.yt.title, ytHook: g.yt.hook, ytDesc: g.yt.desc, ytPinned: g.yt.pinned,
+    igCaption: g.ig.caption, igFirst: g.ig.first,
+    clipTitle: g.clip.title, clipDesc: g.clip.desc, clipTags: g.clip.tags
+  };
+  var ytName = g.isInfo ? '유튜브 · 풍요영상 (@fs-tv23)' : '유튜브 · 아이템24 (@AIhi24)';
+  box.innerHTML =
+    '<section class="gen">' +
+      '<header><span class="tt">' + esc(ytName) + '</span><span class="plat">' + (g.isInfo ? '정보 · 링크 없음' : '쇼핑 · 쿠팡') + '</span>' +
+        '<button class="btn ghost sm" type="button" data-c3block="yt">이 세트 복사</button></header>' +
+      '<div class="bd">' +
+        c3Field('제목 후보 (하나 고르세요)', 'ytTitle', g.yt.title) +
+        c3Field('첫 1.5초 훅 (화면 2줄)', 'ytHook', g.yt.hook) +
+        c3Field('설명란', 'ytDesc', g.yt.desc) +
+        c3Field('고정댓글', 'ytPinned', g.yt.pinned, true) +
+        '<p class="warnline">' + esc(g.numNote) + (g.isInfo ? ' 숫자·출처는 공공기관·제조사 안내에서 확인한 값만 씁니다.' : '') + '</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="gen">' +
+      '<header><span class="tt">인스타그램 · @mortalk23</span><span class="plat">매니챗 댓글 DM</span>' +
+        '<button class="btn ghost sm" type="button" data-c3block="ig">이 세트 복사</button></header>' +
+      '<div class="bd">' +
+        c3Field('캡션 (댓글 키워드 유도)', 'igCaption', g.ig.caption) +
+        c3Field('첫 댓글 고정 문구', 'igFirst', g.ig.first, true) +
+        (g.isInfo ? '' : '<p class="warnline">대가성 고지는 본문과 첫 댓글에 넣었습니다. 지우지 마세요.</p>') +
+        '<p class="warnline">댓글 키워드는 <b>' + esc(g.cta) + '</b> 하나로 고정하세요 — 매니챗 자동 DM이 이 단어로 걸립니다.</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="gen">' +
+      '<header><span class="tt">네이버 클립 · @skyblu18</span><span class="plat">제목 15~25자</span>' +
+        '<button class="btn ghost sm" type="button" data-c3block="clip">이 세트 복사</button></header>' +
+      '<div class="bd">' +
+        c3Field('클립 제목', 'clipTitle', g.clip.title) +
+        c3Field('짧은 설명', 'clipDesc', g.clip.desc) +
+        c3Field('해시태그 15개', 'clipTags', g.clip.tags) +
+        '<div class="c3-tags">' + g.clip.tags.split(' ').filter(Boolean).map(function(t){ return '<span class="c3-tag">' + esc(t) + '</span>'; }).join('') + '</div>' +
+        '<p class="warnline">유튜브 제목·설명을 그대로 복사하지 마세요. 클립은 위 세트만 씁니다(2-7).</p>' +
+      '</div>' +
+    '</section>';
+  if(el('c3Empty')) el('c3Empty').setAttribute('hidden','');
+}
+function c3AllText(){
+  if(!c3Last) return '';
+  var g = c3Build();
+  return [
+    '■ 유튜브 (' + (g.isInfo ? '풍요영상 @fs-tv23' : '아이템24 @AIhi24') + ')',
+    '[제목]', c3Last.ytTitle,
+    '[첫 1.5초 훅]', c3Last.ytHook,
+    '[설명]', c3Last.ytDesc,
+    '[고정댓글]', c3Last.ytPinned,
+    '',
+    '■ 인스타그램 (@mortalk23)',
+    '[캡션]', c3Last.igCaption,
+    '[첫 댓글]', c3Last.igFirst,
+    '',
+    '■ 네이버 클립 (@skyblu18)',
+    '[제목]', c3Last.clipTitle,
+    '[설명]', c3Last.clipDesc,
+    '[해시태그]', c3Last.clipTags
+  ].join('\n');
+}
+function c3BlockText(k){
+  if(!c3Last) return '';
+  if(k === 'yt') return [c3Last.ytTitle, '', c3Last.ytHook, '', c3Last.ytDesc, '', c3Last.ytPinned].join('\n');
+  if(k === 'ig') return [c3Last.igCaption, '', '[첫 댓글]', c3Last.igFirst].join('\n');
+  if(k === 'clip') return [c3Last.clipTitle, '', c3Last.clipDesc, '', c3Last.clipTags].join('\n');
+  return '';
+}
+(function(){
+  if(!el('c3Out')) return;
+  c3Load();
+  if(el('c3Topic')) el('c3Topic').value = c3State.topic;
+  if(el('c3Channel')) el('c3Channel').value = c3State.channel;
+  if(el('c3Cta')) el('c3Cta').value = c3State.cta;
+  if(el('c3Kw')) el('c3Kw').value = c3State.kw;
+  if(el('c3Link')) el('c3Link').value = c3State.link;
+
+  var bindF = function(id, key){
+    var n = el(id); if(!n) return;
+    n.addEventListener('input', function(){ c3State[key] = n.value; c3Save(); if(c3Last) c3Render(); });
+  };
+  bindF('c3Topic','topic'); bindF('c3Cta','cta'); bindF('c3Kw','kw'); bindF('c3Link','link');
+  if(el('c3Channel')) el('c3Channel').addEventListener('change', function(){
+    c3State.channel = el('c3Channel').value; c3Save(); if(c3Last) c3Render();
+  });
+  psQuick('c3Quick', C3_QUICK, function(v){
+    c3State.topic = v; if(el('c3Topic')) el('c3Topic').value = v;
+    c3Save(); c3Render(); if(el('c3Topic')) el('c3Topic').focus();
+  });
+  if(el('c3Go')) el('c3Go').addEventListener('click', function(){
+    if(!String(c3State.topic || '').trim()){
+      if(el('c3Topic')){ el('c3Topic').classList.add('err'); el('c3Topic').focus(); }
+      toast('주제·상품명을 먼저 넣어 주세요'); return;
+    }
+    if(el('c3Topic')) el('c3Topic').classList.remove('err');
+    c3Render();
+    if(el('c3Out')) el('c3Out').scrollIntoView({ behavior:'smooth', block:'start' });
+    toast('3채널 문구를 만들었습니다 — 칸마다 복사하세요');
+  });
+  el('c3Out').addEventListener('click', function(e){
+    var b = e.target.closest('[data-c3copy]');
+    if(b && c3Last){
+      var k = b.getAttribute('data-c3copy');
+      copyText(c3Last[k] || '').then(function(ok){ toast(ok ? '복사했습니다' : '복사가 막혔습니다 — 길게 눌러 복사하세요'); });
+      return;
+    }
+    var w = e.target.closest('[data-c3block]');
+    if(w && c3Last){
+      copyText(c3BlockText(w.getAttribute('data-c3block'))).then(function(ok){ toast(ok ? '세트를 복사했습니다' : '복사가 막혔습니다'); });
+    }
+  });
+  if(el('c3All')) el('c3All').addEventListener('click', function(){
+    if(!c3Last){ toast('먼저 3채널 문구를 만들어 주세요'); return; }
+    copyText(c3AllText()).then(function(ok){ toast(ok ? '3채널 전체를 복사했습니다' : '복사가 막혔습니다'); });
+  });
+  if(el('c3Prompt')) el('c3Prompt').addEventListener('click', function(){
+    if(!c3Last){ toast('먼저 3채널 문구를 만들어 주세요'); return; }
+    var g = c3Build();
+    var p = [
+      '아래 3채널 문구 초안을 CLAUDE.md 8차 규칙에 맞게 다듬어 주세요.',
+      '',
+      '■ 지킬 것',
+      '- 유튜브 제목: 숫자 + 손실 회피 (근거 없는 숫자는 ○○로 두거나 지우기)',
+      '- ' + (g.isInfo ? '풍요영상: 설명형 제목 금지, 링크·광고 표기·띠·운세 금지, 고정댓글은 "나머지 {N}가지는 본 영상에서 확인하세요 / 저장해 두고 꺼내 보세요 · 가족에게 공유하세요"' : '아이템24: 마지막 카드 "링크는 고정댓글 확인!", 대가성 문구는 그대로'),
+      '- 인스타: 댓글 키워드 "' + g.cta + '" 고정, 첫 댓글에 링크 DM 안내',
+      '- 네이버 클립: 제목 15~25자, 설명 2~3문장, 해시태그 10~20개 — 유튜브 문구 복사 금지',
+      '- "절대"라는 표현 0건. 확인 안 된 수치·후기 표현 금지',
+      '',
+      '■ 초안 (주제: ' + g.topic + ')',
+      c3AllText(),
+      '',
+      '■ 출력',
+      '- 3채널 세트를 각각 1안·2안으로 다시 써 주세요.',
+      '- 바꾼 이유를 한 줄씩 붙여 주세요.'
+    ].join('\n');
+    copyText(p).then(function(ok){ toast(ok ? 'AI 다듬기 프롬프트를 복사했습니다' : '복사가 막혔습니다'); });
+  });
+  c3Render();
+})();
+
+/* ───────── ③ 인기 영상 분석 · 훅 분석기 ───────── */
+var LS_HK = 'greenroom_hook_v1';
+var anItems = [];
+var hkLast = '';
+var hkLastPrompt = '';
+var anQuickList = ['겨울 난방비','보풀제거기','생활꿀팁','전기요금 절약','주방 정리','겨울 살림'];
+
+var HOOK_CLASSES = [
+  { k:'loss',    name:'손실회피',    cls:'h1', re:/(안 ?쓰|안 ?하|못 ?하|틀리|잘못|실수|손해|아깝|날리|버리|후회|모르면|놓치|낭비)/ },
+  { k:'warn',    name:'경고·금지',   cls:'h3', re:/(하면 안|하지 마|위험|주의|금지|조심)/ },
+  { k:'compare', name:'비교·대조',   cls:'h2', re:/(보다|vs|VS|차이|대신|비교)/ },
+  { k:'question',name:'질문형',      cls:'h2', re:/(\?|나요|까\b|을까|뭘까|왜 )/ },
+  { k:'list',    name:'리스트형',    cls:'h4', re:/([0-9]+ ?(가지|개|선|단계)|체크리스트|모음)/ },
+  { k:'emotion', name:'감성·공감',   cls:'h5', re:/(퇴근|새벽|혼자|마음|위로|그리운|포근|설레)/ },
+  { k:'num',     name:'숫자형',      cls:'h4', re:/([0-9]|[한두세네다섯여섯일곱여덟아홉열] ?(가지|개|배|원|분|초|위)|만원|만 원|퍼센트|%)/ },
+  { k:'info',    name:'설명·정보형', cls:'h5', re:/(방법|하는 법|꿀팁|정리|가이드|사용법|이유)/ }
+];
+function hookClass(title){
+  var t = String(title || '');
+  for(var i = 0; i < HOOK_CLASSES.length; i++){
+    if(HOOK_CLASSES[i].re.test(t)) return HOOK_CLASSES[i];
+  }
+  return { k:'etc', name:'기타', cls:'h5', re:/$^/ };
+}
+function pctText(n){
+  if(!isFinite(n) || n <= 0) return '—';
+  return (n < 0.01 ? n.toFixed(3) : n.toFixed(2)) + '%';
+}
+function anKeyStatus(){
+  var s = el('anKeyStatus');
+  if(!s) return;
+  var k = ytKey();
+  if(k) s.innerHTML = '✅ 저장된 키를 씁니다 — 끝 4자리 <b>' + esc(k.slice(-4)) + '</b> (탭 2와 같은 키)';
+  else s.innerHTML = '아직 키가 없습니다. 아래 <b>키 입력</b>을 열어 저장하거나, 탭 2 <b>유튜브 소재 검색</b>에서 저장하세요. <b>키 없이도 ③ 훅 분석기</b>는 바로 쓸 수 있습니다.';
+}
+function anBusy(on){
+  var b = el('anGo');
+  if(b){ b.disabled = !!on; b.textContent = on ? '분석 중…' : '📊 인기 영상 분석'; }
+  var w = el('anBusy');
+  if(w){ if(on) w.removeAttribute('hidden'); else w.setAttribute('hidden',''); }
+}
+function anNoteEl(msg){ var n = el('anNote'); if(n) n.textContent = msg || ''; }
+
+async function anRun(){
+  var key = ytKey();
+  if(!key){
+    if(el('anKeyBox')) el('anKeyBox').open = true;
+    if(el('anKeyInput')) el('anKeyInput').classList.add('err');
+    toast('먼저 내 YouTube API 키를 저장하세요');
+    return;
+  }
+  var q = (el('anQ').value || '').trim();
+  if(!q){ el('anQ').classList.add('err'); el('anQ').focus(); toast('키워드를 넣어 주세요'); return; }
+  el('anQ').classList.remove('err');
+
+  var form = el('anForm').value;
+  var days = Number(el('anPeriod').value);
+  var sort = el('anSort').value;
+  var since = new Date(Date.now() - days * 86400000).toISOString();
+
+  var p1 = {
+    part:'snippet', q:q, type:'video', maxResults:'50',
+    regionCode:'KR', relevanceLanguage:'ko',
+    publishedAfter:since, order:'viewCount'
+  };
+  if(form === 'shorts') p1.videoDuration = 'short';
+  if(form === 'long') p1.videoDuration = 'long';
+
+  anBusy(true);
+  el('anList').innerHTML = '';
+  ['anSum','anDist'].forEach(function(id){ if(el(id)) el(id).setAttribute('hidden',''); });
+  if(el('anEmpty')) el('anEmpty').setAttribute('hidden','');
+  anNoteEl('');
+  try{
+    var sRes = await ytGet('search', p1, key);
+    var ids = (sRes.items || []).map(function(it){ return it.id && it.id.videoId; }).filter(Boolean);
+    if(!ids.length){
+      if(el('anEmpty')) el('anEmpty').removeAttribute('hidden');
+      anNoteEl('조건에 맞는 영상이 없습니다 — 기간을 늘리거나 키워드를 짧게 바꿔 보세요.');
+      return;
+    }
+    var vRes = await ytGet('videos', { part:'snippet,statistics,contentDetails', id: ids.slice(0,50).join(',') }, key);
+    var list = (vRes.items || []).map(function(it){
+      var st = it.statistics || {}, sn = it.snippet || {}, cd = it.contentDetails || {};
+      var views = Number(st.viewCount || 0);
+      var likes = Number(st.likeCount || 0);
+      var comments = Number(st.commentCount || 0);
+      var dur = parseISO(cd.duration);
+      var dt = Date.parse(sn.publishedAt || '') || 0;
+      var ageDays = dt ? Math.max(1, Math.round((Date.now() - dt) / 86400000)) : 1;
+      var th = (sn.thumbnails && (sn.thumbnails.medium || sn.thumbnails.high || sn.thumbnails.default)) || null;
+      var hc = hookClass(sn.title || '');
+      return {
+        id: it.id, title: sn.title || '(제목 없음)', chName: sn.channelTitle || '',
+        published: sn.publishedAt || '', thumb: th ? th.url : ('https://i.ytimg.com/vi/' + it.id + '/mqdefault.jpg'),
+        dur: dur, views: views, likes: likes, comments: comments,
+        eng: views > 0 ? ((likes + comments) / views) * 100 : 0,
+        vpd: views / ageDays, hook: hc.name, hookCls: hc.cls
+      };
+    });
+    if(!list.length){
+      if(el('anEmpty')) el('anEmpty').removeAttribute('hidden');
+      anNoteEl('영상 정보를 받지 못했습니다. 잠시 뒤 다시 시도하세요.');
+      return;
+    }
+    if(sort === 'eng') list.sort(function(a,b){ return b.eng - a.eng; });
+    else if(sort === 'vpd') list.sort(function(a,b){ return b.vpd - a.vpd; });
+    else list.sort(function(a,b){ return b.views - a.views; });
+
+    anItems = list;
+    anRender(list, q);
+    anNoteEl('호출 2회 · 약 101 units 사용 (하루 10,000). 같은 검색은 잠시 뒤 다시 하면 결과가 조금 달라집니다.');
+  }catch(err){
+    if(el('anEmpty')) el('anEmpty').removeAttribute('hidden');
+    anNoteEl(ytErrText(err));
+  }finally{
+    anBusy(false);
+  }
+}
+
+function anRender(list, q){
+  var n = list.length;
+  var sumViews = 0, sumEng = 0, bestEng = 0;
+  var byHook = {};
+  list.forEach(function(v){
+    sumViews += v.views;
+    sumEng += v.eng;
+    if(v.eng > bestEng) bestEng = v.eng;
+    var b = byHook[v.hook] || (byHook[v.hook] = { name:v.hook, cls:v.hookCls, n:0, views:0, eng:0 });
+    b.n++; b.views += v.views; b.eng += v.eng;
+  });
+  var sum = el('anSum');
+  if(sum){
+    sum.innerHTML =
+      '<div class="an-k"><div class="k">분석한 영상</div><div class="v">' + n + '<small>편</small></div></div>' +
+      '<div class="an-k"><div class="k">평균 조회수</div><div class="v">' + fmtNum(Math.round(sumViews / n)) + '</div></div>' +
+      '<div class="an-k"><div class="k">평균 참여율</div><div class="v">' + pctText(sumEng / n) + '</div></div>' +
+      '<div class="an-k"><div class="k">최고 참여율</div><div class="v">' + pctText(bestEng) + '</div></div>';
+    sum.removeAttribute('hidden');
+  }
+  var groups = Object.keys(byHook).map(function(k){ return byHook[k]; })
+    .sort(function(a,b){ return b.n - a.n || (b.views / b.n) - (a.views / a.n); });
+  var maxN = groups.length ? groups[0].n : 1;
+  var dist = el('anDist');
+  if(dist){
+    dist.innerHTML = '<h3>훅 유형 분포 — 이 키워드에서 많이 쓰는 제목</h3>' +
+      groups.map(function(g){
+        var w = Math.max(6, Math.round((g.n / maxN) * 100));
+        return '<div class="an-bar"><span class="nm"><span class="hooktag ' + g.cls + '">' + esc(g.name) + '</span></span>' +
+          '<span class="tr"><span style="width:' + w + '%"></span></span>' +
+          '<span class="vl">' + g.n + '편 · 평균 ' + fmtNum(Math.round(g.views / g.n)) + ' · ' + pctText(g.eng / g.n) + '</span></div>';
+      }).join('') +
+      '<p class="note" style="margin:9px 0 0">편수와 평균 조회수를 같이 봅니다. 편수가 적어도 평균 조회수가 높은 유형이 <b>이 키워드에서 통하는 훅</b>입니다.</p>';
+    dist.removeAttribute('hidden');
+  }
+  el('anList').innerHTML = list.map(anCard).join('');
+}
+function anCard(v, i){
+  var url = 'https://www.youtube.com/watch?v=' + encodeURIComponent(v.id);
+  return '<article class="px-card">' +
+    '<a class="px-thumb" href="' + url + '" target="_blank" rel="noopener">' +
+      '<img src="' + esc(v.thumb) + '" alt="" loading="lazy">' +
+      '<span class="px-dur">' + fmtDur(v.dur) + '</span>' +
+    '</a>' +
+    '<div class="px-body">' +
+      '<a class="px-title" href="' + url + '" target="_blank" rel="noopener">' + esc(v.title) + '</a>' +
+      '<div class="px-meta"><span>' + esc(v.chName) + '</span><span class="hooktag ' + v.hookCls + '">' + esc(v.hook) + '</span></div>' +
+      '<div class="an-stats">' +
+        '<div><span class="k">조회수</span><b>' + fmtNum(v.views) + '</b></div>' +
+        '<div><span class="k">좋아요</span><b>' + fmtNum(v.likes) + '</b></div>' +
+        '<div><span class="k">댓글</span><b>' + fmtNum(v.comments) + '</b></div>' +
+        '<div><span class="k">참여율</span><b' + (v.eng >= 3 ? ' class="hot"' : '') + '>' + pctText(v.eng) + '</b></div>' +
+      '</div>' +
+      '<div class="px-meta"><span>하루 ' + fmtNum(Math.round(v.vpd)) + '</span><span>' + relDays(v.published) + ' · ' + dstr(v.published) + '</span></div>' +
+      '<div class="px-acts">' +
+        '<button class="btn primary sm" type="button" data-act="hook" data-i="' + i + '">🔎 훅 분석</button>' +
+        '<button class="btn ghost sm" type="button" data-act="save" data-i="' + i + '" aria-label="참고 링크함에 저장">🔗</button>' +
+        '<a class="btn ghost sm" href="' + url + '" target="_blank" rel="noopener">▶ 열기</a>' +
+      '</div>' +
+    '</div>' +
+  '</article>';
+}
+
+/* ── 훅 분석기 (API 키 없이) ── */
+var HK_STOP = { '영상':'', '진짜':'', '완전':'', '제일':'', '정말':'', '이거':'', '그거':'', '저거':'', '우리':'', '지금':'', '오늘':'', '이번':'', '이런':'', '저런':'', '그런':'', '하는':'', '되는':'', '있어요':'', '합니다':'', '입니다':'', '하세요':'', '보세요':'', '주세요':'' };
+function guessTopic(text){
+  var clean = String(text || '').replace(/[#@]/g, ' ').replace(/https?:\/\/\S+/g, ' ');
+  var words = clean.split(/[\s,.\n·!?"'“”‘’~(){}\[\]<>|/\\:;·…-]+/).filter(Boolean);
+  var best = '', bestScore = 0;
+  words.forEach(function(w, idx){
+    var x = w.replace(/[0-9]/g, '').replace(/[^가-힣a-zA-Z]/g, '');
+    x = x.replace(/(에서|으로|부터|까지|처럼|보다|라고|하면|누르면|했더니|인데요|입니다|합니다|해요|이고|이며|에는|에도|만큼|조차|마저|이랑|랑|과|와|은|는|이|가|을|를|의|에|도|만|로)$/, '');
+    if(x.length < 2) return;
+    if(HK_STOP[x]) return;
+    var score = x.length * 2 + (String(text).split(x).length - 1) + (idx < 4 ? 1 : 0);
+    if(score > bestScore){ bestScore = score; best = x; }
+  });
+  return best.slice(0, 20);
+}
+function hkBuild(){
+  var text = (el('hkText') ? el('hkText').value : '').trim();
+  var topicIn = (el('hkTopic') ? el('hkTopic').value : '').trim();
+  var ch = el('hkChannel') ? el('hkChannel').value : 'item24';
+  var T = topicIn || guessTopic(text) || '이 주제';
+  var firstLine = (text.split(/\n/)[0] || '').trim();
+  var title = (text.indexOf('\n') > 0 || text.length > 90) ? firstLine : text;
+  var probe = title || text;
+
+  var hasNum = /[0-9]|[한두세네다섯여섯일곱여덟아홉열] ?(가지|개|배|원|분|초|위)|만원|만 원|퍼센트|%/.test(probe);
+  var hasLoss = /(안 ?쓰|안 ?하|못 ?하|틀리|잘못|실수|손해|아깝|날리|버리|후회|모르면|놓치|낭비)/.test(probe);
+  var hasQ = /\?/.test(probe);
+  var hasCmp = /(보다|vs|VS|차이|대신|비교)/.test(probe);
+  var hasWarn = /(하면 안|하지 마|위험|주의|금지)/.test(probe);
+  var isHowto = /(방법|하는 법|꿀팁|정리|가이드|사용법)/.test(probe);
+  var hasEmo = /(퇴근|새벽|혼자|마음|위로|그리운|포근|설레)/.test(probe);
+  var hasBanned = /절대/.test(text);
+  var len = probe.length;
+  var numEarly = /^.{0,15}?[0-9]/.test(probe) || /^.{0,15}?(한|두|세|네|다섯) ?(가지|개|원)/.test(probe);
+
+  var formulas = [];
+  if(hasLoss) formulas.push({ n:'손실 회피', d:'안 하면/잘못하면 무엇을 잃는지 먼저 말합니다.' });
+  if(hasNum) formulas.push({ n:'숫자', d:'금액·개수·배수가 들어가 손해가 눈에 보입니다.' });
+  if(hasQ) formulas.push({ n:'질문형', d:'궁금증을 남겨 다음 문장을 보게 만듭니다.' });
+  if(hasCmp) formulas.push({ n:'비교·대조', d:'A보다 B가 낫다 형태로 판단을 쉽게 만듭니다.' });
+  if(hasWarn) formulas.push({ n:'경고·금지', d:'하면 안 되는 행동을 짚어 멈추게 합니다.' });
+  if(isHowto) formulas.push({ n:'설명·정보', d:'무엇인지 설명하는 제목입니다(정보형은 이 패턴이 약합니다).' });
+  if(hasEmo) formulas.push({ n:'감성·공감', d:'상황·감정을 건드립니다(음악·감성 채널에 맞음).' });
+
+  var good = [], fix = [];
+  if(hasNum) good.push('숫자가 있어 손해·이득이 한눈에 보입니다.');
+  else fix.push('숫자가 없습니다 — "○○원 더", "3가지"처럼 손해나 개수를 넣으세요.');
+  if(hasLoss) good.push('손실 회피 표현이 있어 넘기기 전에 손해를 먼저 봅니다.');
+  else fix.push('손실 회피가 없습니다 — "안 쓰면", "잘못하면" 같은 손해 표현을 앞에 두세요.');
+  if(numEarly) good.push('첫 15자 안에 숫자가 있어 모바일 미리보기에서 바로 보입니다.');
+  if(len > 45) fix.push('제목이 ' + len + '자로 깁니다 — 모바일에서 잘리니 40자 안팎으로 줄이세요.');
+  else good.push('제목 길이 ' + len + '자 — 모바일에서 잘리지 않습니다.');
+  if(isHowto) fix.push('설명형 제목(~하는 방법·~소개)입니다 — 무엇인지 설명하기 전에 손해부터 말하세요(풍요영상 쇼츠는 금지).');
+  if(hasBanned) fix.push('"절대"라는 표현이 있습니다 — 과장·금지 표현은 0건으로 맞춥니다.');
+  if(hasEmo && ch !== 'gamsung') fix.push('감성 표현은 쇼핑·정보 쇼츠에서는 힘이 약합니다 — 이 채널은 숫자·손해가 먼저입니다.');
+  if(hasQ) good.push('질문형이라 다음 문장을 보게 만드는 힘이 있습니다.');
+  if(!good.length) good.push('짧고 읽기 쉬운 문장입니다.');
+  if(!fix.length) fix.push('큰 흠은 없습니다 — 첫 1.5초 화면만 훅과 맞으면 됩니다.');
+
+  var t = { item24:[], pungyo:[], gamsung:[] };
+  t.item24 = [
+    { title: T + ' 이거 하나로 ○○원 덜 냅니다', hook:'1줄: 이거 하나로 ○○원 덜\n2줄: ' + T, why:'손실 회피 + 숫자 · 쇼핑 전환형' },
+    { title: T + ' 교체 전에 이 3가지만 보세요', hook:'1줄: 바꾸기 전에 딱 3초\n2줄: ' + T, why:'리스트 + 구매 직전 확인' },
+    { title: T + ' 안 쓰면 겨울에 ○○원 더', hook:'1줄: 안 쓰면 ○○원 더\n2줄: ' + T, why:'손실 회피를 앞세운 겨울 시즌형' }
+  ];
+  t.pungyo = [
+    { title: T + ' 잘못하면 ○○원 더 나갑니다', hook:'1줄: ○○원 더 나가는 이유\n2줄: ' + T, why:'숫자 + 손실 회피 1순위 공식(4-5-1)' },
+    { title: T + ' 이거 안 하면 ○○원 손해', hook:'1줄: 확인 안 하면 손해\n2줄: ' + T, why:'행동 + 손해 + 숫자' },
+    { title: T + ' 하나로 ○○원 덜 내는 법', hook:'1줄: 대부분 이렇게 둡니다\n2줄: ' + T, why:'오해를 짚는 도입(정보형)' }
+  ];
+  t.gamsung = [
+    { title: '퇴근길에 듣는 ' + T + ' 트로트 4곡', hook:'1줄: 퇴근길 막차에서\n2줄: ' + T + ' 4곡', why:'상황 + 곡 수(감성 채널 고정형)' },
+    { title: T + ' 듣고 있으면 마음이 풀려요', hook:'1줄: 오늘 하루 수고했어요\n2줄: ' + T, why:'감정 직격형' },
+    { title: T + ' — 새벽에 혼자 듣기 좋은 4곡', hook:'1줄: 새벽에 혼자 듣는\n2줄: ' + T + ' 4곡', why:'시간대 + 상황형' }
+  ];
+  var pick = t[ch] || t.item24;
+
+  var html =
+    '<div class="an-box"><h3>① 훅 공식 판정</h3>' +
+      (formulas.length
+        ? '<div class="c3-tags" style="margin-bottom:8px">' + formulas.map(function(f){ return '<span class="hooktag ' + (hookClass(probe).cls) + '">' + esc(f.n) + '</span>'; }).join('') + '</div>' +
+          '<ul>' + formulas.map(function(f){ return '<li><b>' + esc(f.n) + '</b> — ' + esc(f.d) + '</li>'; }).join('') + '</ul>'
+        : '<p class="note" style="margin:0">뚜렷한 훅 공식이 안 보입니다. 숫자·손실 회피부터 넣어 보세요.</p>') +
+      '<p class="note" style="margin:8px 0 0">제목 길이 ' + len + '자 · 숫자 ' + (hasNum ? '있음' : '없음') + ' · 손실 회피 ' + (hasLoss ? '있음' : '없음') + '</p>' +
+    '</div>' +
+    '<div class="an-box"><h3>② 강점</h3><ul>' + good.slice(0,4).map(function(s){ return '<li>' + esc(s) + '</li>'; }).join('') + '</ul></div>' +
+    '<div class="an-box"><h3>③ 아쉬운 점 · 고칠 곳</h3><ul>' + fix.slice(0,4).map(function(s){ return '<li>' + esc(s) + '</li>'; }).join('') + '</ul></div>' +
+    '<div class="an-box" style="border-color:#a7f3d0;background:#f7fefb"><h3>④ 우리 채널 리메이크 (' +
+      (ch === 'pungyo' ? '풍요영상' : (ch === 'gamsung' ? '감성노을' : '아이템24')) + ')</h3>' +
+      '<p class="note" style="margin:0 0 8px">○○는 확인된 숫자로 바꾸고, 근거가 없으면 문장을 지우세요. 아래 3안 중 하나를 골라 쓰면 됩니다.</p>' +
+      pick.map(function(r, i){
+        return '<div class="an-rm"><div class="t">' + (i + 1) + '안. <em>' + esc(r.title) + '</em></div>' +
+          '<div class="h">' + esc(r.hook) + '</div>' +
+          '<div class="why">' + esc(r.why) + '</div></div>';
+      }).join('') +
+    '</div>';
+
+  return { html: html, topic: T, title: title, ch: ch, pick: pick, formulas: formulas, good: good, fix: fix, hasNum: hasNum, hasLoss: hasLoss, len: len };
+}
+function hkAnalyze(force){
+  var text = (el('hkText') ? el('hkText').value : '').trim();
+  if(!text){
+    if(el('hkText')){ el('hkText').classList.add('err'); el('hkText').focus(); }
+    toast('참고 제목이나 대본을 먼저 붙여넣어 주세요');
+    return;
+  }
+  if(el('hkText')) el('hkText').classList.remove('err');
+  var r = hkBuild();
+  el('hkOut').innerHTML = r.html;
+  el('hkActs').removeAttribute('hidden');
+  var chName = r.ch === 'pungyo' ? '풍요영상' : (r.ch === 'gamsung' ? '감성노을' : '아이템24');
+  hkLast = [
+    '■ 리메이크 세트 — ' + r.topic + ' / ' + chName,
+    '',
+    '원본 제목: ' + r.title,
+    '',
+    r.pick.map(function(x, i){
+      return (i + 1) + '안) ' + x.title + '\n   ' + x.hook.replace(/\n/g, ' / ') + '\n   (' + x.why + ')';
+    }).join('\n\n'),
+    '',
+    '■ 훅 진단',
+    '훅 공식: ' + (r.formulas.length ? r.formulas.map(function(f){ return f.n; }).join(' · ') : '없음'),
+    '강점: ' + r.good.join(' / '),
+    '고칠 점: ' + r.fix.join(' / ')
+  ].join('\n');
+
+  hkLastPrompt = [
+    '# 그린룸 벤치마킹 — 훅 재해석',
+    '',
+    '아래 참고 영상의 제목·문장에서 훅 구조만 뽑아, 우리 채널(' + chName + ') 기준으로 새 대본과 쇼츠로 재해석해 주세요.',
+    'CLAUDE.md 8차 규칙을 지킵니다: 0~1.5초 밝고 움직이는 첫 클립 + 숫자·손실 회피 훅, 소스는 CC0(Pexels·Pixabay)만, 남의 문장은 그대로 쓰지 않고 구조만 참고.',
+    '',
+    '■ 참고 (그대로 쓰지 않음)',
+    el('hkText').value,
+    '',
+    '■ 주제: ' + r.topic,
+    '■ 훅 진단: ' + (r.formulas.length ? r.formulas.map(function(f){ return f.n; }).join(', ') : '특이 패턴 없음'),
+    '',
+    '■ 내가 고른 리메이크 안',
+    hkLast,
+    '',
+    '■ 출력',
+    '1) 15초 대본 4문장(화면 자막용 + TTS용 두 벌, 숫자는 한글 발음)',
+    '2) 0~1.5초 첫 장면 지시문(밝고 움직이는 컷 + 제목 2줄)',
+    '3) 마지막 카드 문구 — ' + (r.ch === 'pungyo' ? '"나머지 {N}가지는 본 영상에서 확인하세요 / 저장해 두고 꺼내 보세요 · 가족에게 공유하세요"' : (r.ch === 'gamsung' ? '"▶ 전체 4곡은 연결 영상에서 들으세요" 고정' : '"링크는 고정댓글 확인!" (인스타·클립 겸용이면 댓글 키워드 CTA 2줄)')),
+    '4) 15초 타이밍 표(0.0~1.5 / 1.5~7 / 7~12 / 12~15)',
+    '"절대"라는 표현은 쓰지 않습니다.'
+  ].join('\n');
+
+  if(el('hkNote')) el('hkNote').innerHTML = '한 줄 요약 — 훅은 <b>' + esc(r.formulas.length ? r.formulas.map(function(f){ return f.n; }).join(' · ') : '약함') + '</b>, 제목 ' + r.len + '자. 아래 3안 중 하나로 바꿔 쓰세요.';
+  if(force) el('anHookCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  toast('훅을 분석했습니다');
+}
+
+(function(){
+  if(!el('anGo')) return;
+  anKeyStatus();
+  if(el('anKeyInput')){
+    el('anKeyInput').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); el('anKeySave').click(); } });
+  }
+  if(el('anKeySave')) el('anKeySave').addEventListener('click', function(){
+    var v = (el('anKeyInput').value || '').trim();
+    if(!v){ el('anKeyInput').classList.add('err'); toast('키를 붙여넣어 주세요'); return; }
+    el('anKeyInput').classList.remove('err');
+    try{ localStorage.setItem(LS_YTKEY, v); }catch(e){}
+    if(el('anKeyInput')) el('anKeyInput').value = '';
+    ytKeyStatus(); anKeyStatus();
+    toast('YouTube API 키를 저장했습니다 (이 기기만)');
+  });
+  if(el('anKeyClear')) el('anKeyClear').addEventListener('click', function(){
+    try{ localStorage.removeItem(LS_YTKEY); }catch(e){}
+    ytKeyStatus(); anKeyStatus();
+    toast('저장된 키를 지웠습니다. 탭 2 키도 함께 지워집니다');
+  });
+  psQuick('anQuick', anQuickList, function(v){
+    if(el('anQ')){ el('anQ').value = v; el('anQ').focus(); }
+    anRun();
+  });
+  el('anGo').addEventListener('click', function(){ anRun(); });
+  if(el('anQ')) el('anQ').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); anRun(); } });
+  if(el('anList')) el('anList').addEventListener('click', function(e){
+    var sv = e.target.closest('[data-act="save"]');
+    if(sv){
+      var it = anItems[Number(sv.getAttribute('data-i'))];
+      if(it) lkQuickAdd('https://www.youtube.com/watch?v=' + it.id, it.title + ' · ' + it.chName + ' · 조회수 ' + fmtNum(it.views) + ' · 참여율 ' + pctText(it.eng), ['기타']);
+      return;
+    }
+    var b = e.target.closest('[data-act="hook"]');
+    if(!b) return;
+    var v = anItems[Number(b.getAttribute('data-i'))];
+    if(!v) return;
+    if(el('hkText')) el('hkText').value = v.title + '\n' + v.chName + ' · 조회수 ' + fmtNum(v.views) + ' · 참여율 ' + pctText(v.eng);
+    if(el('hkTopic')) el('hkTopic').value = guessTopic(v.title);
+    hkAnalyze(true);
+  });
+  if(el('hkGo')) el('hkGo').addEventListener('click', function(){ hkAnalyze(true); });
+  if(el('hkCopy')) el('hkCopy').addEventListener('click', function(){
+    if(!hkLast){ toast('먼저 분석해 주세요'); return; }
+    copyText(hkLast).then(function(ok){ toast(ok ? '리메이크 세트를 복사했습니다' : '복사가 막혔습니다'); });
+  });
+  if(el('hkPrompt')) el('hkPrompt').addEventListener('click', function(){
+    if(!hkLastPrompt){ toast('먼저 분석해 주세요'); return; }
+    copyText(hkLastPrompt).then(function(ok){ toast(ok ? '어사이드용 프롬프트를 복사했습니다' : '복사가 막혔습니다'); });
+  });
+  try{
+    var raw = localStorage.getItem(LS_HK);
+    if(raw){ var o = JSON.parse(raw); if(o && o.text && el('hkText')) el('hkText').value = o.text; }
+  }catch(e){}
+  if(el('hkText')) el('hkText').addEventListener('input', function(){
+    try{ localStorage.setItem(LS_HK, JSON.stringify({ text: el('hkText').value })); }catch(e){}
+  });
+})();
+
+/* ───────── ④ Pixabay 무료 소재 다운로더 ───────── */
+var LS_PBKEY = 'greenroom_pixabay_key_v1';
+var pbType = 'video';
+var PB_MAP = {
+  '겨울':'winter', '보일러':'heating cozy room', '난방':'heating radiator', '주방':'kitchen',
+  '욕실':'bathroom', '야경':'night city', '도시':'city street', '눈':'snow falling',
+  '비':'rain window', '모닥불':'fireplace', '불':'fire flames', '노을':'sunset',
+  '커피':'coffee morning', '빨래':'laundry', '청소':'cleaning home', '반려동물':'pet dog',
+  '강아지':'dog', '고양이':'cat', '아이':'child playing', '주차':'parking', '전기':'electricity plug',
+  '가을':'autumn leaves', '여름':'summer', '밤':'night sky', '물':'water pouring',
+  '증기':'steam', '김':'steam', '집':'cozy home interior', '운동':'exercise', '음식':'cooking food',
+  '요리':'cooking', '책':'book reading', '손':'hands close up', '창문':'window light'
+};
+var PB_CHIPS = [
+  ['겨울','winter'], ['보일러','heating cozy room'], ['주방','kitchen'], ['욕실','bathroom'],
+  ['야경','night city'], ['눈','snow falling'], ['비','rain window'], ['모닥불','fireplace'],
+  ['노을','sunset'], ['커피','coffee morning'], ['빨래','laundry'], ['청소','cleaning home'],
+  ['반려동물','pet dog'], ['아이','child playing'], ['전기','electricity plug'], ['가을','autumn leaves'],
+  ['물','water pouring'], ['증기','steam'], ['집','cozy home interior'], ['운동','exercise']
+];
+
+function pbKey(){ try{ return localStorage.getItem(LS_PBKEY) || ''; }catch(e){ return ''; } }
+function pbKeyStatus(){
+  var s = el('pbKeyStatus'); if(!s) return;
+  var k = pbKey();
+  s.innerHTML = k
+    ? '✅ 저장됨 — 끝 4자리 <b>' + esc(k.slice(-4)) + '</b>. 이 브라우저에만 있습니다.'
+    : '아직 저장된 키가 없습니다. 위 칸에 붙여넣고 <b>저장</b>을 누르세요.';
+  if(k && el('pbKeyInput')) el('pbKeyInput').value = '';
+}
+function pbTranslate(q){
+  var raw = String(q || '').trim();
+  if(!raw) return 'winter';
+  if(/^[a-zA-Z0-9\s\-]+$/.test(raw)) return raw;
+  var whole = PB_MAP[raw];
+  if(whole) return whole;
+  var words = raw.split(/[\s,·/]+/).filter(Boolean).map(function(w){
+    return PB_MAP[w] || (/[가-힣]/.test(w) ? '' : w);
+  }).filter(Boolean);
+  return words.length ? words.slice(0, 3).join(' ') : raw.replace(/[^가-힣a-zA-Z0-9\s]/g, ' ').trim();
+}
+function pbBusy(on, label){
+  var b = el('pbGo');
+  if(b){ b.disabled = !!on; b.textContent = on ? '검색 중…' : '📥 무료 소재 검색'; }
+  var w = el('pbBusy');
+  if(w){ if(on) w.removeAttribute('hidden'); else w.setAttribute('hidden',''); }
+  if(label && el('pbBusy')) el('pbBusy').lastChild.textContent = ' ' + label;
+}
+function pbNote(msg){ var n = el('pbNote'); if(n) n.textContent = msg || ''; }
+function mbText(size){
+  var n = Number(size || 0);
+  if(!n) return '';
+  return (n / 1048576).toFixed(1) + 'MB';
+}
+function pbVideoSizes(v){
+  var order = ['large','medium','small','tiny'], out = [];
+  var vs = v.videos || {};
+  order.forEach(function(k){
+    var o = vs[k];
+    if(o && o.url) out.push({ k:k, url:o.url, w:o.width, h:o.height, size:o.size });
+  });
+  return out;
+}
+function pbVideoCard(v, i){
+  var sizes = pbVideoSizes(v);
+  var main = sizes[0] || null;
+  var thumb = (v.videos && ((v.videos.medium && v.videos.medium.thumbnail) || (v.videos.tiny && v.videos.tiny.thumbnail))) || '';
+  var vw = main ? main.w : 0, vh = main ? main.h : 0;
+  var ratio = (vw && vh) ? (vh > vw ? '세로' : (vw > vh ? '가로' : '정사각')) : '';
+  return '<article class="px-card">' +
+    '<a class="px-thumb" href="' + esc(v.pageURL || '#') + '" target="_blank" rel="noopener">' +
+      (thumb ? '<img src="' + esc(thumb) + '" alt="" loading="lazy">' : '') +
+      '<span class="pb-type">영상 · ' + ratio + '</span>' +
+      '<span class="px-dur">' + fmtDur(v.duration) + '</span>' +
+    '</a>' +
+    '<div class="px-body">' +
+      '<div class="px-title">' + esc(String(v.tags || '').split(',').slice(0, 4).join(', ')) + '</div>' +
+      '<div class="px-meta"><span>' + esc(v.user || 'Pixabay') + '</span>' +
+        '<span>' + (main ? (main.w + '×' + main.h) : '—') + '</span>' +
+        '<span>' + (v.duration ? v.duration + '초' : '') + '</span></div>' +
+      '<div class="px-meta"><span>조회 ' + fmtNum(v.views || 0) + '</span><span>다운 ' + fmtNum(v.downloads || 0) + '</span></div>' +
+      '<div class="pb-sizes">' + sizes.map(function(s, k){
+        return '<button type="button" data-pbdl="' + esc(s.url) + '" data-pbname="pixabay_' + v.id + '_' + s.k + '.mp4">' +
+          (k === 0 ? '원본 ' : '') + s.w + '×' + s.h + (s.size ? ' · ' + mbText(s.size) : '') + '</button>';
+      }).join('') + '</div>' +
+      '<div class="px-acts">' +
+        '<button class="btn primary sm" type="button" data-pbdl="' + esc(main ? main.url : '') + '" data-pbname="pixabay_' + v.id + '.mp4">⬇ MP4 저장</button>' +
+        '<a class="btn ghost sm" href="' + esc(v.pageURL || '#') + '" target="_blank" rel="noopener">페이지</a>' +
+      '</div>' +
+    '</div>' +
+  '</article>';
+}
+function pbPhotoCard(v, i){
+  var sizes = [];
+  if(v.largeImageURL) sizes.push({ url:v.largeImageURL, label:'1280' });
+  if(v.imageURL) sizes.push({ url:v.imageURL, label:'원본' });
+  if(v.webformatURL) sizes.push({ url:v.webformatURL, label:'640' });
+  var main = v.largeImageURL || v.imageURL || v.webformatURL || '';
+  return '<article class="px-card">' +
+    '<a class="px-thumb" href="' + esc(v.pageURL || '#') + '" target="_blank" rel="noopener">' +
+      '<img src="' + esc(v.webformatURL || v.previewURL || '') + '" alt="" loading="lazy">' +
+      '<span class="pb-type">사진 · ' + (v.imageWidth && v.imageHeight ? (v.imageHeight > v.imageWidth ? '세로' : '가로') : '') + '</span>' +
+    '</a>' +
+    '<div class="px-body">' +
+      '<div class="px-title">' + esc(String(v.tags || '').split(',').slice(0, 4).join(', ')) + '</div>' +
+      '<div class="px-meta"><span>' + esc(v.user || 'Pixabay') + '</span><span>' + (v.imageWidth || '') + '×' + (v.imageHeight || '') + '</span></div>' +
+      '<div class="px-meta"><span>조회 ' + fmtNum(v.views || 0) + '</span><span>다운 ' + fmtNum(v.downloads || 0) + '</span></div>' +
+      '<div class="pb-sizes">' + sizes.map(function(s, k){
+        return '<button type="button" data-pbdl="' + esc(s.url) + '" data-pbname="pixabay_' + v.id + '_' + s.label + '.jpg">' + s.label + '</button>';
+      }).join('') + '</div>' +
+      '<div class="px-acts">' +
+        '<button class="btn primary sm" type="button" data-pbdl="' + esc(main) + '" data-pbname="pixabay_' + v.id + '.jpg">⬇ JPG 저장</button>' +
+        '<a class="btn ghost sm" href="' + esc(v.pageURL || '#') + '" target="_blank" rel="noopener">페이지</a>' +
+      '</div>' +
+    '</div>' +
+  '</article>';
+}
+async function pbDownload(url, name){
+  if(!url){ toast('다운로드 주소가 없습니다'); return; }
+  toast('저장 중… 파일이 크면 조금 걸립니다');
+  try{
+    var res = await fetch(url, { mode:'cors' });
+    if(!res.ok) throw new Error('http');
+    var blob = await res.blob();
+    if(!saveBlob(name || 'pixabay_file', blob)) throw new Error('save');
+    toast('저장했습니다 — 다운로드 폴더를 확인하세요');
+  }catch(err){
+    try{
+      var a = document.createElement('a');
+      a.href = url; a.target = '_blank'; a.rel = 'noopener';
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){ try{ if(a.parentNode) a.parentNode.removeChild(a); }catch(e){} }, 1200);
+    }catch(e){}
+    toast('브라우저가 직접 저장을 막았습니다 — 새 탭에서 길게 눌러 저장하세요');
+  }
+}
+async function pbRun(){
+  var key = pbKey();
+  if(!key){
+    if(el('pbKeyBox')) el('pbKeyBox').open = true;
+    if(el('pbKeyInput')) el('pbKeyInput').classList.add('err');
+    toast('먼저 Pixabay API 키를 저장하세요');
+    return;
+  }
+  var q = (el('pbQ').value || '').trim();
+  if(!q){ el('pbQ').classList.add('err'); el('pbQ').focus(); toast('검색어를 넣어 주세요'); return; }
+  el('pbQ').classList.remove('err');
+  var qEn = pbTranslate(q);
+  var order = el('pbOrder').value;
+  var orient = el('pbOrient').value;
+
+  var params = { key:key, q:qEn, lang:'ko', safesearch:'true', order:order, per_page:'20' };
+  if(pbType === 'photo'){
+    params.image_type = 'photo';
+    if(orient !== 'all') params.orientation = orient;
+  }
+  var base = pbType === 'photo' ? 'https://pixabay.com/api/' : 'https://pixabay.com/api/videos/';
+  var qs = Object.keys(params).map(function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]); }).join('&');
+
+  pbBusy(true, pbType === 'photo' ? '사진을 가져오는 중…' : '영상을 가져오는 중…');
+  el('pbList').innerHTML = '';
+  if(el('pbSum')) el('pbSum').setAttribute('hidden','');
+  if(el('pbEmpty')) el('pbEmpty').setAttribute('hidden','');
+  pbNote('');
+  try{
+    var res = await fetch(base + '?' + qs, { mode:'cors' });
+    var data = null;
+    try{ data = await res.json(); }catch(e){ data = null; }
+    if(!res.ok || !data){
+      throw { status:res.status, data:data };
+    }
+    var hits = data.hits || [];
+    if(!hits.length){
+      if(el('pbEmpty')){ el('pbEmpty').removeAttribute('hidden'); el('pbEmpty').innerHTML = '결과가 없습니다 — 다른 검색어로 시도해 보세요. <b>' + esc(q) + '</b> → <b>' + esc(qEn) + '</b>'; }
+      pbNote('검색어를 영어로 바꿔 찾았습니다: ' + qEn);
+      return;
+    }
+    var list = hits;
+    if(pbType !== 'photo' && orient !== 'all'){
+      var f = list.filter(function(v){
+        var vs = v.videos || {}, o = vs.medium || vs.small || vs.large || vs.tiny || {};
+        if(!o.width || !o.height) return true;
+        return orient === 'vertical' ? o.height >= o.width : o.width > o.height;
+      });
+      if(f.length) list = f;
+    }
+    el('pbList').innerHTML = list.map(pbType === 'photo' ? pbPhotoCard : pbVideoCard).join('');
+    var sum = el('pbSum');
+    if(sum){
+      sum.innerHTML = '<span><b>' + list.length + '건</b> · "' + esc(q) + '" → <b>' + esc(qEn) + '</b> · ' +
+        (pbType === 'photo' ? '사진' : '영상') + ' · ' + (order === 'latest' ? '최신 순' : '인기 순') + '</span>' +
+        '<span>Pixabay API · 무료</span>';
+      sum.removeAttribute('hidden');
+    }
+    if(pbType !== 'photo') pbNote('영상은 <b>세로(1080×1920 계열)</b>를 고르세요. 화면 비율은 받은 파일 기준이라 카드에 표시된 해상도를 확인하면 됩니다.');
+  }catch(err){
+    var st = err && err.status;
+    var msg;
+    if(st === 400) msg = '키가 올바르지 않거나 요청이 잘못되었습니다. Pixabay에서 키를 다시 복사해 붙여넣어 주세요.';
+    else if(st === 429) msg = '요청 한도를 넘었습니다(1시간 100회). 잠시 뒤 다시 시도하세요.';
+    else if(st === 403) msg = '이 키로는 접근이 막혀 있습니다. Pixabay 계정에서 키 상태를 확인하세요.';
+    else msg = 'Pixabay에서 가져오지 못했습니다 — 네트워크·광고 차단 확장을 확인하고 다시 시도하세요.';
+    if(el('pbEmpty')){ el('pbEmpty').removeAttribute('hidden'); el('pbEmpty').textContent = msg; }
+    pbNote(msg);
+  }finally{
+    pbBusy(false);
+  }
+}
+(function(){
+  if(!el('pbGo')) return;
+  pbKeyStatus();
+  el('pbChips').innerHTML = PB_CHIPS.map(function(c){
+    return '<button class="pb-chip" type="button" data-pbq="' + esc(c[0]) + '">' + esc(c[0]) + ' <small>· ' + esc(c[1]) + '</small></button>';
+  }).join('');
+  el('pbChips').addEventListener('click', function(e){
+    var b = e.target.closest('[data-pbq]'); if(!b) return;
+    if(el('pbQ')) el('pbQ').value = b.getAttribute('data-pbq');
+    pbRun();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('#pbType button'), function(b){
+    b.addEventListener('click', function(){
+      pbType = b.getAttribute('data-type');
+      Array.prototype.forEach.call(document.querySelectorAll('#pbType button'), function(x){
+        x.setAttribute('aria-pressed', x === b ? 'true' : 'false');
+      });
+      if(el('pbEmpty')) el('pbEmpty').removeAttribute('hidden');
+      el('pbList').innerHTML = '';
+      if(el('pbSum')) el('pbSum').setAttribute('hidden','');
+      pbNote(pbType === 'photo' ? '사진 모드 — 9:16 쇼츠 배경은 세로를 고르세요.' : '영상 모드 — 쇼츠 배경은 세로(1080×1920 계열)를 고르세요.');
+    });
+  });
+  if(el('pbKeySave')) el('pbKeySave').addEventListener('click', function(){
+    var v = (el('pbKeyInput').value || '').trim();
+    if(!v){ el('pbKeyInput').classList.add('err'); toast('키를 붙여넣어 주세요'); return; }
+    el('pbKeyInput').classList.remove('err');
+    try{ localStorage.setItem(LS_PBKEY, v); }catch(e){}
+    pbKeyStatus(); toast('Pixabay 키를 저장했습니다 (이 기기만)');
+  });
+  if(el('pbKeyClear')) el('pbKeyClear').addEventListener('click', function(){
+    try{ localStorage.removeItem(LS_PBKEY); }catch(e){}
+    pbKeyStatus(); toast('저장된 Pixabay 키를 지웠습니다');
+  });
+  if(el('pbKeyInput')) el('pbKeyInput').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); el('pbKeySave').click(); } });
+  el('pbGo').addEventListener('click', function(){ pbRun(); });
+  if(el('pbQ')) el('pbQ').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); pbRun(); } });
+  el('pbList').addEventListener('click', function(e){
+    var b = e.target.closest('[data-pbdl]'); if(!b) return;
+    pbDownload(b.getAttribute('data-pbdl'), b.getAttribute('data-pbname'));
+  });
+  pbNote('영상은 세로(9:16), 사진은 세로를 고르면 쇼츠 배경으로 바로 씁니다.');
+})();
+
+/* ───────── ⑤ 참고 링크 저장·복사함 (벤치마킹 스크랩북) ───────── */
+var LS_LINKS = 'greenroom_links_v1';
+var lkTags = ['아이템24','풍요영상','감성노을','기타'];
+var lkFilter = 'all';
+var lkDraftTags = [];
+
+function lkRead(){
+  try{
+    var raw = localStorage.getItem(LS_LINKS);
+    var arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr : [];
+  }catch(e){ return []; }
+}
+function lkWrite(arr){
+  try{ localStorage.setItem(LS_LINKS, JSON.stringify(arr)); return true; }
+  catch(e){ toast('저장 공간이 부족합니다'); return false; }
+}
+function lkNewId(){ return 'l' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+function lkCleanUrl(u){
+  var s = String(u || '').trim();
+  if(!s) return '';
+  if(!/^https?:\/\//i.test(s)) s = 'https://' + s;
+  return s;
+}
+function lkHost(u){
+  var m = /^https?:\/\/([^\/]+)/i.exec(String(u || ''));
+  return m ? m[1].replace(/^www\./, '') : '';
+}
+function lkWhen(at){
+  var d = new Date(Number(at) || 0);
+  if(!Number(at)) return '';
+  var p = function(x){ return (x < 10 ? '0' : '') + x; };
+  return (d.getMonth() + 1) + '.' + p(d.getDate());
+}
+function lkAdd(){
+  var url = lkCleanUrl(el('lkUrl') ? el('lkUrl').value : '');
+  if(!url){
+    if(el('lkUrl')){ el('lkUrl').classList.add('err'); el('lkUrl').focus(); }
+    toast('링크 주소를 넣어 주세요'); return;
+  }
+  if(!/^https?:\/\/[^\s.]+\.[^\s]{2,}/i.test(url)){
+    if(el('lkUrl')){ el('lkUrl').classList.add('err'); el('lkUrl').focus(); }
+    toast('주소 형식을 확인해 주세요 (예: https://www.youtube.com/watch?v=...)'); return;
+  }
+  if(el('lkUrl')) el('lkUrl').classList.remove('err');
+  var arr = lkRead();
+  var same = arr.filter(function(x){ return String(x.url) === url; })[0];
+  if(same){
+    same.at = Date.now();
+    same.memo = ((el('lkMemo') ? el('lkMemo').value : '') || same.memo || '').trim();
+    if(lkDraftTags.length) same.tags = lkDraftTags.slice();
+    lkWrite(arr);
+    toast('이미 저장된 링크입니다 — 메모·태그만 새로 고쳤습니다');
+  }else{
+    arr.unshift({
+      id: lkNewId(), url: url,
+      memo: ((el('lkMemo') ? el('lkMemo').value : '') || '').trim(),
+      tags: lkDraftTags.length ? lkDraftTags.slice() : ['기타'],
+      at: Date.now()
+    });
+    lkWrite(arr);
+    toast('참고 링크를 저장했습니다');
+  }
+  if(el('lkUrl')) el('lkUrl').value = '';
+  if(el('lkMemo')) el('lkMemo').value = '';
+  lkDraftTags = [];
+  lkRenderTags(); lkRender();
+}
+function lkQuickAdd(url, memo, tags){
+  var u = lkCleanUrl(url);
+  if(!u) return;
+  var arr = lkRead();
+  if(arr.filter(function(x){ return String(x.url) === u; }).length){ toast('이미 저장된 링크입니다'); return; }
+  arr.unshift({ id: lkNewId(), url: u, memo: String(memo || '').trim(), tags: (tags && tags.length ? tags : ['기타']), at: Date.now() });
+  lkWrite(arr); lkRender();
+  toast('참고 링크함에 저장했습니다');
+}
+function lkBenchText(x){
+  var line1 = '이 링크의 훅·자막·컷 전환을 분석해서 우리 채널(`CLAUDE.md` 기준, 0~1.5초 밝은 훅·CC0/Pixabay 무료 소재만 사용)에 맞게 새 대본과 쇼츠로 재해석해 줘: ' + x.url;
+  var extra = [];
+  if(x.memo) extra.push('- 참고 메모: ' + x.memo);
+  if(x.tags && x.tags.length) extra.push('- 올릴 채널: ' + x.tags.join(', '));
+  return [
+    line1,
+    '',
+    extra.join('\n'),
+    extra.length ? '' : '',
+    '■ 출력',
+    '1) 이 영상의 훅 공식(숫자·손실회피·질문·비교 중 무엇인지)과 0~1.5초 구성',
+    '2) 컷 전환 리듬(몇 초 단위인지)과 자막 위치·크기 특징',
+    '3) 우리 채널용 새 대본 4문장(화면 자막용 + TTS용, 숫자는 한글 발음)',
+    '4) 첫 1.5초 장면 지시문 + 마지막 카드 문구',
+    '5) 이번 편에 쓸 CC0(Pexels·Pixabay) 소재 4~5개 검색어',
+    '',
+    '남의 문장·영상은 그대로 쓰지 않고 구조만 참고합니다. "절대"라는 표현은 쓰지 않습니다.'
+  ].filter(function(s, i, a){ return !(s === '' && a[i - 1] === ''); }).join('\n');
+}
+function lkCard(x){
+  var tags = (x.tags && x.tags.length ? x.tags : ['기타']);
+  return '<div class="gen" data-lk="' + esc(x.id) + '" style="margin:0">' +
+    '<header>' +
+      '<span class="tt" style="font-size:12.5px;font-weight:700;color:#334155">' + esc(lkHost(x.url)) + ' · ' + esc(lkWhen(x.at)) + '</span>' +
+      tags.map(function(t){ return '<span class="plat">' + esc(t) + '</span>'; }).join('') +
+    '</header>' +
+    '<div class="bd">' +
+      (x.memo ? '<div class="val">' + esc(x.memo) + '</div>' : '') +
+      '<a class="px-title" href="' + esc(x.url) + '" target="_blank" rel="noopener" style="-webkit-line-clamp:2">' + esc(x.url) + '</a>' +
+      '<div class="px-acts" style="flex-wrap:wrap">' +
+        '<button class="btn primary sm" type="button" data-lkact="copy">📋 링크 복사</button>' +
+        '<a class="btn ghost sm" href="' + esc(x.url) + '" target="_blank" rel="noopener">↗ 열기</a>' +
+        '<button class="btn ghost sm" type="button" data-lkact="bench">🤖 벤치마킹 명령</button>' +
+        '<button class="btn ghost sm" type="button" data-lkact="del" aria-label="삭제">🗑</button>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+function lkRender(){
+  var box = el('lkList'); if(!box) return;
+  var arr = lkRead();
+  var show = arr.filter(function(x){ return lkFilter === 'all' || (x.tags || []).indexOf(lkFilter) >= 0; });
+  var counts = { all: arr.length };
+  lkTags.forEach(function(t){ counts[t] = arr.filter(function(x){ return (x.tags || []).indexOf(t) >= 0; }).length; });
+  if(el('lkCount')) el('lkCount').textContent = arr.length ? ('총 ' + arr.length + '개 · 지금 ' + show.length + '개') : '아직 저장한 링크가 없습니다';
+  if(el('lkFilter')){
+    el('lkFilter').innerHTML = ['all'].concat(lkTags).map(function(t){
+      var nm = t === 'all' ? '전체' : t;
+      return '<button class="chip" type="button" data-lkf="' + esc(t) + '" aria-pressed="' + (lkFilter === t ? 'true' : 'false') + '">' +
+        esc(nm) + ' <small>' + (counts[t] || 0) + '</small></button>';
+    }).join('');
+  }
+  box.innerHTML = show.length ? show.map(lkCard).join('') : '';
+  if(el('lkEmpty')){
+    if(show.length) el('lkEmpty').setAttribute('hidden','');
+    else el('lkEmpty').removeAttribute('hidden');
+  }
+}
+function lkRenderTags(){
+  var box = el('lkTagPick'); if(!box) return;
+  box.innerHTML = lkTags.map(function(t){
+    var on = lkDraftTags.indexOf(t) >= 0;
+    return '<button class="chip" type="button" data-lkt="' + esc(t) + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + esc(t) + '</button>';
+  }).join('');
+}
+(function(){
+  if(!el('lkList')) return;
+  lkRenderTags();
+  lkRender();
+  if(el('lkTagPick')) el('lkTagPick').addEventListener('click', function(e){
+    var b = e.target.closest('[data-lkt]'); if(!b) return;
+    var t = b.getAttribute('data-lkt');
+    var i = lkDraftTags.indexOf(t);
+    if(i >= 0) lkDraftTags.splice(i, 1); else lkDraftTags.push(t);
+    lkRenderTags();
+  });
+  if(el('lkAdd')) el('lkAdd').addEventListener('click', function(){ lkAdd(); });
+  if(el('lkUrl')) el('lkUrl').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); lkAdd(); } });
+  if(el('lkFilter')) el('lkFilter').addEventListener('click', function(e){
+    var b = e.target.closest('[data-lkf]'); if(!b) return;
+    lkFilter = b.getAttribute('data-lkf');
+    lkRender();
+  });
+  el('lkList').addEventListener('click', function(e){
+    var b = e.target.closest('[data-lkact]'); if(!b) return;
+    var card = b.closest('[data-lk]'); if(!card) return;
+    var id = card.getAttribute('data-lk');
+    var arr = lkRead();
+    var x = arr.filter(function(y){ return y.id === id; })[0];
+    if(!x) return;
+    var act = b.getAttribute('data-lkact');
+    if(act === 'copy'){
+      copyText(x.url).then(function(ok){ toast(ok ? '링크를 복사했습니다' : '복사가 막혔습니다 — 주소를 길게 눌러 복사하세요'); });
+    }else if(act === 'bench'){
+      copyText(lkBenchText(x)).then(function(ok){ toast(ok ? '어사이드 벤치마킹 명령을 복사했습니다' : '복사가 막혔습니다'); });
+    }else if(act === 'del'){
+      if(window.confirm && !window.confirm('이 링크를 저장함에서 지울까요?\n' + x.url)) return;
+      arr = arr.filter(function(y){ return y.id !== id; });
+      lkWrite(arr); lkRender();
+      toast('링크를 지웠습니다');
+    }
+  });
+  if(el('lkAllCopy')) el('lkAllCopy').addEventListener('click', function(){
+    var arr = lkRead();
+    if(!arr.length){ toast('저장된 링크가 없습니다'); return; }
+    var txt = arr.map(function(x, i){
+      return (i + 1) + '. ' + x.url + (x.memo ? '\n   - 메모: ' + x.memo : '') + (x.tags && x.tags.length ? '\n   - 채널: ' + x.tags.join(', ') : '');
+    }).join('\n\n');
+    copyText(txt).then(function(ok){ toast(ok ? '목록을 복사했습니다' : '복사가 막혔습니다'); });
   });
 })();
 
