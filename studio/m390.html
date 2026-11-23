@@ -17,7 +17,7 @@ var q = P.get('t') || 'preset';
 var y = Number(P.get('y') || 0);
 document.getElementById('row').innerHTML = q.split(',').map(function(t){
   return '<figure><figcaption>' + t + ' · 390px' + (y ? ' · y=' + y : '') + '</figcaption>' +
-    '<iframe src="index.html#' + t + '" loading="eager" title="' + t + '"></iframe></figure>';
+    '<iframe src="index.html?v=' + Date.now() + '#' + t + '" loading="eager" title="' + t + '"></iframe></figure>';
 }).join('');
 if(y){
   setTimeout(function(){
