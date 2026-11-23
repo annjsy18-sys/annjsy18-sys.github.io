@@ -5767,7 +5767,7 @@ function hkBuild(){
   else fix.push('손실 회피가 없습니다 — "안 쓰면", "잘못하면" 같은 손해 표현을 앞에 두세요.');
   if(numEarly) good.push('첫 15자 안에 숫자가 있어 모바일 미리보기에서 바로 보입니다.');
   if(len > 45) fix.push((isScript ? '첫 문장이 ' : '제목이 ') + len + '자로 깁니다 — 모바일에서 잘리니 40자 안팎으로 줄이세요.');
-  else good.push('제목 길이 ' + len + '자 — 모바일에서 잘리지 않습니다.');
+  else good.push((isScript ? '첫 문장이 ' : '제목이 ') + len + '자 — 모바일에서 잘리지 않습니다.');
   if(isHowto) fix.push('설명형 제목(~하는 방법·~소개)입니다 — 무엇인지 설명하기 전에 손해부터 말하세요(풍요영상 쇼츠는 금지).');
   if(hasBanned) fix.push('"절대"라는 표현이 있습니다 — 과장·금지 표현은 0건으로 맞춥니다.');
   if(hasEmo && ch !== 'gamsung') fix.push('감성 표현은 쇼핑·정보 쇼츠에서는 힘이 약합니다 — 이 채널은 숫자·손해가 먼저입니다.');
