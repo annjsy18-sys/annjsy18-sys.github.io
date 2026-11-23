@@ -5235,16 +5235,17 @@ function c3KeywordList(){
   });
   return base;
 }
+var C3_JUNK = { '무선':1, '미니':1, '휴대용':1, '국산':1, '가성비':1, '대형':1, '세트':1, '프리미엄':1, '신형':1, '최신':1, '정품':1 };
 function c3Tokens(){
   var t = String(c3State.topic || '');
   var out = [];
   t.replace(/[\[\]()]/g, ' ').split(/\s+/).forEach(function(w){
     w = w.replace(/[^가-힣a-zA-Z0-9]/g, '');
-    if(w.length >= 2) out.push(w);
+    if(w.length >= 2 && !C3_JUNK[w]) out.push(w);
   });
   c3KeywordList().forEach(function(w){
     w = w.replace(/[^가-힣a-zA-Z0-9]/g, '');
-    if(w.length >= 2) out.push(w);
+    if(w.length >= 2 && !C3_JUNK[w]) out.push(w);
   });
   return out.filter(function(w, i, a){ return a.indexOf(w) === i; });
 }
@@ -5252,7 +5253,8 @@ function c3TagSet(extra, want){
   var shop = ['아이템24','살림템','생활꿀팁','쿠팡추천','겨울준비','주부일상','집안일꿀팁','가성비템','리빙템','살림노하우'];
   var info = ['풍요영상','생활정보','절약꿀팁','전기요금','난방비','살림노하우','정보쇼츠','생활상식','겨울준비','관리비','알뜰살림','절약방법'];
   var clipBase = ['네이버클립','클립','살림템','생활꿀팁','겨울준비','쿠팡파트너스','리빙','주부일상','살림노하우','집안일','가성비템','홈템','일상꿀팁','주부스타그램','살림스타그램','쿠팡추천','정보공유'];
-  var base = (extra === 'info') ? info : (extra === 'clip' ? clipBase : shop);
+  var igBase = ['릴스','인스타릴스','살림스타그램','주부스타그램','살림템','생활꿀팁','쿠팡파트너스','겨울준비','일상','리빙','꿀팁','추천템','살림노하우','홈스타그램','인스타데일리'];
+  var base = (extra === 'info') ? info : (extra === 'clip' ? clipBase : (extra === 'ig' ? igBase : shop));
   var toks = c3Tokens();
   var all = base.concat(toks);
   var seen = {}, out = [];
@@ -5340,7 +5342,7 @@ function c3Build(){
     '',
     isInfo ? '' : goji,
     '',
-    c3TagSet(isInfo ? 'info' : 'shop', 13).join(' ')
+    c3TagSet(isInfo ? 'info' : 'ig', 13).join(' ')
   ].filter(function(s, i, a){ return !(s === '' && a[i - 1] === ''); }).join('\n');
 
   var igFirst = isInfo
@@ -5538,7 +5540,7 @@ var anQuickList = ['겨울 난방비','보풀제거기','생활꿀팁','전기�
 var HOOK_CLASSES = [
   { k:'loss',    name:'손실회피',    cls:'h1', re:/(안 ?쓰|안 ?하|못 ?하|틀리|잘못|실수|손해|아깝|날리|버리|후회|모르면|놓치|낭비)/ },
   { k:'warn',    name:'경고·금지',   cls:'h3', re:/(하면 안|하지 마|위험|주의|금지|조심)/ },
-  { k:'compare', name:'비교·대조',   cls:'h2', re:/(보다|vs|VS|차이|대신|비교)/ },
+  { k:'compare', name:'비교·대조',   cls:'h2', re:/(보다는|보다 더|vs|VS|차이|비교)/ },
   { k:'question',name:'질문형',      cls:'h2', re:/(\?|나요|까\b|을까|뭘까|왜 )/ },
   { k:'list',    name:'리스트형',    cls:'h4', re:/([0-9]+ ?(가지|개|선|단계)|체크리스트|모음)/ },
   { k:'emotion', name:'감성·공감',   cls:'h5', re:/(퇴근|새벽|혼자|마음|위로|그리운|포근|설레)/ },
@@ -5712,17 +5714,18 @@ function anCard(v, i){
 }
 
 /* ── 훅 분석기 (API 키 없이) ── */
-var HK_STOP = { '영상':'', '진짜':'', '완전':'', '제일':'', '정말':'', '이거':'', '그거':'', '저거':'', '우리':'', '지금':'', '오늘':'', '이번':'', '이런':'', '저런':'', '그런':'', '하는':'', '되는':'', '있어요':'', '합니다':'', '입니다':'', '하세요':'', '보세요':'', '주세요':'' };
+var HK_STOP = { '영상':'', '진짜':'', '완전':'', '제일':'', '정말':'', '이거':'', '그거':'', '저거':'', '우리':'', '지금':'', '오늘':'', '이번':'', '이런':'', '저런':'', '그런':'', '하는':'', '되는':'', '대부분':'', '그게':'', '여기':'', '거기':'', '무선':'', '미니':'' };
+var HK_VERB = /(하세요|합니다|했습니다|입니다|해요|아요|어요|까요|네요|지요|죠|니다|습니|세요|는데|데요|하면|하다|했다|한다|된다|있다|없다|같아|보세요|주세요|나갑|들어|두는|비우|확인하|누르|쓰면|안 쓰)$/;
 function guessTopic(text){
   var clean = String(text || '').replace(/[#@]/g, ' ').replace(/https?:\/\/\S+/g, ' ');
   var words = clean.split(/[\s,.\n·!?"'“”‘’~(){}\[\]<>|/\\:;·…-]+/).filter(Boolean);
-  var best = '', bestScore = 0;
+  var best = '', bestScore = 0, src = String(text);
   words.forEach(function(w, idx){
     var x = w.replace(/[0-9]/g, '').replace(/[^가-힣a-zA-Z]/g, '');
-    x = x.replace(/(에서|으로|부터|까지|처럼|보다|라고|하면|누르면|했더니|인데요|입니다|합니다|해요|이고|이며|에는|에도|만큼|조차|마저|이랑|랑|과|와|은|는|이|가|을|를|의|에|도|만|로)$/, '');
+    x = x.replace(/(에서|으로|부터|까지|처럼|보다|라고|했더니|인데요|에는|에도|만큼|조차|마저|이랑|랑|과|와|은|는|이|가|을|를|의|에|도|만|로)$/, '');
     if(x.length < 2) return;
-    if(HK_STOP[x]) return;
-    var score = x.length * 2 + (String(text).split(x).length - 1) + (idx < 4 ? 1 : 0);
+    if(HK_STOP[x] || HK_VERB.test(x)) return;
+    var score = x.length * 2 + ((src.split(x).length - 1) * 2) + (idx < 3 ? 3 : 0);
     if(score > bestScore){ bestScore = score; best = x; }
   });
   return best.slice(0, 20);
@@ -5733,13 +5736,16 @@ function hkBuild(){
   var ch = el('hkChannel') ? el('hkChannel').value : 'item24';
   var T = topicIn || guessTopic(text) || '이 주제';
   var firstLine = (text.split(/\n/)[0] || '').trim();
-  var title = (text.indexOf('\n') > 0 || text.length > 90) ? firstLine : text;
+  var firstSentence = (text.split(/[.!?。…\n]/)[0] || '').trim();
+  var isScript = (text.indexOf('\n') >= 0 || text.length > 90);
+  var title = isScript ? (firstSentence || firstLine) : text;
+  if(title.length > 90) title = title.slice(0, 90);
   var probe = title || text;
 
   var hasNum = /[0-9]|[한두세네다섯여섯일곱여덟아홉열] ?(가지|개|배|원|분|초|위)|만원|만 원|퍼센트|%/.test(probe);
   var hasLoss = /(안 ?쓰|안 ?하|못 ?하|틀리|잘못|실수|손해|아깝|날리|버리|후회|모르면|놓치|낭비)/.test(probe);
   var hasQ = /\?/.test(probe);
-  var hasCmp = /(보다|vs|VS|차이|대신|비교)/.test(probe);
+  var hasCmp = /(보다는|보다 더|vs|VS|차이|비교)/.test(probe);
   var hasWarn = /(하면 안|하지 마|위험|주의|금지)/.test(probe);
   var isHowto = /(방법|하는 법|꿀팁|정리|가이드|사용법)/.test(probe);
   var hasEmo = /(퇴근|새벽|혼자|마음|위로|그리운|포근|설레)/.test(probe);
@@ -5762,7 +5768,7 @@ function hkBuild(){
   if(hasLoss) good.push('손실 회피 표현이 있어 넘기기 전에 손해를 먼저 봅니다.');
   else fix.push('손실 회피가 없습니다 — "안 쓰면", "잘못하면" 같은 손해 표현을 앞에 두세요.');
   if(numEarly) good.push('첫 15자 안에 숫자가 있어 모바일 미리보기에서 바로 보입니다.');
-  if(len > 45) fix.push('제목이 ' + len + '자로 깁니다 — 모바일에서 잘리니 40자 안팎으로 줄이세요.');
+  if(len > 45) fix.push((isScript ? '첫 문장이 ' : '제목이 ') + len + '자로 깁니다 — 모바일에서 잘리니 40자 안팎으로 줄이세요.');
   else good.push('제목 길이 ' + len + '자 — 모바일에서 잘리지 않습니다.');
   if(isHowto) fix.push('설명형 제목(~하는 방법·~소개)입니다 — 무엇인지 설명하기 전에 손해부터 말하세요(풍요영상 쇼츠는 금지).');
   if(hasBanned) fix.push('"절대"라는 표현이 있습니다 — 과장·금지 표현은 0건으로 맞춥니다.');
@@ -5795,7 +5801,7 @@ function hkBuild(){
         ? '<div class="c3-tags" style="margin-bottom:8px">' + formulas.map(function(f){ return '<span class="hooktag ' + (hookClass(probe).cls) + '">' + esc(f.n) + '</span>'; }).join('') + '</div>' +
           '<ul>' + formulas.map(function(f){ return '<li><b>' + esc(f.n) + '</b> — ' + esc(f.d) + '</li>'; }).join('') + '</ul>'
         : '<p class="note" style="margin:0">뚜렷한 훅 공식이 안 보입니다. 숫자·손실 회피부터 넣어 보세요.</p>') +
-      '<p class="note" style="margin:8px 0 0">제목 길이 ' + len + '자 · 숫자 ' + (hasNum ? '있음' : '없음') + ' · 손실 회피 ' + (hasLoss ? '있음' : '없음') + '</p>' +
+      '<p class="note" style="margin:8px 0 0">' + (isScript ? '첫 문장' : '제목') + ' 길이 ' + len + '자 · 숫자 ' + (hasNum ? '있음' : '없음') + ' · 손실 회피 ' + (hasLoss ? '있음' : '없음') + '</p>' +
     '</div>' +
     '<div class="an-box"><h3>② 강점</h3><ul>' + good.slice(0,4).map(function(s){ return '<li>' + esc(s) + '</li>'; }).join('') + '</ul></div>' +
     '<div class="an-box"><h3>③ 아쉬운 점 · 고칠 곳</h3><ul>' + fix.slice(0,4).map(function(s){ return '<li>' + esc(s) + '</li>'; }).join('') + '</ul></div>' +
@@ -5809,7 +5815,7 @@ function hkBuild(){
       }).join('') +
     '</div>';
 
-  return { html: html, topic: T, title: title, ch: ch, pick: pick, formulas: formulas, good: good, fix: fix, hasNum: hasNum, hasLoss: hasLoss, len: len };
+  return { html: html, topic: T, title: title, ch: ch, pick: pick, formulas: formulas, good: good, fix: fix, hasNum: hasNum, hasLoss: hasLoss, len: len, isScript: isScript };
 }
 function hkAnalyze(force){
   var text = (el('hkText') ? el('hkText').value : '').trim();
