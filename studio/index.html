@@ -704,7 +704,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
       <span aria-hidden="true">🎬</span><span class="t-lg" title="대본 · 프롬프트 작업실">대본 작업실</span><span class="t-sm">대본</span>
     </button>
     <button class="tab" id="tab-search" role="tab" aria-controls="panel-search" aria-selected="false" tabindex="-1" type="button">
-      <span aria-hidden="true">🔍</span><span class="t-lg" title="실시간 유튜브 소재 검색">유튜브 소재 검색</span><span class="t-sm">소재</span>
+      <span aria-hidden="true">🔍</span><span class="t-lg" title="실시간 유튜브 소재 검색">유튜브 소재 검색</span><span class="t-sm">검색</span>
     </button>
     <button class="tab" id="tab-preset" role="tab" aria-controls="panel-preset" aria-selected="false" tabindex="-1" type="button">
       <span aria-hidden="true">⚡</span><span class="t-lg" title="원클릭 템플릿 프리셋">원클릭 프리셋</span><span class="t-sm">프리셋</span>
@@ -719,7 +719,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
       <span aria-hidden="true">🔗</span><span class="t-lg" title="참고 링크 저장함">참고 링크함</span><span class="t-sm">링크</span>
     </button>
     <button class="tab" id="tab-pixabay" role="tab" aria-controls="panel-pixabay" aria-selected="false" tabindex="-1" type="button">
-      <span aria-hidden="true">📥</span><span class="t-lg" title="Pixabay 무료 소재 다운로더">무료 소재</span><span class="t-sm">소재함</span>
+      <span aria-hidden="true">📥</span><span class="t-lg" title="Pixabay 무료 소재 다운로더">Pixabay 소재</span><span class="t-sm">소재</span>
     </button>
     <button class="tab" id="tab-track" role="tab" aria-controls="panel-track" aria-selected="false" tabindex="-1" type="button">
       <span aria-hidden="true">📈</span><span class="t-lg" title="업로드 기록 · 조회수 체크">업로드 기록</span><span class="t-sm">기록</span>
@@ -2020,7 +2020,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
         <button class="btn ghost sm" id="pbKeyClear" type="button">지우기</button>
       </div>
       <p class="note" id="pbKeyStatus" style="margin-top:6px"></p>
-      <p class="note">키 발급: <a href="https://pixabay.com/api/docs/" target="_blank" rel="noopener">pixabay.com/api/docs</a> → 로그인 → <b>Your API key</b> 복사. 무료이고 카드 등록이 필요 없습니다. (1시간에 100회)</p>
+      <p class="note">키 발급: <a href="https://pixabay.com/api/docs/" target="_blank" rel="noopener">pixabay.com/api/docs</a> → 로그인 → <b>Your API key</b> 복사. 무료이고 카드 등록이 필요 없습니다. (1분에 100회까지)</p>
     </div>
   </details>
 </section>
@@ -2030,7 +2030,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",Consolas,monospace
     <div class="num">①</div>
     <div>
       <h2>무엇을 찾을까요</h2>
-      <p class="hint">한국어로 넣어도 <b>영어 검색어로 바꿔</b> 찾습니다. 아래 추천 칩을 눌러도 됩니다.</p>
+      <p class="hint">한국어로 넣어도 <b>영어 검색어로 바꿔</b> 찾습니다. 아래 추천 칩을 눌러도 됩니다. Pixabay 영상은 <b>가로가 많아</b> 세로 컷은 사진·직접 촬영으로 채우는 편이 빠릅니다.</p>
     </div>
   </div>
 
@@ -3329,6 +3329,10 @@ function switchTab(name, silent){
 TAB_KEYS.forEach(function(k){
   var b = el('tab-' + k);
   if(b) b.addEventListener('click', function(){ switchTab(k); });
+});
+window.addEventListener('hashchange', function(){
+  var h = (location.hash || '').replace('#', '');
+  if(TAB_KEYS.indexOf(h) >= 0 && h !== document.body.getAttribute('data-tab')) switchTab(h, false);
 });
 (function(){
   var nav = document.querySelector('.tabbar');
@@ -5737,7 +5741,7 @@ function hkBuild(){
   var T = topicIn || guessTopic(text) || '이 주제';
   var firstLine = (text.split(/\n/)[0] || '').trim();
   var firstSentence = (text.split(/[.!?。…\n]/)[0] || '').trim();
-  var isScript = (text.indexOf('\n') >= 0 || text.length > 90);
+  var isScript = (text.indexOf('\n') >= 0 || text.length > 55 || /[.!?。…]\s*\S/.test(text));
   var title = isScript ? (firstSentence || firstLine) : text;
   if(title.length > 90) title = title.slice(0, 90);
   var probe = title || text;
@@ -5990,13 +5994,18 @@ function pbVideoSizes(v){
   var vs = v.videos || {};
   order.forEach(function(k){
     var o = vs[k];
-    if(o && o.url) out.push({ k:k, url:o.url, w:o.width, h:o.height, size:o.size });
+    if(o && o.url && Number(o.size || 0) > 0) out.push({ k:k, url:o.url, w:o.width, h:o.height, size:o.size });
   });
   return out;
 }
+function pbMainSize(sizes){
+  if(!sizes.length) return null;
+  for(var i = 0; i < sizes.length; i++){ if(sizes[i].k === 'medium') return sizes[i]; }
+  return sizes[0];
+}
 function pbVideoCard(v, i){
   var sizes = pbVideoSizes(v);
-  var main = sizes[0] || null;
+  var main = pbMainSize(sizes);
   var thumb = (v.videos && ((v.videos.medium && v.videos.medium.thumbnail) || (v.videos.tiny && v.videos.tiny.thumbnail))) || '';
   var vw = main ? main.w : 0, vh = main ? main.h : 0;
   var ratio = (vw && vh) ? (vh > vw ? '세로' : (vw > vh ? '가로' : '정사각')) : '';
@@ -6014,7 +6023,7 @@ function pbVideoCard(v, i){
       '<div class="px-meta"><span>조회 ' + fmtNum(v.views || 0) + '</span><span>다운 ' + fmtNum(v.downloads || 0) + '</span></div>' +
       '<div class="pb-sizes">' + sizes.map(function(s, k){
         return '<button type="button" data-pbdl="' + esc(s.url) + '" data-pbname="pixabay_' + v.id + '_' + s.k + '.mp4">' +
-          (k === 0 ? '원본 ' : '') + s.w + '×' + s.h + (s.size ? ' · ' + mbText(s.size) : '') + '</button>';
+          (s.k === 'large' ? '원본 ' : (s.k === 'medium' ? '1080p ' : '')) + s.w + '×' + s.h + (s.size ? ' · ' + mbText(s.size) : '') + '</button>';
       }).join('') + '</div>' +
       '<div class="px-acts">' +
         '<button class="btn primary sm" type="button" data-pbdl="' + esc(main ? main.url : '') + '" data-pbname="pixabay_' + v.id + '.mp4">⬇ MP4 저장</button>' +
@@ -6059,8 +6068,9 @@ async function pbDownload(url, name){
     toast('저장했습니다 — 다운로드 폴더를 확인하세요');
   }catch(err){
     try{
+      var direct = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'download=1';
       var a = document.createElement('a');
-      a.href = url; a.target = '_blank'; a.rel = 'noopener';
+      a.href = direct; a.target = '_blank'; a.rel = 'noopener';
       document.body.appendChild(a); a.click();
       setTimeout(function(){ try{ if(a.parentNode) a.parentNode.removeChild(a); }catch(e){} }, 1200);
     }catch(e){}
@@ -6116,6 +6126,7 @@ async function pbRun(){
         return orient === 'vertical' ? o.height >= o.width : o.width > o.height;
       });
       if(f.length) list = f;
+      else pbNote('세로 영상이 없어 전체 방향으로 보여줍니다 — Pixabay 영상은 가로가 많습니다. 세로가 필요하면 사진 탭에서 세로를 고르세요.');
     }
     el('pbList').innerHTML = list.map(pbType === 'photo' ? pbPhotoCard : pbVideoCard).join('');
     var sum = el('pbSum');
@@ -6130,11 +6141,11 @@ async function pbRun(){
     var st = err && err.status;
     var msg;
     if(st === 400) msg = '키가 올바르지 않거나 요청이 잘못되었습니다. Pixabay에서 키를 다시 복사해 붙여넣어 주세요.';
-    else if(st === 429) msg = '요청 한도를 넘었습니다(1시간 100회). 잠시 뒤 다시 시도하세요.';
+    else if(st === 429) msg = '요청 한도를 넘었습니다(1분에 100회). 1분 뒤 다시 시도하세요.';
     else if(st === 403) msg = '이 키로는 접근이 막혀 있습니다. Pixabay 계정에서 키 상태를 확인하세요.';
     else msg = 'Pixabay에서 가져오지 못했습니다 — 네트워크·광고 차단 확장을 확인하고 다시 시도하세요.';
     if(el('pbEmpty')){ el('pbEmpty').removeAttribute('hidden'); el('pbEmpty').textContent = msg; }
-    pbNote(msg);
+    pbNote('');
   }finally{
     pbBusy(false);
   }
@@ -6305,7 +6316,7 @@ function lkRender(){
   var show = arr.filter(function(x){ return lkFilter === 'all' || (x.tags || []).indexOf(lkFilter) >= 0; });
   var counts = { all: arr.length };
   lkTags.forEach(function(t){ counts[t] = arr.filter(function(x){ return (x.tags || []).indexOf(t) >= 0; }).length; });
-  if(el('lkCount')) el('lkCount').textContent = arr.length ? ('총 ' + arr.length + '개 · 지금 ' + show.length + '개') : '아직 저장한 링크가 없습니다';
+  if(el('lkCount')) el('lkCount').textContent = arr.length ? ('총 ' + arr.length + '개 · 지금 ' + show.length + '개') : '';
   if(el('lkFilter')){
     el('lkFilter').innerHTML = ['all'].concat(lkTags).map(function(t){
       var nm = t === 'all' ? '전체' : t;
